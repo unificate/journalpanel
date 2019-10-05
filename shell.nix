@@ -6,5 +6,5 @@ let pinnedVersion = builtins.fromJSON (builtins.readFile ./nixpkgs-version.json)
 in
 with pinnedPkgs;
 mkShell {
-  buildInputs = [ bundix ruby ];
+  buildInputs = [ bundix cacert ruby ];
 }
