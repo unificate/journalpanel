@@ -1,0 +1,31 @@
+$primary-color: #bb86fc;
+$secondary-color: #03dac6;
+$success-color: #a5d6a7;
+$error-color: #cf6679;
+$card-bg-color: #434343;
+$dropdown-bg-color: #4e4e4e;
+$dropdown-color: #fff;
+$navbar-font-color: #000;
+@import "materialize-css/sass/materialize";
+
+body {
+    background-color: #121212;
+    color: #fff;
+}
+
+input {
+    color: #fff;
+}
+
+.btn {
+    color: #000;
+}
+
+a .card {
+    color: #fff;
+    text-decoration: none;
+}
+
+.error-text {
+    color: $error-color
+}
