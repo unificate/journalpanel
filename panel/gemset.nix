@@ -221,6 +221,16 @@
     };
     version = "1.0.5";
   };
+  diff-lcs = {
+    groups = ["default" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "18w22bjz424gzafv6nzv98h0aqkwz3d9xhm7cbr1wfbyas8zayza";
+      type = "gem";
+    };
+    version = "1.3";
+  };
   erubi = {
     groups = ["default"];
     platforms = [];
@@ -535,6 +545,60 @@
       type = "gem";
     };
     version = "1.6.0";
+  };
+  rspec-core = {
+    dependencies = ["rspec-support"];
+    groups = ["default" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0gppalb2ynj0xk7vp8kk5pwzihmiqc8l4prpy4n9spclq7iqkspq";
+      type = "gem";
+    };
+    version = "3.9.0";
+  };
+  rspec-expectations = {
+    dependencies = ["diff-lcs" "rspec-support"];
+    groups = ["default" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1gjqfb39da6gywdcp4h77738r7khbrn2v4y45589z25bj4z9paf0";
+      type = "gem";
+    };
+    version = "3.9.0";
+  };
+  rspec-mocks = {
+    dependencies = ["diff-lcs" "rspec-support"];
+    groups = ["default" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0q9f8nrxhs4k2vl3bnm3pi5s44v9pnvjwirjnwji3sxzf68c2xjf";
+      type = "gem";
+    };
+    version = "3.9.0";
+  };
+  rspec-rails = {
+    dependencies = ["actionpack" "activesupport" "railties" "rspec-core" "rspec-expectations" "rspec-mocks" "rspec-support"];
+    groups = ["test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0iyj1gkid35pvfam28i1qdlv8naf717ql619wrphf4bciksm77h9";
+      type = "gem";
+    };
+    version = "3.9.0";
+  };
+  rspec-support = {
+    groups = ["default" "test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "18080h06kqayyr6dpw4c62l0wav09ihkd6skinsln13kmq0cv0mx";
+      type = "gem";
+    };
+    version = "3.9.0";
   };
   ruby_dep = {
     groups = ["default" "development"];
