@@ -12,5 +12,5 @@ let gems = bundlerEnv {
     };
 in
 mkShell {
-  buildInputs = [ bundix cacert libxml2 gems nodejs yarn zlib ];
+  buildInputs = [ bundix cacert libxml2 gems nodejs ruby yarn zlib ];
 }
