@@ -1,31 +1,38 @@
-$primary-color: #bb86fc;
-$secondary-color: #03dac6;
-$success-color: #a5d6a7;
-$error-color: #cf6679;
-$card-bg-color: #434343;
-$dropdown-bg-color: #4e4e4e;
-$dropdown-color: #fff;
-$navbar-font-color: #000;
-@import "materialize-css/sass/materialize";
+$mdc-theme-primary: #bb86fc;
+$mdc-theme-secondary: #03dac6;
+$mdc-theme-background: #121212;
+$mdc-theme-surface: #434343;
+$mdc-theme-on-primary: #000000;
+$mdc-theme-on-secondary: #000000;
+$mdc-theme-on-surface: #ffffff;
+@import "@material/button/mdc-button";
+@import "@material/card/mdc-card";
+@import "@material/textfield/mdc-text-field";
+
+#login-container {
+    display: flex;
+    justify-content: center;
+}
+
+#login-card {
+    width: 350px;
+}
+
+#login-content {
+    margin: auto 0;
+    padding: 16px;
+}
+
+#login-content h1 {
+    margin-top: 0;
+}
+
+#username-field, #password-field {
+    margin-bottom: 20px;
+    width: 100%;
+}
 
 body {
-    background-color: #121212;
-    color: #fff;
-}
-
-input {
-    color: #fff;
-}
-
-.btn {
-    color: #000;
-}
-
-a .card {
-    color: #fff;
-    text-decoration: none;
-}
-
-.error-text {
-    color: $error-color
+     background-color: $mdc-theme-background;
+     color: #ffffff;
 }

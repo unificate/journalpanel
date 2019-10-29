@@ -1,22 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col offset-s4 s4">
-      <div class="card-panel">
-        <h4>Login</h4>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="username" type="text" class="validate">
-            <label for="username">Username</label>
+<%= javascript_pack_tag 'login.js', 'data-turbolinks-track': 'reload' %>
+<div id="login-container">
+  <div id="login-card" class="mdc-card">
+    <div id="login-content">
+      <h1>Login</h1>
+      <div id="username-field" class="mdc-text-field mdc-text-field--outlined">
+        <input type="text" id="username" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="username" class="mdc-floating-label">Username</label>
           </div>
-          <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
-          </div>
-          <div class="col offset-s8 s4">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
-          </div>
+          <div class="mdc-notched-outline__trailing"></div>
         </div>
       </div>
+      <div id="password-field" class="mdc-text-field mdc-text-field--outlined">
+        <input type="password" id="password" class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label for="password" class="mdc-floating-label">Password</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+      <button class="mdc-button mdc-button--raised">Login</button>
     </div>
   </div>
 </div>
