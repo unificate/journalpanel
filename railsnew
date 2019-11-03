@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+if [ $# -lt 1 ]; then
+	echo "./railsnew <project> <--args>"
+	exit 1
+fi
+
+NAME="$1"
+shift
+ARGS="$@"
+
+mkdir $NAME
+cd $NAME
+echo -e "source 'https://rubygems.org'\ngem 'rails'\n" > Gemfile
+bundix -l
+cp ../hello_rails/.envrc .
+cp ../hello_rails/shell.nix .
+nix-shell --run "rails new . --force --skip-bundle $ARGS"
+bundix -l
+rm -rf .git
