@@ -5,4 +5,8 @@ class LoginController < ApplicationController
   def list
     render body: nil
   end
+
+  def admin_panel
+	
+  end
 end

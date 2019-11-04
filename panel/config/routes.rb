@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   }
   get '/', to: 'login#index'
   get '/list', to: 'login#list'
+  get '/admin_panel', to: 'login#admin_panel'
 end
