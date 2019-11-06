@@ -9,6 +9,20 @@ $mdc-theme-on-surface: #ffffff;
 @import "@material/card/mdc-card";
 @import "@material/textfield/mdc-text-field";
 
+@import "@material/checkbox/mdc-checkbox"; // Required only for data table with row selection.
+@import "@material/data-table/mdc-data-table";
+
+/*Reqired for the menus on the admin_panel page*/
+@import "@material/select/mdc-select";
+@import "@material/list/mdc-list";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
+
+/*Radio Buttons*/
+@import "@material/form-field/mdc-form-field";
+@import "@material/radio/mdc-radio";
+/*End of menu styles*/
+
 #login-container {
     display: flex;
     justify-content: center;
@@ -30,6 +44,12 @@ $mdc-theme-on-surface: #ffffff;
 #username-field, #password-field {
     margin-bottom: 20px;
     width: 100%;
+}
+
+
+container {
+	justify-content: center;
+
 }
 
 body {
