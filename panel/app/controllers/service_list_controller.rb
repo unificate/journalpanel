@@ -1,4 +1,4 @@
 class ServiceListController < ApplicationController
-  def service_list
+  def index 
   end
 end
