@@ -131,17 +131,6 @@
     };
     version = "2.7.0";
   };
-  autoprefixer-rails = {
-    dependencies = ["execjs"];
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "0pc60v6j2zf7bmd4ribmbkj94r6i3c70kv2301nf29a4058ncwrm";
-      type = "gem";
-    };
-    version = "9.7.1";
-  };
   bcrypt = {
     groups = ["default"];
     platforms = [];
@@ -273,16 +262,6 @@
     };
     version = "1.9.0";
   };
-  execjs = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "1yz55sf2nd3l666ms6xr18sm2aggcvmb8qr3v53lr4rir32y1yp1";
-      type = "gem";
-    };
-    version = "2.7.0";
-  };
   factory_bot = {
     dependencies = ["activesupport"];
     groups = ["test"];
@@ -391,17 +370,6 @@
       type = "gem";
     };
     version = "0.3.3";
-  };
-  materialize-sass = {
-    dependencies = ["autoprefixer-rails"];
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "00241r0r1a7q70rzswkp3nlqpcs0gxcfbmjpnslkpx1k2g4jcp5d";
-      type = "gem";
-    };
-    version = "1.0.0";
   };
   method_source = {
     groups = ["default"];
