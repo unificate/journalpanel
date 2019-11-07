@@ -7,23 +7,17 @@ $mdc-theme-on-secondary: #000000;
 $mdc-theme-on-surface: #ffffff;
 @import "@material/button/mdc-button";
 @import "@material/card/mdc-card";
-@import "@material/textfield/mdc-text-field";
-
-@import "@material/checkbox/mdc-checkbox"; // Required only for data table with row selection.
+@import "@material/checkbox/mdc-checkbox";
 @import "@material/data-table/mdc-data-table";
-
-/*Reqired for the menus on the admin_panel page*/
-@import "@material/select/mdc-select";
+@import "@material/form-field/mdc-form-field";
 @import "@material/list/mdc-list";
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/menu/mdc-menu";
-
-/*Radio Buttons*/
-@import "@material/form-field/mdc-form-field";
 @import "@material/radio/mdc-radio";
-/*End of menu styles*/
+@import "@material/select/mdc-select";
+@import "@material/textfield/mdc-text-field";
 
-#login-container {
+.container {
     display: flex;
     justify-content: center;
 }
