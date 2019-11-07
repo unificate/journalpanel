@@ -11,11 +11,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     ​<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  </head>
-
+  </head> 
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%= render "layouts/header"%>
+    <div class="application_content">
+	    <%= yield %>
+    </div>
+    <%=render "layouts/footer"%>
   </body>
 </html>
