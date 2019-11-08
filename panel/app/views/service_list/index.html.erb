@@ -1,8 +1,5 @@
 <h1 class="service-title">Microservices</h1>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
-<%= render "service_list_tile",name: "Service Name!", details: "SO MANY DETAILS AHGSHAHAHAHAHAHASFAFA Details I wonder why THERE ARE SO MANY DETAILS ONN THIS TILE HOLY SMOKES", changes: 5%>
+
+<% @services.each do |service|%>
+    <%= render "service_list_tile",name: service.name , changes: 5%>
+<%end%>

@@ -1,0 +1,2 @@
+class Microservice < ApplicationRecord
+end
