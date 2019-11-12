@@ -10,7 +10,16 @@ RSpec.feature 'Logins', type: :feature do
     expect(page).to have_field('password')
     expect(page).to have_button('Login')
   end
-  scenario "User logins using valid username and password" do
+  scenario "User logins using an invalid username and password" do
+    visit '/'
+    expect(page).not_to have_text('Invalid username or password.')
+    fill_in 'username', with: 'tester'
+    fill_in 'password', with: 'wrong'
+    click_button 'Login'
+    expect(page).to have_current_path('/')
+    expect(page).to have_text('Invalid username or password.')
+  end
+  scenario "User logins using a valid username and password" do
     visit '/'
     fill_in 'username', with: 'tester'
     fill_in 'password', with: 'tester'

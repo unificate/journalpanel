@@ -2,9 +2,11 @@ $mdc-theme-primary: #bb86fc;
 $mdc-theme-secondary: #03dac6;
 $mdc-theme-background: #121212;
 $mdc-theme-surface: #434343;
+$mdc-theme-error: #cf6679;
 $mdc-theme-on-primary: #000000;
 $mdc-theme-on-secondary: #000000;
 $mdc-theme-on-surface: #ffffff;
+$mdc-theme-on-errore: #000000;
 @import "@material/button/mdc-button";
 @import "@material/card/mdc-card";
 @import "@material/checkbox/mdc-checkbox";
@@ -33,6 +35,12 @@ $mdc-theme-on-surface: #ffffff;
 
 #login-content h1 {
     margin-top: 0;
+}
+
+#login-error {
+    display: none;
+    margin-top: 0;
+    color: $mdc-theme-error;
 }
 
 #username-field, #password-field {
