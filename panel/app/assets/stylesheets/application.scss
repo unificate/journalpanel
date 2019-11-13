@@ -12,12 +12,33 @@ $mdc-theme-on-errore: #000000;
 @import "@material/checkbox/mdc-checkbox";
 @import "@material/data-table/mdc-data-table";
 @import "@material/form-field/mdc-form-field";
+@import "@material/icon-button/mdc-icon-button";
 @import "@material/list/mdc-list";
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/menu/mdc-menu";
 @import "@material/radio/mdc-radio";
 @import "@material/select/mdc-select";
 @import "@material/textfield/mdc-text-field";
+@import "@material/top-app-bar/mdc-top-app-bar";
+div.head-wraper { 
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 60px;
+}
+
+div.foot-wraper {
+	position: fixed; 
+	bottom: 0px; 
+	width: 100%; 
+	height: 60px;
+}
+
+div.application_content {
+	margin-top:100px;
+	margin-bottom: 100px;
+	
+}
 
 .container {
     display: flex;
@@ -52,6 +73,7 @@ body {
      background-color: $mdc-theme-background;
      color: #ffffff;
 }
+
 
 .service-title {
     color: white;

@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get '/', to: 'login#index'
   get '/list', to: 'login#list'
   get '/users', to: 'accounts#index'
+  post '/users', to: 'accounts#create'	
 end

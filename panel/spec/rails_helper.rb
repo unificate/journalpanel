@@ -66,4 +66,5 @@ RSpec.configure do |config|
   Capybara.configure do |config|
     config.default_driver = :selenium
   end
+  config.include Warden::Test::Helpers 
 end
