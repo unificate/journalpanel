@@ -3,8 +3,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   get '/', to: 'login#index'
-  get '/list', to: 'login#list'
-  get '/service_list', to: 'service_list#index'
+  get '/list', to: 'service_list#index'
   get '/users', to: 'accounts#index'
   post '/users', to: 'accounts#create'	
 end

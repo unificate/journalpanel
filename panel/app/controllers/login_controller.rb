@@ -4,8 +4,4 @@ class LoginController < ApplicationController
       redirect_to '/list'
     end
   end
-
-  def list
-    render body: nil
-  end
 end
