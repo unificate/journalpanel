@@ -1,4 +1,5 @@
 class ServiceListController < ApplicationController
-  def service_list
+  def index 
+      @services = Microservice.order('name')
   end
 end

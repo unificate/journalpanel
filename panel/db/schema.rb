@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_10_011054) do
+ActiveRecord::Schema.define(version: 2019_11_06_221449) do
 
-  create_table "user_roles", force: :cascade do |t|
-    t.string "username"
-    t.string "role"
+  create_table "microservices", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
