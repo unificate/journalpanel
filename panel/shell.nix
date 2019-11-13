@@ -12,5 +12,5 @@ let gems = bundlerEnv {
     };
 in
 mkShell {
-  buildInputs = [ bundix cacert geckodriver libxml2 gems nodejs ruby yarn zlib ];
+  buildInputs = [ bundix cacert firefox geckodriver libxml2 gems nodejs ruby yarn zlib ];
 }
