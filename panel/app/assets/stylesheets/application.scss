@@ -2,33 +2,24 @@ $mdc-theme-primary: #bb86fc;
 $mdc-theme-secondary: #03dac6;
 $mdc-theme-background: #121212;
 $mdc-theme-surface: #434343;
+$mdc-theme-error: #cf6679;
 $mdc-theme-on-primary: #000000;
 $mdc-theme-on-secondary: #000000;
 $mdc-theme-on-surface: #ffffff;
+$mdc-theme-on-errore: #000000;
 @import "@material/button/mdc-button";
 @import "@material/card/mdc-card";
-@import "@material/textfield/mdc-text-field";
-
-@import "@material/checkbox/mdc-checkbox"; // Required only for data table with row selection.
+@import "@material/checkbox/mdc-checkbox";
 @import "@material/data-table/mdc-data-table";
-
-/*Reqired for the menus on the admin_panel page*/
-@import "@material/select/mdc-select";
+@import "@material/form-field/mdc-form-field";
+@import "@material/icon-button/mdc-icon-button";
 @import "@material/list/mdc-list";
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/menu/mdc-menu";
-
-/*Radio Buttons*/
-@import "@material/form-field/mdc-form-field";
 @import "@material/radio/mdc-radio";
-/*End of menu styles*/
-
-/*Needed elements, from material, for the header*/
+@import "@material/select/mdc-select";
+@import "@material/textfield/mdc-text-field";
 @import "@material/top-app-bar/mdc-top-app-bar";
-@import "@material/icon-button/mdc-icon-button";
-/*End*/
-
-/*For the header*/
 div.head-wraper { 
 	position: fixed;
 	top: 0px;
@@ -36,7 +27,6 @@ div.head-wraper {
 	height: 60px;
 }
 
-/*For the footer*/
 div.foot-wraper {
 	position: fixed; 
 	bottom: 0px; 
@@ -50,8 +40,7 @@ div.application_content {
 	
 }
 
-
-#login-container {
+.container {
     display: flex;
     justify-content: center;
 }
@@ -67,6 +56,12 @@ div.application_content {
 
 #login-content h1 {
     margin-top: 0;
+}
+
+#login-error {
+    display: none;
+    margin-top: 0;
+    color: $mdc-theme-error;
 }
 
 #username-field, #password-field {

@@ -10,25 +10,22 @@ document.addEventListener('turbolinks:load', () => {
 
     login.root_.onclick = () => {
         const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = () => {
-            console.log(xhttp);
+        xhttp.onload = () => {
             if (xhttp.status == 200) {
                 window.location = 'list';
+            } else {
+                const error = document.querySelector('#login-error')
+                error.innerText = xhttp.response;
+                error.style.display = "block";
             }
         }
 
-        if (username.value == "logout") {
-            xhttp.open('DELETE', 'users/sign_out');
-            xhttp.setRequestHeader('X-CSRF-Token', document.getElementsByName("csrf-token")[0].content);
-            xhttp.send();
-        } else {
-            xhttp.open('POST', 'users/sign_in');
-            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            const token = document.getElementsByName("csrf-token");
-            if (token.length > 0) {
-                xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
-            }
-            xhttp.send("user[username]=" + username.value + "&user[password]=" + password.value);
+        xhttp.open('POST', 'users/sign_in');
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        const token = document.getElementsByName("csrf-token");
+        if (token.length > 0) {
+            xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
         }
+        xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value);
     }
 });
