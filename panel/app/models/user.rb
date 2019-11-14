@@ -11,4 +11,10 @@ class User < ApplicationRecord
   def will_save_change_to_email?
     false
   end
+
+  # This should obviously compare the argument with the users role and return true or false
+  # Currently users don't actually have roles though...
+  def is_role(r)
+    true
+  end
 end
