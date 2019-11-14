@@ -11,14 +11,14 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     resource = User.find_for_database_authentication(username: params[:user][:username])
-    return invalid_login_attempt unless resource
+    return render json: find_message(:invalid), status: 401 unless resource
 
     if resource.valid_password?(params[:user][:password])
       sign_in :user, resource
       return render body: nil
     end
 
-    invalid_login_attempt
+    render json: find_message(:invalid), status: 401
   end
 
   # DELETE /resource/sign_out
@@ -26,12 +26,7 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  protected
-  def invalid_login_attempt
-    set_flash_message(:alert, :invalid)
-    render json: flash[:alert], status: 401
-  end
-
+  # protected
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])

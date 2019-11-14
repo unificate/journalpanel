@@ -1,49 +1,154 @@
 <%= javascript_pack_tag 'accounts.js', 'data-turbolinks-track': 'reload' %>
-<div align="center" class="user-container">
-  <div class="mdc-data-table">
-    <table class="mdc-data-table__table" aria-label="Management">
-      <thead>
-      <tr class="mdc-data-table__header-row">
-        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Users</th>
-        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Role</th>
-      </tr>
-      </thead>
+<div class="container">
+  <div class="users-container">
+    <div id="users-data" class="mdc-data-table">
+      <table class="mdc-data-table__table" aria-label="Management">
+        <thead>
+          <tr class="mdc-data-table__header-row">
+            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Users</th>
+            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Role</th>
+          </tr>
+        </thead>
 
-      <% @users.each do |user| %>
+        <% @users.each_with_index do |user, index| %>
         <tbody>
-        <tr class="mdc-data-table__row">
-          <td class="mdc-data-table__cell"><%= user.username %></td>
-          <td class="mdc-data-table__cell">
-            <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Admin", checked = user.is_role("admin")) %>
-              <%= label_tag("radio-1", "Admin") %>
-              <div class="mdc-radio__ripple"></div>
-            </div>
-          </td>
-          <td class="mdc-data-table__cell">
-            <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Developer", checked = user.is_role("developer")) %>
-              <%= label_tag("radio-1", "Developer") %>
-              <div class="mdc-radio__ripple"></div>
-            </div>
-          </td>
-          <td class="mdc-data-table__cell">
-            <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Product Owner", checked = user.is_role("product owner")) %>
-              <%= label_tag("radio-1", "Product Owner") %>
-              <div class="mdc-radio__ripple"></div>
-            </div>
-          </td>
-          <td class="mdc-data-table__cell">
-            <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Stage Reviewer", checked = user.is_role("stage reviewer")) %>
-              <%= label_tag("radio-1", "Stage Reviewer") %>
-              <div class="mdc-radio__ripple"></div>
-            </div>
-          </td>
-        </tr>
+          <tr class="mdc-data-table__row">
+            <td class="mdc-data-table__cell"><%= user.username %></td>
+            <td class="mdc-data-table__cell">
+              <div class="mdc-form-field">
+                <div class="mdc-radio">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> checked=<%= user.is_role("admin") %>>
+                  <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                  </div>
+                  <div class="mdc-radio__ripple"></div>
+                </div>
+                <label for=<%= "radio-admin-" + index.to_s %>>Admin</label>
+              </div>
+            </td>
+            <td class="mdc-data-table__cell">
+              <div class="mdc-form-field">
+                <div class="mdc-radio">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> checked=<%= user.is_role("developer") %>>
+                  <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                  </div>
+                  <div class="mdc-radio__ripple"></div>
+                </div>
+                <label for=<%= "radio-developer-" + index.to_s %>>Developer</label>
+              </div>
+            </td>
+            <td class="mdc-data-table__cell">
+              <div class="mdc-form-field">
+                <div class="mdc-radio">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> checked=<%= user.is_role("product_owner") %>>
+                  <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                  </div>
+                  <div class="mdc-radio__ripple"></div>
+                </div>
+                <label for=<%= "radio-productowner-" + index.to_s %>>Product Owner</label>
+              </div>
+            </td>
+            <td class="mdc-data-table__cell">
+              <div class="mdc-form-field">
+                <div class="mdc-radio">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> checked=<%= user.is_role("release_manager") %>>
+                  <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                  </div>
+                  <div class="mdc-radio__ripple"></div>
+                </div>
+                <label for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
+              </div>
+            </td>
+          </tr>
         </tbody>
-      <% end %>
-    </table>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container">
+    <div class="users-container">
+      <div id="users-card" class="mdc-card">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-text-field mdc-text-field--outlined">
+              <input type="text" id="username" class="mdc-text-field__input">
+              <div class="mdc-notched-outline">
+                <div class="mdc-notched-outline__leading"></div>
+                <div class="mdc-notched-outline__notch">
+                  <label for="username" class="mdc-floating-label">Username</label>
+                </div>
+                <div class="mdc-notched-outline__trailing"></div>
+              </div>
+            </div>
+            <div class="mdc-text-field mdc-text-field--outlined">
+              <input type="password" id="password" class="mdc-text-field__input">
+              <div class="mdc-notched-outline">
+                <div class="mdc-notched-outline__leading"></div>
+                <div class="mdc-notched-outline__notch">
+                  <label for="password" class="mdc-floating-label">Password</label>
+                </div>
+                <div class="mdc-notched-outline__trailing"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-form-field">
+              <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="radio-admin-new" name="radios-new">
+                <div class="mdc-radio__background">
+                  <div class="mdc-radio__outer-circle"></div>
+                  <div class="mdc-radio__inner-circle"></div>
+                </div>
+                <div class="mdc-radio__ripple"></div>
+              </div>
+              <label for="radio-admin-new">Admin</label>
+            </div>
+            <div class="mdc-form-field">
+              <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="radio-developer-new" name="radios-new" checked>
+                <div class="mdc-radio__background">
+                  <div class="mdc-radio__outer-circle"></div>
+                  <div class="mdc-radio__inner-circle"></div>
+                </div>
+                <div class="mdc-radio__ripple"></div>
+              </div>
+              <label for="radio-developer-new">Developer</label>
+            </div>
+            <div class="mdc-form-field">
+              <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="radio-productowner-new" name="radios-new">
+                <div class="mdc-radio__background">
+                  <div class="mdc-radio__outer-circle"></div>
+                  <div class="mdc-radio__inner-circle"></div>
+                </div>
+                <div class="mdc-radio__ripple"></div>
+              </div>
+              <label for="radio-productowner-new">Product Owner</label>
+            </div>
+            <div class="mdc-form-field">
+              <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="radio-releasemanager-new" name="radios-new">
+                <div class="mdc-radio__background">
+                  <div class="mdc-radio__outer-circle"></div>
+                  <div class="mdc-radio__inner-circle"></div>
+                </div>
+                <div class="mdc-radio__ripple"></div>
+              </div>
+              <label for="radio-productowner-new">Release Manager</label>
+            </div>
+
+            <button class="mdc-button mdc-button--raised">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

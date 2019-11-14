@@ -5,6 +5,4 @@ class AccountsController < ApplicationController
     end
     @users = User.order('username')
   end
-  def create
-  end
 end
