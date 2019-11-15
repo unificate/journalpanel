@@ -15,10 +15,10 @@ RSpec.feature 'Accounts', type: :feature do
 	scenario 'Make sure that the radio buttons are working' do
 		visit '/users'
 		User.order('username').each_with_index do |user, index|
-                  choose('radio-admin-' + index.to_s, visible: false)
-                  choose('radio-developer-' + index.to_s, visible: false)
-                  choose('radio-productowner-' + index.to_s, visible: false)
-                  choose('radio-releasemanager-' + index.to_s, visible: false)
-                end
+      choose('radio-admin-' + index.to_s, visible: false)
+      choose('radio-developer-' + index.to_s, visible: false)
+      choose('radio-productowner-' + index.to_s, visible: false)
+      choose('radio-releasemanager-' + index.to_s, visible: false)
+    end
 	end
 end

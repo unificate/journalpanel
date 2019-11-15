@@ -2,8 +2,10 @@
 <header class="mdc-top-app-bar mdc-top-app-bar--dense">
   <div class="mdc-top-app-bar__row" style >
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon--unbounded">menu</button><span class="mdc-top-app-bar__title">HP Microservice Managment</span> </section>
+      <span class="mdc-top-app-bar__title">HP Microservice Managment</span> </section>
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+      <%= button_to('dashboard', '/list', method: 'get', :class => "mdc-icon-button material-icons")%>
+      <%= button_to('groups', '/users', method: 'get', :class => "mdc-icon-button material-icons")%>
     </section>
   </div>
 </header>
