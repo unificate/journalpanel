@@ -10,19 +10,15 @@ RSpec.feature 'Accounts', type: :feature do
 		expect(page).to have_content('Admin')
 		expect(page).to have_content('Developer')
 		expect(page).to have_content('Product Owner')
-		expect(page).to have_content('Stage Reviewer')
+		expect(page).to have_content('Release Manager')
 	end
 	scenario 'Make sure that the radio buttons are working' do
 		visit '/users'
-		@user = User.order('username')
-		choice1 = @user[0].username+"_Admin"
-		choice2 = @user[0].username+"_Developer"
-		choice3 = @user[0].username+"_Product_Owner"
-		choice4 = @user[0].username+"_Stage_Reviewer"
-		choose(choice1)
-		choose(choice2)
-		choose(choice3)
-		choose(choice4)
+		User.order('username').each_with_index do |user, index|
+      choose('radio-admin-' + index.to_s, visible: false)
+      choose('radio-developer-' + index.to_s, visible: false)
+      choose('radio-productowner-' + index.to_s, visible: false)
+      choose('radio-releasemanager-' + index.to_s, visible: false)
+    end
 	end
 end
-

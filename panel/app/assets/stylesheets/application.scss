@@ -20,6 +20,7 @@ $mdc-theme-on-errore: #000000;
 @import "@material/select/mdc-select";
 @import "@material/textfield/mdc-text-field";
 @import "@material/top-app-bar/mdc-top-app-bar";
+
 div.head-wraper { 
 	position: fixed;
 	top: 0px;
@@ -39,12 +40,12 @@ div.foot-wraper {
 div.application_content {
 	margin-top:100px;
 	margin-bottom: 100px;
-	
 }
 
 .container {
     display: flex;
     justify-content: center;
+    margin: 20px;
 }
 
 #login-card {
@@ -76,7 +77,6 @@ body {
      color: #ffffff;
 }
 
-
 .service-title {
     color: white;
     text-align: center;
@@ -95,7 +95,7 @@ body {
   display: inline-grid;
   width: 200px;
   overflow: auto;
-  background:#303030;
+  background: #303030;
   box-shadow: 0 2px 6px 0 rgba(48,48,48,0.2);
   transition: 0.3s;
   border-radius: 5px;
@@ -109,4 +109,28 @@ body {
 /* Add some padding inside the card container */
 .service-tile-container {
   padding: 2px 16px;
+}
+
+#users-card {
+    padding: 5px;
+}
+
+#users-card .mdc-text-field {
+    margin: 0 10px;
+}
+
+#users-card .mdc-form-field {
+    margin: 0 5px;
+}
+
+#users-card button {
+    margin: 0 20px;
+}
+
+#users-data {
+    width: 100%;
+}
+
+.users-container {
+    width: 750px;
 }
