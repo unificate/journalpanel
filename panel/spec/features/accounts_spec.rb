@@ -14,25 +14,15 @@ RSpec.feature 'Accounts', type: :feature do
 	end
 	scenario 'Make sure that the radio buttons are working' do
 		visit '/users'
-		choose('radio-1_Admin')
-		choose('radio-1_Developer')
-		choose('radio-1_Product_Owner')
-		choose('radio-1_Stage_Reviewer')
-		
-		choose('radio-2_Admin')
-		choose('radio-2_Developer')
-		choose('radio-2_Product_Owner')
-		choose('radio-2_Stage_Reviewer')
-		
-		choose('radio-3_Admin')
-		choose('radio-3_Developer')
-		choose('radio-3_Product_Owner')
-		choose('radio-3_Stage_Reviewer')
-		
-		choose('radio-4_Admin')
-		choose('radio-4_Developer')
-		choose('radio-4_Product_Owner')
-		choose('radio-4_Stage_Reviewer')
+		@user = User.order('username')
+		choice1 = @user[0].username+"_Admin"
+		choice2 = @user[0].username+"_Developer"
+		choice3 = @user[0].username+"_Product_Owner"
+		choice4 = @user[0].username+"_Stage_Reviewer"
+		choose(choice1)
+		choose(choice2)
+		choose(choice3)
+		choose(choice4)
 	end
 end
 

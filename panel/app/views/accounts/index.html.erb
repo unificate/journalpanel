@@ -15,29 +15,29 @@
           <td class="mdc-data-table__cell"><%= user.username %></td>
           <td class="mdc-data-table__cell">
             <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Admin", checked = user.is_role("admin")) %>
-              <%= label_tag("radio-1", "Admin") %>
+              <%= radio_button_tag(user.username, "Admin", checked = user.is_role("admin")) %>
+              <%= label_tag(user.username, "Admin") %>
               <div class="mdc-radio__ripple"></div>
             </div>
           </td>
           <td class="mdc-data-table__cell">
             <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Developer", checked = user.is_role("developer")) %>
-              <%= label_tag("radio-1", "Developer") %>
+              <%= radio_button_tag(user.username, "Developer", checked = user.is_role("developer")) %>
+              <%= label_tag(user.username, "Developer") %>
               <div class="mdc-radio__ripple"></div>
             </div>
           </td>
           <td class="mdc-data-table__cell">
             <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Product Owner", checked = user.is_role("product owner")) %>
-              <%= label_tag("radio-1", "Product Owner") %>
+              <%= radio_button_tag(user.username, "Product Owner", checked = user.is_role("product owner")) %>
+              <%= label_tag(user.username, "Product Owner") %>
               <div class="mdc-radio__ripple"></div>
             </div>
           </td>
           <td class="mdc-data-table__cell">
             <div class="mdc-form-field">
-              <%= radio_button_tag("radio-1", "Stage Reviewer", checked = user.is_role("stage reviewer")) %>
-              <%= label_tag("radio-1", "Stage Reviewer") %>
+              <%= radio_button_tag(user.username, "Stage Reviewer", checked = user.is_role("stage reviewer")) %>
+              <%= label_tag(user.username, "Stage Reviewer") %>
               <div class="mdc-radio__ripple"></div>
             </div>
           </td>
