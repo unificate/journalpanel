@@ -1,6 +1,7 @@
-<div class="service-tile">
+<%= link_to "service/"+id.to_s, class: "service-tile", :action => 'go' do%>
     <div class="service-tile-container">
         <h4 class="service-tile-title"><b><%=name%></b></h4>
-        <h4 style:"color: red">Changes: <%=changes%> </h4>
+        <h4 class="service-tile-title">Changes: <%=changes%> </h4>
     </div>
-</div>
+<% end %>
+

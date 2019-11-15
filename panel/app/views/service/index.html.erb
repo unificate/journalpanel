@@ -1,0 +1,5 @@
+<h1><%= @microservice.name %></h1>
+<% @microservice.attributes.each do |attr_name, attr_value| %>
+    <h5><%= attr_name %>: <%= attr_value %></h5>
+<%end%>
+
