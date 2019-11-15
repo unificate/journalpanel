@@ -1,5 +1,6 @@
 <h1 class="service-title">Microservices</h1>
-
-<% @services.each do |service|%>
-    <%= render "service_list_tile",name: service.name , changes: 5%>
-<%end%>
+<div class="tile-container">
+    <% @services.each do |service|%>
+        <%= render "service_list_tile",name: service.name , changes: 5, id: service.id%>
+    <%end%>
+</div>

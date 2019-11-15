@@ -89,9 +89,11 @@ body {
 
 .service-tile{
   /* Add shadows to create the "card" effect */
-  margin: 10px;
+  text-decoration: none;
+  text-color: white;
+  margin: 1%;
   display: inline-grid;
-  width: 200px;
+  width: 22%;
   overflow: auto;
   background: #303030;
   box-shadow: 0 2px 6px 0 rgba(48,48,48,0.2);
@@ -106,7 +108,11 @@ body {
 
 /* Add some padding inside the card container */
 .service-tile-container {
-  padding: 2px 16px;
+  padding: 2% 16px;
+}
+
+.tile-container{
+    justify-items: center;
 }
 
 #users-card {
