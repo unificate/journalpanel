@@ -38,7 +38,7 @@ document.addEventListener('turbolinks:load', () => {
         if (token.length > 0) {
             xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
         }
-        xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value + '&buttonvalue=' + buttonValue);
+        xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value);
         
 	/*Send a second POST request to add the user to a group*/
 	xhttp2.open('POST', 'create');
