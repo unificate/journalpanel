@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: 'users/registrations',
+  registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
   get '/', to: 'login#index'
   get '/list', to: 'service_list#index'
   get '/service/:id', to: 'service#index'
   get '/users', to: 'accounts#index'
-  post '/users', to: 'accounts#create'	
+  post '/create', to: 'accounts#createGroup'
+  
 end
