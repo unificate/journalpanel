@@ -1,3 +1,13 @@
+# Project Structure
+| Directory            | Description                              |
+| -------------------- | ---------------------------------------- |
+| contacts             | Test microservice                        |
+| customer_info_server | Test microservice                        |
+| hello                | Ruby project template                    |
+| hello_rails          | Rails project template                   |
+| login_test           | Test microservice                        |
+| panel                | Control panel for managing microservices |
+
 # Setting up your environment
 You only need to install 2 dependencies:
 
