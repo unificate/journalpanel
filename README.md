@@ -28,3 +28,7 @@ Alternatively, if you can not get direnv working you can still work on the proje
 
 # Adding a dependency
 Add the dependency to the Gemfile file and then run `bundix -l`. You will then need to rebuild your environment. This will happen after you execute a command in the environment or leave and reenter it.
+
+# Running project
+$ cd panel
+$ rails s
