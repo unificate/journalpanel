@@ -24,12 +24,6 @@ document.addEventListener('turbolinks:load', () => {
                 location.reload()
             }
         }
-	xhttp2.onload = () => {
-            console.log(xhttp2.response.Text);
-            if (xhttp2.status == 200) {
-                location.reload()
-            }
-	}
 
 
         xhttp.open('POST', 'users');
