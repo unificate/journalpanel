@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_040934) do
+ActiveRecord::Schema.define(version: 2019_12_12_043214) do
 
   create_table "groups", force: :cascade do |t|
     t.string "username"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_040934) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "role"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

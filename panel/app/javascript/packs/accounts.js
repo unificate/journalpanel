@@ -38,15 +38,8 @@ document.addEventListener('turbolinks:load', () => {
         if (token.length > 0) {
             xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
         }
-        xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value);
+        xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value + '&user[role]=' + buttonValue);
         
-	/*Send a second POST request to add the user to a group*/
-	xhttp2.open('POST', 'create');
-        xhttp2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        if (token.length > 0) {
-            xhttp2.setRequestHeader('X-CSRF-Token', token[0].content);
-        }
-        xhttp2.send('username=' + username.value + '&buttonvalue=' + buttonValue);
     }
 
 	/*Get the value for the selected radio button*/

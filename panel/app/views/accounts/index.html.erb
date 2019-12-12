@@ -17,7 +17,7 @@
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
                 <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("admin") ? "checked" : "" %> autocomplete="off">
+			<input class="mdc-radio__native-control" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("admin") ? "checked" : "" %> autocomplete="off">
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
@@ -30,7 +30,7 @@
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
                 <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("developer") ? "checked" : "" %> autocomplete="off">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> autocomplete="off">
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
@@ -43,7 +43,7 @@
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
                 <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("product_owner") ? "checked" : "" %> autocomplete="off">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> autocomplete="off">
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
@@ -56,7 +56,7 @@
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
                 <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("release_manager") ? "checked" : "" %> autocomplete="off">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> autocomplete="off">
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>

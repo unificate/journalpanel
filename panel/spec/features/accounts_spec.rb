@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.feature 'Accounts', type: :feature do
 	before(:each) do
                 user =  create(:user)
-		group = create(:group) 
                 login_as(user, :scope => :user)
         end
 	scenario 'Make sure that the users page contains all of the account types' do
