@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.feature 'Accounts', type: :feature do
 	before(:each) do
-		user =  create(:user)
-		login_as(user, :scope => :user)
-  	end
-	scenario 'Make sure that the users page contains all of the account types' do	
+                user =  create(:user)
+                login_as(user, :scope => :user)
+        end
+	scenario 'Make sure that the users page contains all of the account types' do
 		visit '/users'
 		expect(page).to have_content('Admin')
 		expect(page).to have_content('Developer')
