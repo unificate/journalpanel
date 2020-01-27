@@ -473,14 +473,15 @@
     version = "4.0.1";
   };
   puma = {
+    dependencies = ["nio4r"];
     groups = ["default"];
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1pkrbvak6rlf147qpd4zss031qrwwh53g8s6017037iwg0436kv3";
+      sha256 = "0v6zai6sinw5r1lchm278mm3dr8x5vi8pwmybwv9lz1kz02fk2g3";
       type = "gem";
     };
-    version = "3.12.1";
+    version = "4.3.1";
   };
   rack = {
     groups = ["default"];
