@@ -37,3 +37,7 @@ yarn-debug.log*
 # Ignore IntelliJ project files
 .idea/*
 *.iml
+
+# Ignore generators and rake files
+.generators
+.rakeTasks
