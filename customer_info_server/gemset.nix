@@ -347,24 +347,25 @@
     version = "1.10.4";
   };
   puma = {
+    dependencies = ["nio4r"];
     groups = ["default"];
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1pkrbvak6rlf147qpd4zss031qrwwh53g8s6017037iwg0436kv3";
+      sha256 = "0v6zai6sinw5r1lchm278mm3dr8x5vi8pwmybwv9lz1kz02fk2g3";
       type = "gem";
     };
-    version = "3.12.1";
+    version = "4.3.1";
   };
   rack = {
     groups = ["default"];
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0z90vflxbgjy2n84r7mbyax3i2vyvvrxxrf86ljzn5rw65jgnn2i";
+      sha256 = "1id0jsslx1ipv0pbqjfn7mjbb2vx2xybk7qypq59a17163xp30gr";
       type = "gem";
     };
-    version = "2.0.7";
+    version = "2.0.8";
   };
   rack-test = {
     dependencies = ["rack"];
