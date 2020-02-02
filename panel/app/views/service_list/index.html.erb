@@ -3,4 +3,7 @@
     <% @services.each do |service|%>
         <%= render "service_list_tile",name: service.name , changes: 5, id: service.id%>
     <%end%>
+    <% @service_schemas.each do |schema|%>
+        <%= schema %>
+    <%end%>
 </div>
