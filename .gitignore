@@ -35,9 +35,12 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore IntelliJ project files
-.idea/*
+*.idea/
 *.iml
 
 # Ignore all generators and rake stuff
 .generators
 .rakeTasks
+
+# Ignore direnv files
+*.direnv/
