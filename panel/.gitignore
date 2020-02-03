@@ -39,5 +39,9 @@ yarn-debug.log*
 *.iml
 
 # Ignore generators and rake stuff
-.generators
-.rakeTasks
+*.generators
+*.rakeTasks
+*.xml
+
+# Ignore old SQLite3 database backup
+/config.database.yml.sqlite3
