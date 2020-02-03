@@ -317,7 +317,7 @@
   };
   minitest = {
     groups = ["default"];
-    platforms = [578a5caf2655a22de7490d12c20];
+    platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
       sha256 = "0g73x65hmjph8dg1h3rkzfg7ys3ffxm35hj35grw75fixmq53qyz";
