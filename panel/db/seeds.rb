@@ -7,3 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Microservice.create(name:'customer_info',address:'localhost:3001/grabber')
+
+# Default admin user - ideally this would be changed when first setting up the app
+User.create(username:'admin', password:'password', role:'Admin')
