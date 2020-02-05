@@ -42,6 +42,3 @@ yarn-debug.log*
 *.generators
 *.rakeTasks
 *.xml
-
-# Ignore old SQLite3 database backup
-/config.database.yml.sqlite3
