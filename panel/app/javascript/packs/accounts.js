@@ -17,7 +17,6 @@ document.addEventListener('turbolinks:load', () => {
     create.root_.onclick = () => {
 	const buttonValue = getButtonValue();
         const xhttp = new XMLHttpRequest();
-	const xhttp2 = new XMLHttpRequest();    
         xhttp.onload = () => {
             console.log(xhttp.responseText);
             if (xhttp.status == 200) {
