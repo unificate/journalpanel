@@ -284,6 +284,17 @@
     };
     version = "5.1.1";
   };
+  faraday = {
+    dependencies = ["multipart-post"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "11yn7mhi4rl24brs2qfwysas14csjf1zmb835cfklqz5ka032xp6";
+      type = "gem";
+    };
+    version = "1.0.0";
+  };
   ffi = {
     groups = ["default" "development"];
     platforms = [];
@@ -430,6 +441,16 @@
       type = "gem";
     };
     version = "1.3.1";
+  };
+  multipart-post = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1zgw9zlwh2a6i1yvhhc4a84ry1hv824d6g2iw2chs3k5aylpmpfj";
+      type = "gem";
+    };
+    version = "2.1.1";
   };
   nio4r = {
     groups = ["default"];
