@@ -1,9 +1,5 @@
 class ViewtableController < ApplicationController
   def index
-    @records = {"Nothin":"At all"}
-    @tname = "Nothing"
-  end
-  def show
     keys = params[:id].split("_")
     if keys.length() >= 2
         service = Microservice.find(keys[0])
@@ -24,6 +20,6 @@ class ViewtableController < ApplicationController
     else
         @records = {"Bad":"News"}
     end
-    render :index
+
   end
 end

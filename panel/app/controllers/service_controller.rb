@@ -10,17 +10,12 @@ class ServiceController < ApplicationController
     adr = @microservice.address
     conn = Faraday.new
     if adr != nil and adr != ""
-        if adr.include? 'http'
-            @schema = JSON.parse(conn.get(adr).body).with_indifferent_access
-            @table_names = @schema.keys.select do |el|
-                @schema[el] != nil
-            end
-        else
+        unless adr.include? 'http'
             adr = 'http://'+adr
-            @schema = JSON.parse(conn.get(adr).body).with_indifferent_access
-            @table_names = @schema.keys.select do |el|
-                @schema[el] != nil
-            end
+        end
+        @schema = JSON.parse(conn.get(adr).body).with_indifferent_access
+        @table_names = @schema.keys.select do |el|
+            @schema[el] != nil
         end
     end
   end
