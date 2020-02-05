@@ -13,7 +13,7 @@ import {MDCRipple} from '@material/ripple';
 
 document.addEventListener('turbolinks:load', () => {
     const userButton = new MDCRipple(document.querySelector('#user-button'));
-    const menu = new MDCMenu(document.querySelector('.mdc-menu'));
+    const menu = new MDCMenu(document.querySelector('#user-menu'));
     userButton.root_.onclick = () => {
         menu.open = true;
     };

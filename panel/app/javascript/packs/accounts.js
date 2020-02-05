@@ -13,7 +13,7 @@ document.addEventListener('turbolinks:load', () => {
     for (let textField of document.querySelectorAll('.mdc-text-field')) {
         new MDCTextField(textField);
     }
-    const create = new MDCRipple(document.querySelector('.mdc-button'));
+    const create = new MDCRipple(document.querySelector('#create-button'));
     create.root_.onclick = () => {
 	const buttonValue = getButtonValue();
         const xhttp = new XMLHttpRequest();

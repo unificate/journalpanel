@@ -6,7 +6,7 @@ document.addEventListener('turbolinks:load', () => {
     const username = document.querySelector('#username');
     new MDCTextField(document.querySelector('#password-field'));
     const password = document.querySelector('#password');
-    const login = new MDCRipple(document.querySelector('.mdc-button'));
+    const login = new MDCRipple(document.querySelector('#login-button'));
 
     login.root_.onclick = () => {
         const xhttp = new XMLHttpRequest();
