@@ -43,3 +43,6 @@ yarn-debug.log*
 *.rakeTasks
 *.iml
 *.xml
+
+# Ignore direnv files
+*.direnv/
