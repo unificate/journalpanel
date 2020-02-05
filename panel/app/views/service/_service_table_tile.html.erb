@@ -1,0 +1,8 @@
+<%= link_to "/viewtable/"+id+"_"+name, class: "service-tile", :action => 'go' do%>
+    <div class="service-tile-container">
+        <h4 class="service-tile-title"><b><%=name%></b></h4>
+        <% table.each do |key1, val1| %>
+            <h6 class="service-tile-title"><%= key1['name'] %> : <%=key1['sql_type_metadata']['sql_type']%></h5>
+        <%end%>
+    </div>
+<% end %>

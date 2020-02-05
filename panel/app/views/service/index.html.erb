@@ -2,4 +2,9 @@
 <% @microservice.attributes.each do |attr_name, attr_value| %>
     <h5><%= attr_name %>: <%= attr_value %></h5>
 <%end%>
+<div class="tile-container">
+    <% @table_names.each do |n|%>
+        <%= render "service_table_tile",name:n,table:@schema[n],id:@microservice.id.to_s%>
+    <%end%>
+</div>
 

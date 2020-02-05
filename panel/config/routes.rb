@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get '/list', to: 'service_list#index'
   get '/service/:id', to: 'service#index'
   get '/users', to: 'accounts#index'
+  get 'viewtable/:id', to: 'viewtable#index'
   
 end

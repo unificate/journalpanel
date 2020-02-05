@@ -3,30 +3,22 @@ module Grabber
     protect_from_forgery with: :exception
     def index
         schemas = ActiveRecord::Base.connection.tables
-        unpacked_schemas = Array.new
-        str = "{"
-        first = 0
-        ActiveRecord::Base.connection.tables.each do |table_name|
-            if first == 0
-                first = 1
-            else
-                str += ", "
-            end
-            str += "#{table_name}: {"
-            innerfirst = 0
-            ActiveRecord::Base.connection.columns(table_name).each do |c|
-                if innerfirst == 0
-                    innerfirst = 1
-                else
-                    str += ", "
-                end
-                str += "#{c.name}:#{c.type} #{c.limit}"
-                unpacked_schemas.push(str)
-            end
-            str += "}"
+        out = {}
+        ActiveRecord::Base.connection.tables.each do |table_name| 
+            out[table_name] = ActiveRecord::Base.connection.columns(table_name)
         end
-        str += "}"
-        render json: {status: 'SUCCESS', message:'Loaded schemas', data:str}, status: :ok
+        render json: out, status: :ok
     end
+    
+    def show
+        if ActiveRecord::Base.connection.tables.include? params[:id]
+            table = params[:id].classify.constantize
+            render json: table.all, status: :ok
+        else
+            table = {"Response": "Table does not exist"}
+            render json: table, status: :not_found
+        end
+    end
+
   end
 end
