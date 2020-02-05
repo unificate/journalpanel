@@ -35,7 +35,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore IntelliJ project files
-.idea/*
+*.idea/
 *.iml
 
 # Ignore generators and rake stuff
