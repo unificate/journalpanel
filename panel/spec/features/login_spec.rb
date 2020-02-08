@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Logins', type: :feature do
   before(:each) do
-    create(:user)
+    create(:admin)
   end
   scenario 'User visits the login page' do
     visit '/'

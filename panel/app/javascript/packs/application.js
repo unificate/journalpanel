@@ -28,7 +28,7 @@ document.addEventListener('turbolinks:load', () => {
         }
 
 
-        xhttp.open('DELETE', 'users/sign_out');
+        xhttp.open('DELETE', '/users/sign_out');
         const token = document.getElementsByName("csrf-token");
         if (token.length > 0) {
             xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
