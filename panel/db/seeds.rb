@@ -8,5 +8,7 @@
 
 Microservice.create(name:'customer_info',address:'localhost:3001/grabber')
 
+Microservice.create(name:'contacts',address:'localhost:3002/grabber')
+
 # Default admin user - ideally this would be changed when first setting up the app
 User.create(username:'admin', password:'password', role:'Admin')
