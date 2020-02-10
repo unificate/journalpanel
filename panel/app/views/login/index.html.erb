@@ -3,28 +3,30 @@
   <div id="login-card" class="mdc-card">
     <div id="login-content">
       <h1>Login</h1>
-      <div id="username-field" class="mdc-text-field mdc-text-field--outlined">
-        <input type="text" id="username" class="mdc-text-field__input">
-        <div class="mdc-notched-outline">
-          <div class="mdc-notched-outline__leading"></div>
-          <div class="mdc-notched-outline__notch">
-            <label for="username" class="mdc-floating-label">Username</label>
+      <form action="javascript:void(0);">
+        <div id="username-field" class="mdc-text-field mdc-text-field--outlined">
+          <input type="text" id="username" class="mdc-text-field__input">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="username" class="mdc-floating-label">Username</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
           </div>
-          <div class="mdc-notched-outline__trailing"></div>
         </div>
-      </div>
-      <div id="password-field" class="mdc-text-field mdc-text-field--outlined">
-        <input type="password" id="password" class="mdc-text-field__input">
-        <div class="mdc-notched-outline">
-          <div class="mdc-notched-outline__leading"></div>
-          <div class="mdc-notched-outline__notch">
-            <label for="password" class="mdc-floating-label">Password</label>
+        <div id="password-field" class="mdc-text-field mdc-text-field--outlined">
+          <input type="password" id="password" class="mdc-text-field__input">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="password" class="mdc-floating-label">Password</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
           </div>
-          <div class="mdc-notched-outline__trailing"></div>
         </div>
-      </div>
-      <p id="login-error">lol</p>
-      <button class="mdc-button mdc-button--raised">Login</button>
+        <p id="login-error">lol</p>
+        <button id="login-button" class="mdc-button mdc-button--raised">Login</button>
+      </form>
     </div>
   </div>
 </div>

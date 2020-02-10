@@ -13,7 +13,7 @@ import {MDCRipple} from '@material/ripple';
 
 document.addEventListener('turbolinks:load', () => {
     const userButton = new MDCRipple(document.querySelector('#user-button'));
-    const menu = new MDCMenu(document.querySelector('.mdc-menu'));
+    const menu = new MDCMenu(document.querySelector('#user-menu'));
     userButton.root_.onclick = () => {
         menu.open = true;
     };
@@ -28,7 +28,7 @@ document.addEventListener('turbolinks:load', () => {
         }
 
 
-        xhttp.open('DELETE', 'users/sign_out');
+        xhttp.open('DELETE', '/users/sign_out');
         const token = document.getElementsByName("csrf-token");
         if (token.length > 0) {
             xhttp.setRequestHeader('X-CSRF-Token', token[0].content);

@@ -13,7 +13,7 @@
       <% if current_user %>
         <div class="mdc-menu-surface--anchor">
           <button id="user-button" class="mdc-button mdc-button--unelevated"><%= current_user.username%><i class="material-icons mdc-icon-button__icon">more_vert</i></button>
-          <div class="mdc-menu mdc-menu-surface">
+          <div id="user-menu" class="mdc-menu mdc-menu-surface">
             <ul class="mdc-list" role="menu" aria-hidden="true">
               <li id="logout" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Logout</li>
             </ul>
