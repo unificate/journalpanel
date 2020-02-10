@@ -189,6 +189,17 @@
     };
     version = "1.9.0";
   };
+  faker = {
+    dependencies = ["i18n"];
+    groups = ["development"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "13h4ijsx5jvb9lnyi9llxpcxp213m08j82zs4xyf09rrzr6x4mly";
+      type = "gem";
+    };
+    version = "2.10.1";
+  };
   ffi = {
     groups = ["default" "development"];
     platforms = [];
