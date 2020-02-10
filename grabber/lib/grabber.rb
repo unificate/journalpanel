@@ -1,10 +1,14 @@
 require "grabber/engine"
 
 module Grabber
-  # a list to store which tables the engine should service
-  def self.tables
-    ["customers",
-     "items",
-     "purchases"]
+  # define a tables variable for the modules metaclass (metamodule?)
+  class << self
+    mattr_accessor :tables
+  end
+
+  # define a method to allow the host app to configure the engine
+  # i.e. assign "tables"
+  def self.setup
+    yield self
   end
 end
