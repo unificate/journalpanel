@@ -1,6 +1,9 @@
 module Grabber
   class ApplicationController < ActionController::Base
-    protect_from_forgery with: :exception
+    # protect_from_forgery with: :exception
+    # don't do any CSRF checks for now
+    # we may want to figure out how to support this later
+    skip_before_action :verify_authenticity_token
     def index
         schemas = ActiveRecord::Base.connection.tables
         out = {}
@@ -20,6 +23,15 @@ module Grabber
             table = {"Response": "Table does not exist"}
             render json: table, status: :not_found
         end
+    end
+
+    def update
+      if ActiveRecord::Base.connection.tables.include? params[:table]
+        table = params[:table].classify.constantize
+        row = table.find(params[:row])
+        # update row using parsed JSON
+        row.update(JSON.parse(request.body.read))
+      end
     end
 
   end
