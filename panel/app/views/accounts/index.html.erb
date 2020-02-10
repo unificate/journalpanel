@@ -13,11 +13,11 @@
         <% @users.each_with_index do |user, index| %>
         <tbody>
           <tr class="mdc-data-table__row">
-            <td class="mdc-data-table__cell"><%= user.username %></td>
+            <td class="mdc-data-table__cell" id=<%= "user-" + index.to_s %>><%= user.username %></td>
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> autocomplete="off">
+                <div class="mdc-radio <%= current_user == user ? "mdc-radio--disabled" : "" %>">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> autocomplete="off" <%= current_user == user ? "disabled" : "" %>>
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
@@ -29,8 +29,8 @@
             </td>
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> autocomplete="off">
+                <div class="mdc-radio <%= current_user == user ? "mdc-radio--disabled" : "" %>">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> autocomplete="off" <%= current_user == user ? "disabled" : "" %>>
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
@@ -42,8 +42,8 @@
             </td>
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> autocomplete="off">
+                <div class="mdc-radio <%= current_user == user ? "mdc-radio--disabled" : "" %>">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> autocomplete="off" <%= current_user == user ? "disabled" : "" %>>
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
@@ -55,8 +55,8 @@
             </td>
             <td class="mdc-data-table__cell">
               <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> autocomplete="off">
+                <div class="mdc-radio <%= current_user == user ? "mdc-radio--disabled" : "" %>">
+                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> autocomplete="off" <%= current_user == user ? "disabled" : "" %>>
                   <div class="mdc-radio__background">
                     <div class="mdc-radio__outer-circle"></div>
                     <div class="mdc-radio__inner-circle"></div>
