@@ -1,5 +1,10 @@
 require "grabber/engine"
 
 module Grabber
-  # Your code goes here...
+  # a list to store which tables the engine should service
+  def self.tables
+    ["customers",
+     "items",
+     "purchases"]
+  end
 end

@@ -4,12 +4,14 @@ module Grabber
     def index
         schemas = ActiveRecord::Base.connection.tables
         out = {}
-        ActiveRecord::Base.connection.tables.each do |table_name| 
+        Grabber.tables.each do |table_name|
+          if schemas.include? table_name
             out[table_name] = ActiveRecord::Base.connection.columns(table_name)
+          end
         end
         render json: out, status: :ok
     end
-    
+
     def show
         if ActiveRecord::Base.connection.tables.include? params[:id]
             table = params[:id].classify.constantize
