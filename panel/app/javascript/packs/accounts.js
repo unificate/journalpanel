@@ -1,4 +1,5 @@
 import {MDCFormField} from '@material/form-field';
+import {MDCMenu} from '@material/menu';
 import {MDCRadio} from '@material/radio';
 import {MDCRipple} from '@material/ripple';
 import {MDCTextField} from '@material/textfield';
@@ -46,6 +47,12 @@ document.addEventListener('turbolinks:load', () => {
         };
         document.querySelector("#radio-releasemanager-" + i).onclick = () => {
             setUserRole(user, "Release Manager");
+        };
+        const menu = new MDCMenu(document.querySelector('#more-menu-' + i));
+        const more = new MDCRipple(document.querySelector('#more-' + i));
+        more.unbounded = true;
+        more.root_.onclick = () => {
+            menu.open = true;
         };
     }
 });

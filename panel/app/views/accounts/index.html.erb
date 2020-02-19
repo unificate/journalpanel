@@ -66,6 +66,17 @@
                 <label for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
               </div>
             </td>
+            <td class="mdc-data-table__cell">
+              <div class="mdc-menu-surface--anchor">
+                <button id=<%= "more-" + index.to_s %> class="mdc-icon-button material-icons">more_vert</button>
+                <div id=<%= "more-menu-" + index.to_s %> class="mdc-menu mdc-menu-surface">
+                  <ul class="mdc-list" role="menu" aria-hidden="true">
+                    <li id="change-password" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Change Password</li>
+                    <li id="delete-user" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Delete User</li>
+                  </ul>
+                </div>
+              </div>
+            </td>
           </tr>
         </tbody>
         <% end %>
@@ -74,80 +85,78 @@
   </div>
 </div>
 <div class="container">
-    <div class="users-container">
-      <div id="users-card" class="mdc-card">
-        <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-text-field mdc-text-field--outlined">
-              <input type="text" id="username" class="mdc-text-field__input">
-              <div class="mdc-notched-outline">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label for="username" class="mdc-floating-label">Username</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
+  <div id="users-card" class="mdc-card">
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input type="text" id="username" class="mdc-text-field__input">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="username" class="mdc-floating-label">Username</label>
             </div>
-            <div class="mdc-text-field mdc-text-field--outlined">
-              <input type="password" id="password" class="mdc-text-field__input">
-              <div class="mdc-notched-outline">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label for="password" class="mdc-floating-label">Password</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
-            </div>
+            <div class="mdc-notched-outline__trailing"></div>
           </div>
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-admin-new" name="radios-new" value="Admin">
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-admin-new">Admin</label>
+        </div>
+        <div class="mdc-text-field mdc-text-field--outlined">
+          <input type="password" id="password" class="mdc-text-field__input">
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label for="password" class="mdc-floating-label">Password</label>
             </div>
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-developer-new" name="radios-new" value="Developer" checked>
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-developer-new">Developer</label>
-            </div>
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-productowner-new" name="radios-new" value="Product Owner">
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-productowner-new">Product Owner</label>
-            </div>
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-releasemanager-new" name="radios-new" value="Release Manager">
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-productowner-new">Release Manager</label>
-            </div>
-	    <button id="create-button" class="mdc-button mdc-button--raised">Create</button>
+            <div class="mdc-notched-outline__trailing"></div>
           </div>
         </div>
       </div>
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-form-field">
+          <div class="mdc-radio">
+            <input class="mdc-radio__native-control" type="radio" id="radio-admin-new" name="radios-new" value="Admin">
+            <div class="mdc-radio__background">
+              <div class="mdc-radio__outer-circle"></div>
+              <div class="mdc-radio__inner-circle"></div>
+            </div>
+            <div class="mdc-radio__ripple"></div>
+          </div>
+          <label for="radio-admin-new">Admin</label>
+        </div>
+        <div class="mdc-form-field">
+          <div class="mdc-radio">
+            <input class="mdc-radio__native-control" type="radio" id="radio-developer-new" name="radios-new" value="Developer" checked>
+            <div class="mdc-radio__background">
+              <div class="mdc-radio__outer-circle"></div>
+              <div class="mdc-radio__inner-circle"></div>
+            </div>
+            <div class="mdc-radio__ripple"></div>
+          </div>
+          <label for="radio-developer-new">Developer</label>
+        </div>
+        <div class="mdc-form-field">
+          <div class="mdc-radio">
+            <input class="mdc-radio__native-control" type="radio" id="radio-productowner-new" name="radios-new" value="Product Owner">
+            <div class="mdc-radio__background">
+              <div class="mdc-radio__outer-circle"></div>
+              <div class="mdc-radio__inner-circle"></div>
+            </div>
+            <div class="mdc-radio__ripple"></div>
+          </div>
+          <label for="radio-productowner-new">Product Owner</label>
+        </div>
+        <div class="mdc-form-field">
+          <div class="mdc-radio">
+            <input class="mdc-radio__native-control" type="radio" id="radio-releasemanager-new" name="radios-new" value="Release Manager">
+            <div class="mdc-radio__background">
+              <div class="mdc-radio__outer-circle"></div>
+              <div class="mdc-radio__inner-circle"></div>
+            </div>
+            <div class="mdc-radio__ripple"></div>
+          </div>
+          <label for="radio-productowner-new">Release Manager</label>
+        </div>
+	<button id="create-button" class="mdc-button mdc-button--raised">Create</button>
+      </div>
     </div>
   </div>
+</div>
 </div>
