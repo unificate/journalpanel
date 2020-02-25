@@ -1,10 +1,19 @@
-<h1><%= @microservice.name %></h1>
+<!-- <h1><%= @microservice.name %></h1>
 <% @microservice.attributes.each do |attr_name, attr_value| %>
     <h5><%= attr_name %>: <%= attr_value %></h5>
-<%end%>
+<%end%> -->
+
+<h1 class="service-title" style="color: #01A0D7 !important; text-align: center; margin: 20px 0 20px 0;"><%= @microservice.name %></h1>
+
 <div class="tile-container">
-    <% @table_names.each do |n|%>
-        <%= render "service_table_tile",name:n,table:@schema[n],id:@microservice.id.to_s%>
-    <%end%>
+    <div class="container">
+      <div class="row justify-content-center">
+        <% @table_names.each do |n|%>
+        <div class="col-sm-3 mb-4"">
+          <%= render "service_table_tile",name:n,table:@schema[n],id:@microservice.id.to_s%>
+        </div>
+        <%end%>
+      </div>
+    </div>
 </div>
 
