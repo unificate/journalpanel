@@ -1,3 +1,25 @@
+$mdc-theme-primary: #bb86fc;
+$mdc-theme-secondary: #03dac6;
+$mdc-theme-background: #121212;
+$mdc-theme-surface: #434343;
+$mdc-theme-error: #cf6679;
+$mdc-theme-on-primary: #000000;
+$mdc-theme-on-secondary: #000000;
+$mdc-theme-on-surface: #ffffff;
+$mdc-theme-on-errore: #000000;
+@import "@material/button/mdc-button";
+@import "@material/card/mdc-card";
+@import "@material/checkbox/mdc-checkbox";
+@import "@material/data-table/mdc-data-table";
+@import "@material/form-field/mdc-form-field";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/list/mdc-list";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
+@import "@material/radio/mdc-radio";
+@import "@material/select/mdc-select";
+@import "@material/textfield/mdc-text-field";
+
 $hp-blue: #01A0D7;
 
 .service-title {
@@ -9,4 +31,16 @@ $hp-blue: #01A0D7;
 .tile-container {
   text-align: center;
   margin: 20px 0 20px 0;
+}
+
+.user-table {
+  width: 60%;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 10px;
+}
+
+.user-table tr {
+  line-height: 50px;
+  padding: 5px 5px 5px 5px;
 }
