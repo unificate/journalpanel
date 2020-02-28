@@ -411,14 +411,14 @@
   };
   nokogiri = {
     dependencies = ["mini_portile2"];
-    groups = ["default"];
+    groups = ["default" "development" "test"];
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0nmdrqqz1gs0fwkgzxjl4wr554gr8dc1fkrqjc2jpsvwgm41rygv";
+      sha256 = "1yi8j8hwrlc3rg5v3w52gxndmwifyk7m732q9yfbal0qajqbh1h8";
       type = "gem";
     };
-    version = "1.10.4";
+    version = "1.10.8";
   };
   orm_adapter = {
     groups = ["default"];
@@ -446,10 +446,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0v6zai6sinw5r1lchm278mm3dr8x5vi8pwmybwv9lz1kz02fk2g3";
+      sha256 = "1g4w94r27klkm4a82mdrdasjkmb7zvdhbl6lljsnfb4srfnaq1hp";
       type = "gem";
     };
-    version = "4.3.1";
+    version = "4.3.2";
   };
   rack = {
     groups = ["default" "development" "test"];
