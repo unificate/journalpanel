@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'accounts.js', 'data-turbolinks-track': 'reload' %>
+
 <div class="user-table">
   <table class="table table-hover text-center">
     <thead>
@@ -48,7 +50,7 @@
 
   <form class="form text-center">
     <div class="form-group mx-sm-3 mb-2">
-      <label for="username" class="sr-only">Password</label>
+      <label for="username" class="sr-only">Username</label>
       <input type="text" class="form-control" id="username" placeholder="Username">
     </div>
     <div class="form-group mx-sm-3 mb-2">
@@ -77,3 +79,4 @@
     <button id="create-button" class="btn btn-primary mb-2">Create</button>
   </form>
 </div>
+
