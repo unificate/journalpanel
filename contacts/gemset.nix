@@ -362,20 +362,13 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0r0qpgf80h764k176yr63gqbs2z0xbsp8vlvs2a79d5r9vs83kln";
+      sha256 = "1yi8j8hwrlc3rg5v3w52gxndmwifyk7m732q9yfbal0qajqbh1h8";
       type = "gem";
     };
-    version = "1.10.7";
+    version = "1.10.8";
   };
   puma = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "07sb9xqc9bn5lvl9ia25w8x1fwzk52p5vgysnvjlc3hvn0r00ysj";
-      type = "gem";
-    };
-    version = "3.12.2";
+    dependencies = ["nio4r"];
   };
   rack = {
     groups = ["default"];
