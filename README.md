@@ -3,6 +3,7 @@
 | -------------------- | ---------------------------------------- |
 | contacts             | Test microservice                        |
 | customer_info_server | Test microservice                        |
+| grabber              | Microservice model grabber               |
 | hello                | Ruby project template                    |
 | hello_rails          | Rails project template                   |
 | login_test           | Test microservice                        |
