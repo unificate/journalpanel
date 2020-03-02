@@ -686,6 +686,17 @@
     };
     version = "3.9.0";
   };
+  rspec_junit_formatter = {
+    dependencies = ["rspec-core"];
+    groups = ["test"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1aynmrgnv26pkprrajvp7advb8nbh0x4pkwk6jwq8qmwzarzk21p";
+      type = "gem";
+    };
+    version = "0.4.1";
+  };
   ruby_dep = {
     groups = ["default" "development"];
     platforms = [];
