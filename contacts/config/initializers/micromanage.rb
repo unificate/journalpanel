@@ -1,3 +1,3 @@
-Grabber.setup do |config|
+Micromanage.setup do |config|
   config.tables = ["contacts"]
 end
