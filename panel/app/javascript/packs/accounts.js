@@ -1,25 +1,25 @@
-console.log("Outside listner");
-document.addEventListener('turbolinks:load', () => {
-    console.log("Created listner1");
-    const newUserButton = document.getElementById("create-button");
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
+// document.addEventListener('turbolinks:load', () => {
+//     const newUserButton = document.getElementById("create-button");
+//     const username = document.getElementById("username");
+//     const password = document.getElementById("password");
 
-    console.log("Created listner2");
+//     console.log("Created listner2");
 
-    newUserButton.onclick = () => {
-        const role = getButtonValue();
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', 'users');
-        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        const token = document.getElementsByName("csrf-token");
-        if (token.length > 0) {
-            xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
-        }
-        xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value + '&user[role]=' + role);
-        console.log(username.value + "!" + role);
-    };
-});
+//     // New user is submitted
+//     newUserButton.onclick = () => {
+//         const role = getButtonValue();
+//         const xhttp = new XMLHttpRequest();
+//         xhttp.open('POST', 'users');
+//         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//         const token = document.getElementsByName("csrf-token");
+//         if (token.length > 0) {
+//             xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
+//         }
+//         // Create new user in db
+//         xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value + '&user[role]=' + role);
+//         console.log(username.value + "!" + role);
+//     };
+// });
 
 // import {MDCFormField} from '@material/form-field';
 // import {MDCMenu} from '@material/menu';
