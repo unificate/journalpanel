@@ -49,14 +49,6 @@ ActiveRecord::Schema.define(version: 2020_03_04_192923) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "rows", force: :cascade do |t|
-    t.string "Table_Name"
-    t.integer "microservice_id"
-    t.integer "record_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
