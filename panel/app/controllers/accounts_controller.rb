@@ -17,4 +17,20 @@ class AccountsController < ApplicationController
       end
     end
   end
+
+  def create
+    # Make new variable with input from form
+
+    @user = User.new(user_params)
+    if @user.save
+        redirect_to '/users'
+    end
+  end
+
+  private
+
+  def user_params
+    # # This makes sure you get all data you are asking for and nothing more
+    params.require(:user).permit(:username, :password, :role)
+  end
 end

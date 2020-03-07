@@ -8,34 +8,34 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import {MDCMenu} from '@material/menu';
-import {MDCRipple} from '@material/ripple';
+// import {MDCMenu} from '@material/menu';
+// import {MDCRipple} from '@material/ripple';
 
-document.addEventListener('turbolinks:load', () => {
-    const userButton = new MDCRipple(document.querySelector('#user-button'));
-    const menu = new MDCMenu(document.querySelector('#user-menu'));
-    userButton.root_.onclick = () => {
-        menu.open = true;
-    };
+// document.addEventListener('turbolinks:load', () => {
+//     const userButton = new MDCRipple(document.querySelector('#user-button'));
+//     const menu = new MDCMenu(document.querySelector('#user-menu'));
+//     userButton.root_.onclick = () => {
+//         menu.open = true;
+//     };
 
-    const logout = new MDCRipple(document.querySelector('#logout'));
-    logout.root_.onclick = () => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = () => {
-            if (xhttp.status == 204) {
-                location.href = "/";
-            }
-        }
+//     const logout = new MDCRipple(document.querySelector('#logout'));
+//     logout.root_.onclick = () => {
+//         const xhttp = new XMLHttpRequest();
+//         xhttp.onload = () => {
+//             if (xhttp.status == 204) {
+//                 location.href = "/";
+//             }
+//         }
 
 
-        xhttp.open('DELETE', '/users/sign_out');
-        const token = document.getElementsByName("csrf-token");
-        if (token.length > 0) {
-            xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
-        }
-        xhttp.send();
-    };
-});
+//         xhttp.open('DELETE', '/users/sign_out');
+//         const token = document.getElementsByName("csrf-token");
+//         if (token.length > 0) {
+//             xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
+//         }
+//         xhttp.send();
+//     };
+// });
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
