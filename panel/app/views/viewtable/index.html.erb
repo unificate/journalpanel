@@ -6,16 +6,19 @@
             <% @records[0].keys.each do |key| %>
                 <th scope="col"><%= key %></th>
             <% end %>
+            <th scope="col">edit</th>
             </tr>
         </thead>
         <tbody>
         <% @records.each do |tuple| %>
+            
             <tr>
             <% tuple.keys.each do |attr| %>
                 <td><%= tuple[attr] %></td>
             <% end %>
+            <td><%= link_to "/edit/"+(@service.id).to_s+"/"+@tname+"/"+(tuple["id"]).to_s,:controller=>"editpage",:id => (@service.id).to_s, :table => @tname, :rowid =>(tuple["id"]).to_s%></td>
             </tr>
-        <% end %>
+        <%end%>
         </tbody>
     </table>
 <% end %>

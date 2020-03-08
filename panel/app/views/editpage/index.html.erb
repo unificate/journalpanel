@@ -1,1 +1,12 @@
-<h1>Oh dear</h1>
+<div class="container">
+    <%@data.each do |key, value| %>
+        <%= render "field_tile",name:key,value:value%>
+    <%end%>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="CheckExecute">
+        <label class="form-check-label" for="CheckExecute">Execute Now</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+
+

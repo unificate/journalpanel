@@ -34,5 +34,12 @@ module Grabber
       end
     end
 
+    def showRow
+        table = params[:table].classify.constantize
+        row = table.find(params[:row])
+        render json: row, status: :ok
+    end
+
+
   end
 end

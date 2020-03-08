@@ -2,9 +2,9 @@ class ViewtableController < ApplicationController
   def index
     keys = params[:id].split("_")
     if keys.length() >= 2
-        service = Microservice.find(keys[0])
+        @service = Microservice.find(keys[0])
         keys[1] = keys[1..-1].join('_')
-        adr = service.address
+        adr = @service.address
         conn = Faraday.new
         @tname = keys[1]
         if adr != nil and adr != ""

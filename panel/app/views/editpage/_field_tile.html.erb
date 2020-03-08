@@ -1,6 +1,8 @@
-<%= link_to "service/"+id.to_s, class: "service-tile", :action => 'go' do%>
-    <div class="service-tile-container">
-        <h4 class="service-tile-title"><b><%=name%></b></h4>
-        <h4 class="service-tile-title">Changes: <%=changes%> </h4>
-    </div>
-<% end %>
+<div class="service-tile-container">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputPassword1"><%=name%></label>
+            <input class="form-control" id="Input<%=name%>" value="<%=value%>">
+        </div>
+    </form>
+</div>
