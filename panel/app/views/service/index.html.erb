@@ -3,7 +3,9 @@
     <h5><%= attr_name %>: <%= attr_value %></h5>
 <%end%> -->
 
-<h1 class="service-title" style="color: #01A0D7 !important; text-align: center; margin: 20px 0 20px 0;"><%= @microservice.name %></h1>
+<% microserviceTitle = []%>
+<% @microservice.name.split(/\s|'|,|_/).each {|n| microserviceTitle.push(n.capitalize())} %>
+<h1 class="service-title"><%= microserviceTitle.join(" ") %></h1>
 
 <div class="tile-container">
     <div class="container">
