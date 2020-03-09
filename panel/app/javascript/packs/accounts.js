@@ -81,34 +81,34 @@
 // });
 
 /* Get the value for the selected radio button */
-const getButtonValue = () => {
-    const radio1 = document.getElementById("radio-admin-new");
-    const radio2 = document.getElementById("radio-developer-new");
-    const radio3 = document.getElementById("radio-productowner-new");
-    const radio4 = document.getElementById("radio-releasemanager-new");
+// const getButtonValue = () => {
+//     const radio1 = document.getElementById("radio-admin-new");
+//     const radio2 = document.getElementById("radio-developer-new");
+//     const radio3 = document.getElementById("radio-productowner-new");
+//     const radio4 = document.getElementById("radio-releasemanager-new");
 
-    if (radio1.checked == true) {
-        return radio1.value;
-    }
-    else if (radio2.checked == true) {
-        return radio2.value;
-    }
-    else if (radio3.checked == true) {
-        return radio3.value;
-    }
-    else if (radio4.checked == true) {
-        return radio4.value;
-    }
-};
+//     if (radio1.checked == true) {
+//         return radio1.value;
+//     }
+//     else if (radio2.checked == true) {
+//         return radio2.value;
+//     }
+//     else if (radio3.checked == true) {
+//         return radio3.value;
+//     }
+//     else if (radio4.checked == true) {
+//         return radio4.value;
+//     }
+// };
 
-const setUserRole = (user, role) => {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open('PUT', 'users');
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    const token = document.getElementsByName("csrf-token");
-    if (token.length > 0) {
-        xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
-    }
-    xhttp.send('user[username]=' + user + '&user[role]=' + role);
-    console.log(user + "!" + role);
-};
+// const setUserRole = (user, role) => {
+//     const xhttp = new XMLHttpRequest();
+//     xhttp.open('PUT', 'users');
+//     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//     const token = document.getElementsByName("csrf-token");
+//     if (token.length > 0) {
+//         xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
+//     }
+//     xhttp.send('user[username]=' + user + '&user[role]=' + role);
+//     console.log(user + "!" + role);
+// };

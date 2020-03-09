@@ -14,19 +14,19 @@
         <th scope="row"><%= user.username %></th>
         <td>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> name="inlineRadioOptions"value="option1" <%= current_user == user ? "disabled" : "" %>>
+            <input class="form-check-input" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> name="inlineRadioOptions"value="option1" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Admin')">
             <label class="form-check-label" for=<%= "radio-admin-" + index.to_s %>>Admin</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> id="inlineRadio2" value="option2" <%= current_user == user ? "disabled" : "" %>>
+            <input class="form-check-input" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> id="inlineRadio2" value="option2" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Developer')">
             <label class="form-check-label" for=<%= "radio-developer-" + index.to_s %>>Developer</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %>>
+            <input class="form-check-input" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Product Owner')">
             <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Product Owner</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %>>
+            <input class="form-check-input" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> value="option4" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Release Manager')">
             <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
           </div>
         </td>
@@ -112,3 +112,17 @@
   </form> -->
 </div>
 
+<script type="text/javascript">
+    function setUserRole(user, role) {
+        console.log("Setting the role of " + role + " to user: " + user);
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('PUT', 'users');
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        const token = document.getElementsByName("csrf-token");
+        if (token.length > 0) {
+            xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
+        }
+        xhttp.send('user[username]=' + user + '&user[role]=' + role);
+        console.log(user + "!" + role);
+    };
+</script>
