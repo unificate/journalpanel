@@ -28,9 +28,22 @@ $hp-blue: #01A0D7;
     margin: auto;
     margin-top: 100px;
 }
+#login-button {
+  background-color: $hp-blue;
+  border-color: $hp-blue;
+}
 
 #login-error {
     visibility: hidden;
     margin-top: 0;
     color: #ff0000;
+}
+
+#dropdownMenuButton {
+  background-color: $hp-blue !important;
+  border-color: $hp-blue !important;
+}
+
+.logoutDrop {
+  color: $hp-blue;
 }

@@ -10,7 +10,7 @@
       </li>
       <% if current_user && current_user.role == "Admin" %>
       <li class="nav-item active">
-        <a class="nav-link" href="/users">Groups<span class="sr-only"></span></a>
+        <a class="nav-link" href="/users">Users<span class="sr-only"></span></a>
       </li>
       <% else %>
         <li class="nav-item disabled">
@@ -18,14 +18,16 @@
       </li>
       <% end %>
     </ul>
-    <ul class="navbar-nav mr-5 navbar-right" id="user-button">
+    <ul class="navbar-nav mr-5 navbar-right">
       <% if current_user %>
         <li class="nav-item dropdown active navbar-right">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.username%>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#"><%= link_to('Logout', destroy_user_session_path, method: :delete) %></a>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.username%>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"><%= link_to('Logout', destroy_user_session_path, method: :delete, class: "logoutDrop") %></a>
+            </div>
           </div>
         </li>
       <% end %>

@@ -23,7 +23,7 @@ RSpec.feature 'Accounts', type: :feature do
 
   scenario 'The admin should be able to logout from the microservices page' do
     visit '/list'
-    click_button('user-button')
+    click_button('dropdownMenuButton')
     page.find('li', :text => 'Logout').click
     expect(page).to have_current_path('/')
     expect(page).to have_content('Log In')
