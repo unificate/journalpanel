@@ -1,16 +1,13 @@
 <div class="card bg-light mb-3" style="max-width: 18rem;">
 <%= link_to "service/"+id.to_s, class: "service-tile", style: "color: #000000", :action => 'go' do%>
     <div class="card-header">
-      <b><%=name%></b>
+        <% microservice = []%>
+        <% name.split(/\s|'|,|_/).each {|n| microservice.push(n.capitalize())} %>
+      <b><%= microservice.join(" ") %></b>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><%=changes%></li>
     </ul>
-
-<!--     <div class="service-tile-container">
-        <h4 class="service-tile-title"><b><%=name%></b></h4>
-        <h4 class="service-tile-title">Changes: <%=changes%> </h4>
-    </div> -->
 <% end %>
 </div>
 
