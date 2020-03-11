@@ -1,12 +1,17 @@
 <div class="container">
+    <%= form_with :url => url_for(:controller => "editpage", :action => "submit"), :local => true do |form| %>
     <%@data.each do |key, value| %>
-        <%= render "field_tile",name:key,value:value%>
+        <%= render "field_tile",name:key,value:value,form:form, html:{method:"post"}%>
     <%end%>
+    <%= form.hidden_field :mid, value:@mid, class:"form-control" %>
+    <%= form.hidden_field :tid, value:@tid, class:"form-control" %>
+    <%= form.hidden_field :rid, value:@rid, class:"form-control" %>
     <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="CheckExecute">
-        <label class="form-check-label" for="CheckExecute">Execute Now</label>
+        <%= check_box_tag :execute,"1",false,class:"form-check-input"%>
+        <%= label_tag "Execute Now",nil, class:"form-check-label" %>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <%= form.submit "Submit",type: "submit",class:"btn btn-primary"%>
+<%end%>
 </div>
 
 
