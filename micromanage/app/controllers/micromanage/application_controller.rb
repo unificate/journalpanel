@@ -35,5 +35,19 @@ module Micromanage
       end
     end
 
+    def create
+      if ActiveRecord::Base.connection.tables.include? params[:table]
+        table = params[:table].classify.constantize
+        # create new entry using parsed JSON
+        table.create(JSON.parse(request.body.read))
+
+        # we may want to check that the request has all the required
+        # attributes, unless we can just store null
+
+        # we may also want to try and detect duplicate requests
+        # somehow, not sure if that's needed
+      end
+    end
+
   end
 end
