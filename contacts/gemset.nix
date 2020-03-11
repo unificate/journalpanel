@@ -221,16 +221,6 @@
     };
     version = "0.4.2";
   };
-  grabber = {
-    dependencies = ["rails"];
-    groups = ["default"];
-    platforms = [];
-    source = {
-      path = ../grabber;
-      type = "path";
-    };
-    version = "0.1.0";
-  };
   i18n = {
     dependencies = ["concurrent-ruby"];
     groups = ["default" "development"];
@@ -295,6 +285,16 @@
       type = "gem";
     };
     version = "0.9.2";
+  };
+  micromanage = {
+    dependencies = ["rails"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      path = ../micromanage;
+      type = "path";
+    };
+    version = "0.1.0";
   };
   mimemagic = {
     groups = ["default"];
