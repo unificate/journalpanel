@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Microservice.create(name:'customer_info',address:'localhost:3001/grabber')
+Microservice.create(name:'customer_info',address:'localhost:3001/micromanage')
 
-Microservice.create(name:'contacts',address:'localhost:3002/grabber')
+Microservice.create(name:'contacts',address:'localhost:3002/micromanage')
 
 # Default admin user - ideally this would be changed when first setting up the app
 User.create(username:'admin', password:'password', role:'Admin')
