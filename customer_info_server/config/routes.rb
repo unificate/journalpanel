@@ -5,5 +5,5 @@ Rails.application.routes.draw do
           resources :customers, :items, :purchases
       end
   end
-  mount Grabber::Engine => "/grabber"
+  mount Micromanage::Engine => "/micromanage"
 end
