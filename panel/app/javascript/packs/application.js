@@ -8,6 +8,19 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+document.addEventListener('turbolinks:load', () => {
+    const logoutButton = document.getElementById("dropdownMenuButton");
+
+    console.log("Created listner2");
+
+    // New user is submitted
+    logoutButton.onclick = () => {
+        console.log(logoutButton);
+        logoutButton.dropdown();
+    };
+});
+
+
 // import {MDCMenu} from '@material/menu';
 // import {MDCRipple} from '@material/ripple';
 
