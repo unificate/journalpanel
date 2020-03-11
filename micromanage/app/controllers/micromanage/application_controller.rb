@@ -8,7 +8,7 @@ module Micromanage
     def index
       schemas = ActiveRecord::Base.connection.tables
       out = {}
-      Grabber.tables.each do |table_name|
+      Micromanage.tables.each do |table_name|
         if schemas.include? table_name
           out[table_name] = ActiveRecord::Base.connection.columns(table_name)
         end
@@ -17,11 +17,11 @@ module Micromanage
     end
 
     def show
-      if ActiveRecord::Base.connection.tables.include? params[:id]
-        table = params[:id].classify.constantize
+      if ActiveRecord::Base.connection.tables.include? params[:table]
+        table = params[:table].classify.constantize
         render json: table.all, status: :ok
       else
-        table = {"Response" : "Table does not exist"}
+        table = {Response: "Table does not exist"}
         render json: table, status: :not_found
       end
     end
