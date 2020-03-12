@@ -34,30 +34,3 @@
     </ul>
   </div>
 </nav>
-
-<!-- <div class="head-wraper">
-<header class="mdc-top-app-bar mdc-top-app-bar--dense">
-  <div class="mdc-top-app-bar__row" style >
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <span class="mdc-top-app-bar__title">HP Microservice Managment</span>
-    </section>
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-      <%= button_to('dashboard', '/list', method: 'get', :class => "mdc-icon-button material-icons")%>
-      <% if current_user && current_user.role == "Admin" %>
-        <%= button_to('groups', '/users', method: 'get', :class => "mdc-icon-button material-icons")%>
-      <% end %>
-
-      <% if current_user %>
-        <div class="mdc-menu-surface--anchor">
-          <button id="user-button" class="mdc-button mdc-button--unelevated"><%= current_user.username%><i class="material-icons mdc-icon-button__icon">more_vert</i></button>
-          <div id="user-menu" class="mdc-menu mdc-menu-surface">
-            <ul class="mdc-list" role="menu" aria-hidden="true">
-              <li id="logout" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Logout</li>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-    </section>
-  </div>
-</header>
-</div> -->
