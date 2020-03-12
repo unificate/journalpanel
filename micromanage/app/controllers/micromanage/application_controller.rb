@@ -53,7 +53,7 @@ module Micromanage
         table = params[:table].classify.constantize
         row = table.find(params[:row])
         # update row using parsed JSON
-        render json: row.json, status: :ok
+        render json: row, status: :ok
       end
     
     end
