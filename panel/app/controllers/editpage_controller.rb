@@ -74,7 +74,7 @@ class EditpageController < ApplicationController
         else
             # New change, new Row
             row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
-            Change.create!( Users_id: current_user, Row_Entry_id: row, old_value: @data.to_json, new_value: new_val.to_json)
+            Change.create!( Users_id: current_user.id, Row_Entry_id: row.id, old_value: @data.to_json, new_value: new_val.to_json)
             render html: "success!"
 
         end
