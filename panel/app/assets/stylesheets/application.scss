@@ -1,140 +1,60 @@
-$mdc-theme-primary: #bb86fc;
-$mdc-theme-secondary: #03dac6;
-$mdc-theme-background: #121212;
-$mdc-theme-surface: #434343;
-$mdc-theme-error: #cf6679;
-$mdc-theme-on-primary: #000000;
-$mdc-theme-on-secondary: #000000;
-$mdc-theme-on-surface: #ffffff;
-$mdc-theme-on-errore: #000000;
-@import "@material/button/mdc-button";
-@import "@material/card/mdc-card";
-@import "@material/checkbox/mdc-checkbox";
-@import "@material/data-table/mdc-data-table";
-@import "@material/form-field/mdc-form-field";
-@import "@material/icon-button/mdc-icon-button";
-@import "@material/list/mdc-list";
-@import "@material/menu-surface/mdc-menu-surface";
-@import "@material/menu/mdc-menu";
-@import "@material/radio/mdc-radio";
-@import "@material/select/mdc-select";
-@import "@material/textfield/mdc-text-field";
-@import "@material/top-app-bar/mdc-top-app-bar";
+$hp-blue: #01A0D7;
 
-div.head-wraper { 
-	position: fixed;
-	top: 0px;
-	width: 100%;
-	height: 60px;
-	margin-left: -7px;
+.service-title {
+    color: $hp-blue;
+    text-align: center;
+    margin: 20px 0 20px 0;
 }
 
-div.foot-wraper {
-	position: fixed; 
-	bottom: 0px; 
-	width: 100%; 
-	height: 60px;
-	margin-left: -7px;
+.tile-container {
+  text-align: center;
+  margin: 20px 0 20px 0;
 }
 
-div.application_content {
-	margin-top:100px;
-	margin-bottom: 100px;
+.user-table {
+  width: 60%;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 10px;
 }
 
-.container {
+.user-table tr {
+  line-height: 50px;
+  padding: 5px 5px 5px 5px;
+}
+
+.login-card {
     display: flex;
-    justify-content: center;
-    margin: 20px;
+    margin: auto;
+    margin-top: 100px;
 }
-
-#login-card {
-    width: 350px;
-}
-
-#login-content {
-    margin: auto 0;
-    padding: 16px;
-}
-
-#login-content h1 {
-    margin-top: 0;
+#login-button {
+  background-color: $hp-blue;
+  border-color: $hp-blue;
 }
 
 #login-error {
-    display: none;
+    visibility: hidden;
     margin-top: 0;
-    color: $mdc-theme-error;
+    color: #ff0000;
 }
 
-#username-field, #password-field {
-    margin-bottom: 20px;
-    width: 100%;
+#dropdownMenuButton {
+  background-color: $hp-blue !important;
+  border-color: $hp-blue !important;
 }
 
-body {
-     background-color: $mdc-theme-background;
-     color: #ffffff;
+.logoutDrop {
+  color: $hp-blue;
 }
 
-.service-title {
-    color: white;
-    text-align: center;
-    background: grey;
-    border-radius: 5px;
+.newUserForm {
+  width: 65%;
+  margin: auto;
 }
 
-.service-tile-title {
-    color: white;
-    text-align: center;
-}
-
-.service-tile{
-  /* Add shadows to create the "card" effect */
-  text-decoration: none;
-  text-color: white;
-  margin: 1%;
-  display: inline-grid;
-  width: 22%;
-  overflow: auto;
-  background: #303030;
-  box-shadow: 0 2px 6px 0 rgba(48,48,48,0.2);
-  transition: 0.3s;
-  border-radius: 5px;
-}
-
-/* On mouse-over, add a deeper shadow */
-.service-tile:hover {
-  box-shadow: 0 6px 9px 0 rgba(255,255,255,0.2);
-}
-
-/* Add some padding inside the card container */
-.service-tile-container {
-  padding: 2% 16px;
-}
-
-
-#users-card {
-    padding: 5px;
-}
-
-#users-card .mdc-text-field {
-    margin: 0 10px;
-}
-
-#users-card .mdc-form-field {
-    margin: 0 5px;
-}
-
-#users-card button {
-    margin: 0 20px;
-}
-
-#users-data {
-    width: 100%;
-    overflow: visible;
-}
-
-.users-container {
-    width: 1250px;
+.microserviceTable {
+  width: 80%;
+  display: flex;
+  margin: auto;
 }
