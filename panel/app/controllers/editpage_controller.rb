@@ -61,16 +61,16 @@ class EditpageController < ApplicationController
                 # Insert new change here, row already exists
                 if(row != nil)
                     Change.create!( Users_id: current_user.id, Row_Entry_id: row.id,old_value: @data.to_json, new_value: new_val.to_json)
-                    redirect_to url_for(:controller => "service", :action => "index", :id => params[:mid])
+                    redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
                 end
             else
-                redirect_to url_for(:controller => "service", :action => "index", :id => params[:mid])
+                redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
             end 
         else
             # New change, new Row
             row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
             Change.create!( Users_id: current_user.id, Row_Entry_id: row.id, old_value: @data.to_json, new_value: new_val.to_json)
-            redirect_to url_for(:controller => "service", :action => "index", :id => params[:mid])
+            redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
 
         end
     end
