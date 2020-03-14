@@ -53,29 +53,24 @@ class EditpageController < ApplicationController
                 puts "Different Value "+ params[:"#{key}"]
             end
         end
-        puts "TID: "+params[:tid]
         row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
         if(row != nil)
-            puts "<ROW FOUND>!!!!"
             # Been changed before, check for unexecuted changes.
             changes = Change.find_by(Row_Entry_id: row.id)
             if( changes == nil)
-                puts "<CHANGE NOT FOUND>!!!!"
                 # Insert new change here, row already exists
-                puts "USER ID "+current_user.id.to_s + "ROW ID "+ row.id.to_s
                 if(row != nil)
                     Change.create!( Users_id: current_user.id, Row_Entry_id: row.id,old_value: @data.to_json, new_value: new_val.to_json)
-                    render html: "success!"
+                    redirect_to url_for(:controller => "service", :action => "index", :id => params[:mid])
                 end
             else
-                puts "Change already exists for that record Bad >:I"
-                render html: "Change already exists!"
+                redirect_to url_for(:controller => "service", :action => "index", :id => params[:mid])
             end 
         else
             # New change, new Row
             row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
             Change.create!( Users_id: current_user.id, Row_Entry_id: row.id, old_value: @data.to_json, new_value: new_val.to_json)
-            render html: "success!"
+            redirect_to url_for(:controller => "service", :action => "index", :id => params[:mid])
 
         end
     end

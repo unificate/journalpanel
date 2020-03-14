@@ -14,7 +14,6 @@ class ServiceController < ApplicationController
             adr = 'http://'+adr
         end
         @schema = JSON.parse(conn.get(adr).body).with_indifferent_access
-        puts @schema
         @table_names = @schema.keys.select do |el|
             @schema[el] != nil
         end
