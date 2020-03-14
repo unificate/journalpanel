@@ -10,7 +10,7 @@
       </li>
       <% if current_user && current_user.role == "Admin" %>
       <li class="nav-item active">
-        <a class="nav-link" href="/users">Groups<span class="sr-only"></span></a>
+        <a class="nav-link" href="/users">Users<span class="sr-only"></span></a>
       </li>
       <% else %>
         <li class="nav-item disabled">
@@ -21,41 +21,16 @@
     <ul class="navbar-nav mr-5 navbar-right">
       <% if current_user %>
         <li class="nav-item dropdown active navbar-right">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.username%>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#"><%= link_to('Logout', destroy_user_session_path, method: :delete) %></a>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.username%>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"><%= link_to('Logout', destroy_user_session_path, method: :delete, class: "logoutDrop") %></a>
+            </div>
           </div>
         </li>
       <% end %>
     </ul>
   </div>
 </nav>
-
-<!-- <div class="head-wraper">
-<header class="mdc-top-app-bar mdc-top-app-bar--dense">
-  <div class="mdc-top-app-bar__row" style >
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <span class="mdc-top-app-bar__title">HP Microservice Managment</span>
-    </section>
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-      <%= button_to('dashboard', '/list', method: 'get', :class => "mdc-icon-button material-icons")%>
-      <% if current_user && current_user.role == "Admin" %>
-        <%= button_to('groups', '/users', method: 'get', :class => "mdc-icon-button material-icons")%>
-      <% end %>
-
-      <% if current_user %>
-        <div class="mdc-menu-surface--anchor">
-          <button id="user-button" class="mdc-button mdc-button--unelevated"><%= current_user.username%><i class="material-icons mdc-icon-button__icon">more_vert</i></button>
-          <div id="user-menu" class="mdc-menu mdc-menu-surface">
-            <ul class="mdc-list" role="menu" aria-hidden="true">
-              <li id="logout" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Logout</li>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-    </section>
-  </div>
-</header>
-</div> -->

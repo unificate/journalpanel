@@ -14,20 +14,20 @@
         <th scope="row"><%= user.username %></th>
         <td>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> name="inlineRadioOptions"value="option1" <%= current_user == user ? "disabled" : "" %>>
+            <input class="form-check-input" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> name="inlineRadioOptions"value="option1" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Admin')">
             <label class="form-check-label" for=<%= "radio-admin-" + index.to_s %>>Admin</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> id="inlineRadio2" value="option2" <%= current_user == user ? "disabled" : "" %>>
-            <label class="form-check-label" for=<%= "radio-developer-" + index.to_s %>>Developer</label>
+            <input class="form-check-input" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> value="option4" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Release Manager')">
+            <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %>>
+            <input class="form-check-input" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Product Owner')">
             <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Product Owner</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %>>
-            <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
+            <input class="form-check-input" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> id="inlineRadio2" value="option2" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Developer')">
+            <label class="form-check-label" for=<%= "radio-developer-" + index.to_s %>>Developer</label>
           </div>
         </td>
         <td>
@@ -46,69 +46,52 @@
     </tbody>
   </table>
 
-  <h3>Create new user:</h1>
-
-<%= form_with(model: @user) do %>
-<form class="form text-center" action="/users" method="post">
-    <div class="form-group mx-sm-3 mb-2">
-      <%= label_tag('user[username]', "Username", class: "sr-only") %>
-      <%= text_field_tag('user[username]', "", placeholder: 'Username', class: "form-control") %>
-    </div>
-    <div class="form-group mx-sm-3 mb-2">
-      <%= label_tag('user[password]', "Password", class: "sr-only") %>
-      <%= password_field_tag('user[password]', "", class: "form-control", placeholder: "Password") %>
-    </div>
-
-    <br>
-    <div class="form-check form-check-inline">
-      <%= label_tag(:admin_new, "Admin", class: "form-check-label") %>
-      <%= radio_button_tag('user[role]', "Admin", class: "form-check-input") %>
-    </div>
-    <div class="form-check form-check-inline">
-      <%= label_tag(:developer_new, "Developer", class: "form-check-label") %>
-      <%= radio_button_tag('user[role]', "Developer", class: "form-check-input") %>
-    </div>
-    <div class="form-check form-check-inline">
-      <%= label_tag(:productowner_new, "Product Owner", class: "form-check-label") %>
-      <%= radio_button_tag('user[role]', "Product Owner", class: "form-check-input") %>
-    </div>
-    <div class="form-check form-check-inline">
-      <%= label_tag(:releasemanager_new, "Release Manager", class: "form-check-label") %>
-      <%= radio_button_tag('user[role]', "Release Manager", class: "form-check-input") %>
-    </div>
-    <br>
-      <%= submit_tag("Create", class: "btn btn-primary mb-2") %>
-  </form>
-<% end %>
-  <!-- <form class="form text-center" action="/users" method="post">
-    <div class="form-group mx-sm-3 mb-2">
-      <label for="username" class="sr-only">Username</label>
-      <input type="text" class="form-control" id="username" placeholder="Username">
-    </div>
-    <div class="form-group mx-sm-3 mb-2">
-      <label for="password" class="sr-only">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password">
-    </div>
-
-    <br>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="radios-new" id="radio-admin-new" value="Admin">
-      <label class="form-check-label" for="radio-admin-new">Admin</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="radios-new" id="radio-developer-new" value="Developer">
-      <label class="form-check-label" for="radio-developer-new">Developer</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="radios-new" id="radio-productowner-new" value="Product Owner">
-      <label class="form-check-label" for="radio-productowner-new">Product Owner</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="radios-new" id="radio-releasemanager-new" value="Release Manager">
-      <label class="form-check-label" for="radio-productowner-new">Release Manager</label>
-    </div>
-    <br>
-    <button id="create-button" class="btn btn-primary mb-2">Create</button>
-  </form> -->
+  <div class="newUserForm text-center mt-3">
+    <h3>Create new user:</h3>
+    <%= form_with(model: @user) do %>
+    <form class="form text-center" action="/users" method="post">
+        <div class="form-group mx-sm-3 mb-2">
+          <%= label_tag('user[username]', "Username", class: "sr-only") %>
+          <%= text_field_tag('user[username]', "", placeholder: 'Username', class: "form-control") %>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <%= label_tag('user[password]', "Password", class: "sr-only") %>
+          <%= password_field_tag('user[password]', "", class: "form-control", placeholder: "Password") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Admin", class: "form-check-input") %>
+          <%= label_tag(:admin_new, "Admin", class: "form-check-label ml-2") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Release Manager", class: "form-check-input") %>
+          <%= label_tag(:releasemanager_new, "Release Manager", class: "form-check-label ml-2") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Product Owner", class: "form-check-input") %>
+          <%= label_tag(:productowner_new, "Product Owner", class: "form-check-label ml-2") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Developer", class: "form-check-input") %>
+          <%= label_tag(:developer_new, "Developer", class: "form-check-label ml-2") %>
+        </div>
+        <br>
+          <%= submit_tag("Create", class: "btn btn-primary mt-2") %>
+      </form>
+    <% end %>
+  </div>
 </div>
 
+<script type="text/javascript">
+    function setUserRole(user, role) {
+        console.log("Setting the role of " + role + " to user: " + user);
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('PUT', 'users');
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        const token = document.getElementsByName("csrf-token");
+        if (token.length > 0) {
+            xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
+        }
+        xhttp.send('user[username]=' + user + '&user[role]=' + role);
+        console.log(user + "!" + role);
+    };
+</script>

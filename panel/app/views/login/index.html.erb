@@ -1,32 +1,20 @@
 <%= javascript_pack_tag 'login.js', 'data-turbolinks-track': 'reload' %>
-<div class="container">
-  <div id="login-card" class="mdc-card">
-    <div id="login-content">
-      <h1>Login</h1>
-      <form action="javascript:void(0);">
-        <div id="username-field" class="mdc-text-field mdc-text-field--outlined">
-          <input type="text" id="username" class="mdc-text-field__input">
-          <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-              <label for="username" class="mdc-floating-label">Username</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-          </div>
+
+<div class="card login-card text-center" style="width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">HP</h5>
+    <h6 class="card-subtitle mb-2 text-muted">MicroManage</h6>
+    <h6 class="mt-2" id="login-error">Invalid username or password</h6>
+      <form class="form text-center" action="javascript:void(0);">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="username" class="sr-only">Username</label>
+          <input type="text" class="form-control mt-3 mb-3" id="username" placeholder="Username">
         </div>
-        <div id="password-field" class="mdc-text-field mdc-text-field--outlined">
-          <input type="password" id="password" class="mdc-text-field__input">
-          <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-              <label for="password" class="mdc-floating-label">Password</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-          </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" class="form-control mb-3" id="password" placeholder="Password">
         </div>
-        <p id="login-error">lol</p>
-        <button id="login-button" class="mdc-button mdc-button--raised">Login</button>
+        <button id="login-button" class="btn btn-primary">Log In</button>
       </form>
-    </div>
   </div>
 </div>
