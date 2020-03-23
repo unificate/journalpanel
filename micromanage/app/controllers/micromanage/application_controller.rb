@@ -48,6 +48,16 @@ module Micromanage
         # somehow, not sure if that's needed
       end
     end
+    def getrow
+      if ActiveRecord::Base.connection.tables.include? params[:table]
+        table = params[:table].classify.constantize
+        row = table.find(params[:row])
+        # update row using parsed JSON
+        render json: row, status: :ok
+      end
+    
+    end
+
 
   end
 end

@@ -1,0 +1,2 @@
+class Row < ApplicationRecord
+end

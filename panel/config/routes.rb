@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   post '/users', to: 'accounts#create'
 
   put '/users', to: 'accounts#update'
-  get 'viewtable/:id', to: 'viewtable#index'
+  get '/edit/:id/:table/:rowid', to: 'editpage#index'
+  post '/edit/submit', to: 'editpage#submit'
+  get 'viewtable/:id/:tid', to: 'viewtable#index'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
