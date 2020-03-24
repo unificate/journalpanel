@@ -1,5 +1,10 @@
 class EditpageController < ApplicationController
     def index
+        newTable = Change.joins("JOIN row_entries ON row_entries.id = changes.Row_Entry_id")
+        @changes = newTable.all
+    end
+
+    def show
         #params, id (microservice id), table (table name), rowid (row id)
         @microservice = Microservice.find(params[:id])
         @mid = params[:id]
@@ -14,10 +19,10 @@ class EditpageController < ApplicationController
             begin
                 response = conn.get(adr).body
             rescue Faraday::Error::ConnectionFailed
-                response = "{}" 
+                response = "{}"
             end
             @data = JSON.parse(response).with_indifferent_access
-        end 
+        end
         adr = @microservice.address
         if adr != nil and adr != ""
             unless adr.include? 'http'
@@ -26,7 +31,7 @@ class EditpageController < ApplicationController
             begin
                 response1 = conn.get(adr).body
             rescue Faraday::Error::ConnectionFailed
-                response1 = "{'status':'Failed'}" 
+                response1 = "{'status':'Failed'}"
             end
             @table_data = ((JSON.parse(response1).with_indifferent_access)[params[:table]])
         end
@@ -42,7 +47,7 @@ class EditpageController < ApplicationController
             begin
                 response = conn.get(adr).body
             rescue Faraday::Error::ConnectionFailed
-                response = "{}" 
+                response = "{}"
             end
             @data = JSON.parse(response).with_indifferent_access
         end
@@ -65,7 +70,7 @@ class EditpageController < ApplicationController
                 end
             else
                 redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
-            end 
+            end
         else
             # New change, new Row
             row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])

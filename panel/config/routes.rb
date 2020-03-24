@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   post '/users', to: 'accounts#create'
 
   put '/users', to: 'accounts#update'
-  get '/edit/:id/:table/:rowid', to: 'editpage#index'
+  get '/edit', to: 'editpage#index'
+  get '/edit/:id/:table/:rowid', to: 'editpage#show'
   post '/edit/submit', to: 'editpage#submit'
   get 'viewtable/:id/:tid', to: 'viewtable#index'
   devise_for :users, controllers: {

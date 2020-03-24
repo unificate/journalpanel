@@ -1,17 +1,45 @@
 <div class="container">
-    <%= form_with :url => url_for(:controller => "editpage", :action => "submit"), :local => true do |form| %>
-    <%@data.each do |key, value| %>
-        <%= render "field_tile",name:key,value:value,form:form, html:{method:"post"}%>
-    <%end%>
-    <%= form.hidden_field :mid, value:@mid, class:"form-control" %>
-    <%= form.hidden_field :tid, value:@tid, class:"form-control" %>
-    <%= form.hidden_field :rid, value:@rid, class:"form-control" %>
-    <div class="form-check">
-        <%= check_box_tag :execute,"1",false,class:"form-check-input"%>
-        <%= label_tag "Execute Now",nil, class:"form-check-label" %>
+  <h1 class="service-title">Changes</h1>
+    <div class="changesTable">
+        <% unless @changes.nil? %>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">
+                            Change Id
+                        </th>
+                        <th scope="col">
+                            Row Entry Id
+                        </th>
+                        <th scope="col">
+                            Old Value
+                        </th>
+                        <th scope="col">
+                            New Value
+                        </th>
+                        <th scope="col">
+                            Created At
+                        </th>
+                        <th scope="col">
+                            User Id
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @changes.each do |change| %>
+                    <tr>
+                        <td><%= change.id %></td>
+                        <td><%= change.Row_Entry_id %></td>
+                        <td><%= stringToJSON(change.old_value)["name"] %></td>
+                        <td><%= stringToJSON(change.new_value)["name"] %></td>
+                        <td><%= change.created_at %></td>
+                        <td><%= change.Users_id %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        <% end %>
     </div>
-    <%= form.submit "Submit",type: "submit",class:"btn btn-primary"%>
-<%end%>
 </div>
 
 
