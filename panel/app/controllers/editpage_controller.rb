@@ -1,7 +1,22 @@
 class EditpageController < ApplicationController
     def index
-        newTable = Change.joins("JOIN row_entries ON row_entries.id = changes.Row_Entry_id")
-        @changes = newTable.all
+        if user_signed_in? and current_user.role == "Admin"
+            @changes = Change.all
+
+            # Get metadata for each change
+            @metadata = []
+            @changes.each do |change|
+                @metadata.push(RowEntry.where(id: change.Row_Entry_id).take)
+            end
+
+            # Find microservice for each change
+            @microservice = []
+            @metadata.each do |cmd|
+                @microservice.push(Microservice.where(id: cmd.microservice_id).take)
+            end
+        else
+          redirect_to '/'
+        end
     end
 
     def show
