@@ -1,153 +1,97 @@
 <%= javascript_pack_tag 'accounts.js', 'data-turbolinks-track': 'reload' %>
-<div class="container">
-  <div class="users-container">
-    <div id="users-data" class="mdc-data-table">
-      <table class="mdc-data-table__table" aria-label="Management">
-        <thead>
-          <tr class="mdc-data-table__header-row">
-            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Users</th>
-            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Role</th>
-          </tr>
-        </thead>
 
-        <% @users.each_with_index do |user, index| %>
-        <tbody>
-          <tr class="mdc-data-table__row">
-            <td class="mdc-data-table__cell"><%= user.username %></td>
-            <td class="mdc-data-table__cell">
-              <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> autocomplete="off">
-                  <div class="mdc-radio__background">
-                    <div class="mdc-radio__outer-circle"></div>
-                    <div class="mdc-radio__inner-circle"></div>
-                  </div>
-                  <div class="mdc-radio__ripple"></div>
-                </div>
-                <label for=<%= "radio-admin-" + index.to_s %>>Admin</label>
-              </div>
-            </td>
-            <td class="mdc-data-table__cell">
-              <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> autocomplete="off">
-                  <div class="mdc-radio__background">
-                    <div class="mdc-radio__outer-circle"></div>
-                    <div class="mdc-radio__inner-circle"></div>
-                  </div>
-                  <div class="mdc-radio__ripple"></div>
-                </div>
-                <label for=<%= "radio-developer-" + index.to_s %>>Developer</label>
-              </div>
-            </td>
-            <td class="mdc-data-table__cell">
-              <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> autocomplete="off">
-                  <div class="mdc-radio__background">
-                    <div class="mdc-radio__outer-circle"></div>
-                    <div class="mdc-radio__inner-circle"></div>
-                  </div>
-                  <div class="mdc-radio__ripple"></div>
-                </div>
-                <label for=<%= "radio-productowner-" + index.to_s %>>Product Owner</label>
-              </div>
-            </td>
-            <td class="mdc-data-table__cell">
-              <div class="mdc-form-field">
-                <div class="mdc-radio">
-                  <input class="mdc-radio__native-control" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> autocomplete="off">
-                  <div class="mdc-radio__background">
-                    <div class="mdc-radio__outer-circle"></div>
-                    <div class="mdc-radio__inner-circle"></div>
-                  </div>
-                  <div class="mdc-radio__ripple"></div>
-                </div>
-                <label for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-        <% end %>
-      </table>
-    </div>
-  </div>
-</div>
-<div class="container">
-    <div class="users-container">
-      <div id="users-card" class="mdc-card">
-        <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-text-field mdc-text-field--outlined">
-              <input type="text" id="username" class="mdc-text-field__input">
-              <div class="mdc-notched-outline">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label for="username" class="mdc-floating-label">Username</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
-            </div>
-            <div class="mdc-text-field mdc-text-field--outlined">
-              <input type="password" id="password" class="mdc-text-field__input">
-              <div class="mdc-notched-outline">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label for="password" class="mdc-floating-label">Password</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
+<div class="user-table">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each_with_index do |user, index| %>
+      <tr>
+        <th scope="row"><%= user.username %></th>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id=<%= "radio-admin-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Admin") ? "checked" : "" %> name="inlineRadioOptions"value="option1" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Admin')">
+            <label class="form-check-label" for=<%= "radio-admin-" + index.to_s %>>Admin</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id=<%= "radio-releasemanager-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Release Manager") ? "checked" : "" %> value="option4" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Release Manager')">
+            <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Release Manager</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id=<%= "radio-productowner-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Product Owner") ? "checked" : "" %> value="option3" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Product Owner')">
+            <label class="form-check-label" for=<%= "radio-productowner-" + index.to_s %>>Product Owner</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id=<%= "radio-developer-" + index.to_s %> name=<%= "radios-" + index.to_s %> <%= user.is_role("Developer") ? "checked" : "" %> id="inlineRadio2" value="option2" <%= current_user == user ? "disabled" : "" %> onclick="setUserRole('<%= user.username %>', 'Developer')">
+            <label class="form-check-label" for=<%= "radio-developer-" + index.to_s %>>Developer</label>
+          </div>
+        </td>
+        <td>
+          <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Settings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" id="change-password" href="#">Change Password</a>
+              <a class="dropdown-item" id="delete-user" href="#">Delete User</a>
             </div>
           </div>
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-admin-new" name="radios-new" value="Admin">
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-admin-new">Admin</label>
-            </div>
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-developer-new" name="radios-new" value="Developer" checked>
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-developer-new">Developer</label>
-            </div>
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-productowner-new" name="radios-new" value="Product Owner">
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-productowner-new">Product Owner</label>
-            </div>
-            <div class="mdc-form-field">
-              <div class="mdc-radio">
-                <input class="mdc-radio__native-control" type="radio" id="radio-releasemanager-new" name="radios-new" value="Release Manager">
-                <div class="mdc-radio__background">
-                  <div class="mdc-radio__outer-circle"></div>
-                  <div class="mdc-radio__inner-circle"></div>
-                </div>
-                <div class="mdc-radio__ripple"></div>
-              </div>
-              <label for="radio-productowner-new">Release Manager</label>
-            </div>
-	    <button class="mdc-button mdc-button--raised">Create</button>
-          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="newUserForm text-center mt-3">
+    <h3>Create new user:</h3>
+    <%= form_with(model: @user) do %>
+    <form class="form text-center" action="/users" method="post">
+        <div class="form-group mx-sm-3 mb-2">
+          <%= label_tag('user[username]', "Username", class: "sr-only") %>
+          <%= text_field_tag('user[username]', "", placeholder: 'Username', class: "form-control") %>
         </div>
-      </div>
-    </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <%= label_tag('user[password]', "Password", class: "sr-only") %>
+          <%= password_field_tag('user[password]', "", class: "form-control", placeholder: "Password") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Admin", class: "form-check-input") %>
+          <%= label_tag(:admin_new, "Admin", class: "form-check-label ml-2") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Release Manager", class: "form-check-input") %>
+          <%= label_tag(:releasemanager_new, "Release Manager", class: "form-check-label ml-2") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Product Owner", class: "form-check-input") %>
+          <%= label_tag(:productowner_new, "Product Owner", class: "form-check-label ml-2") %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag('user[role]', "Developer", class: "form-check-input") %>
+          <%= label_tag(:developer_new, "Developer", class: "form-check-label ml-2") %>
+        </div>
+        <br>
+          <%= submit_tag("Create", class: "btn btn-primary mt-2") %>
+      </form>
+    <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+    function setUserRole(user, role) {
+        console.log("Setting the role of " + role + " to user: " + user);
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('PUT', 'users');
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        const token = document.getElementsByName("csrf-token");
+        if (token.length > 0) {
+            xhttp.setRequestHeader('X-CSRF-Token', token[0].content);
+        }
+        xhttp.send('user[username]=' + user + '&user[role]=' + role);
+        console.log(user + "!" + role);
+    };
+</script>

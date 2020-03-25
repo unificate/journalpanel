@@ -1,14 +1,10 @@
-import {MDCRipple} from '@material/ripple';
-import {MDCTextField} from '@material/textfield';
-
 document.addEventListener('turbolinks:load', () => {
-    new MDCTextField(document.querySelector('#username-field'));
-    const username = document.querySelector('#username');
-    new MDCTextField(document.querySelector('#password-field'));
-    const password = document.querySelector('#password');
-    const login = new MDCRipple(document.querySelector('.mdc-button'));
+    const loginButton = document.getElementById("login-button");
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
 
-    login.root_.onclick = () => {
+    // New user is submitted
+    loginButton.onclick = () => {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = () => {
             if (xhttp.status == 200) {
@@ -16,7 +12,7 @@ document.addEventListener('turbolinks:load', () => {
             } else {
                 const error = document.querySelector('#login-error')
                 error.innerText = xhttp.response;
-                error.style.display = "block";
+                error.style.visibility = "visible";
             }
         }
 
@@ -29,3 +25,4 @@ document.addEventListener('turbolinks:load', () => {
         xhttp.send('user[username]=' + username.value + '&user[password]=' + password.value);
     }
 });
+

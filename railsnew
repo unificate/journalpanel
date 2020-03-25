@@ -14,6 +14,6 @@ echo -e "source 'https://rubygems.org'\ngem 'rails'\n" > Gemfile
 bundix -l
 cp ../hello_rails/.envrc .
 cp ../hello_rails/shell.nix .
-nix-shell --run "rails new . --force --skip-bundle $ARGS"
+nix-shell --run "rails plugin new . --force --skip-bundle $ARGS"
 bundix -l
 rm -rf .git

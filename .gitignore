@@ -38,11 +38,9 @@ yarn-debug.log*
 *.idea/
 *.iml
 
-# Ignore generators and rake stuff
-*.generators
-*.rakeTasks
-*.iml
-*.xml
+# Ignore all generators and rake stuff
+.generators
+.rakeTasks
 
 # Ignore direnv files
 *.direnv/

@@ -6,7 +6,8 @@
 | hello                | Ruby project template                    |
 | hello_rails          | Rails project template                   |
 | login_test           | Test microservice                        |
-| panel                | Control panel for managing microservices |
+| micromanage          | Engine for exposing microservice API     |
+| panel                | Control panel for apps with Micromanage  |
 
 # Setting up your environment
 You only need to install 2 dependencies:

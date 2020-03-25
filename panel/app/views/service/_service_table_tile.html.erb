@@ -1,0 +1,14 @@
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+<%= link_to "/viewtable/"+id+"/"+name, class: "service-tile", style: "color: #000000", :action => 'go' do%>
+    <div class="card-header">
+        <% tableTitle = []%>
+        <% name.split(/\s|'|,|_/).each {|n| tableTitle.push(n.capitalize())} %>
+      <b><%=tableTitle.join(" ")%></b>
+    </div>
+    <% table.each do |key1, val1| %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= key1['name'] %> : <%=key1['sql_type_metadata']['sql_type']%></li>
+        </ul>
+    <%end%>
+<% end %>
+</div>

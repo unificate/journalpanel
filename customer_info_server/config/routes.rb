@@ -5,4 +5,5 @@ Rails.application.routes.draw do
           resources :customers, :items, :purchases
       end
   end
+  mount Micromanage::Engine => "/micromanage"
 end

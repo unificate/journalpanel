@@ -1,12 +1,36 @@
-<div class="head-wraper">
-<header class="mdc-top-app-bar mdc-top-app-bar--dense">
-  <div class="mdc-top-app-bar__row" style >
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-      <span class="mdc-top-app-bar__title">HP Microservice Managment</span> </section>
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-      <%= button_to('dashboard', '/list', method: 'get', :class => "mdc-icon-button material-icons")%>
-      <%= button_to('groups', '/users', method: 'get', :class => "mdc-icon-button material-icons")%>
-    </section>
+<nav class="navbar navbar-expand-lg navbar-dark bg-light" style="background-color: #01A0D7 !important;">
+  <a class="navbar-brand" href="#">HP MicroManage</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/list">Dashboard<span class="sr-only"></span></a>
+      </li>
+      <% if current_user && current_user.role == "Admin" %>
+      <li class="nav-item active">
+        <a class="nav-link" href="/users">Users<span class="sr-only"></span></a>
+      </li>
+      <% else %>
+        <li class="nav-item disabled">
+        <a class="nav-link" href="/users">Groups<span class="sr-only"></span></a>
+      </li>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav mr-5 navbar-right">
+      <% if current_user %>
+        <li class="nav-item dropdown active navbar-right">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.username%>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"><%= link_to('Logout', destroy_user_session_path, method: :delete, class: "logoutDrop") %></a>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
-</header>
-</div>
+</nav>
