@@ -5,7 +5,7 @@ default: &default
   encoding: utf8
   reconnect: false
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
+  username: paneluser
   password: Mangoes!
   host: 127.0.0.1
   socket: 3306
