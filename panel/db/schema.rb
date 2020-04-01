@@ -12,36 +12,36 @@
 
 ActiveRecord::Schema.define(version: 2020_03_04_192923) do
 
-  create_table "changes", force: :cascade do |t|
-    t.integer "Row_Entry_id", null: false
+  create_table "changes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "Row_Entry_id", null: false
     t.string "old_value"
     t.string "new_value"
-    t.integer "Users_id", null: false
+    t.bigint "Users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["Row_Entry_id"], name: "index_changes_on_Row_Entry_id"
     t.index ["Users_id"], name: "index_changes_on_Users_id"
   end
 
-  create_table "executed_ats", force: :cascade do |t|
-    t.integer "Row_Entry_id", null: false
+  create_table "executed_ats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "Row_Entry_id", null: false
     t.string "old_value"
     t.string "new_value"
-    t.integer "Users_id", null: false
+    t.bigint "Users_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["Row_Entry_id"], name: "index_executed_ats_on_Row_Entry_id"
     t.index ["Users_id"], name: "index_executed_ats_on_Users_id"
   end
 
-  create_table "microservices", force: :cascade do |t|
+  create_table "microservices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "address"
   end
 
-  create_table "row_entries", force: :cascade do |t|
+  create_table "row_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "Table_Name"
     t.integer "microservice_id"
     t.integer "record_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_192923) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
