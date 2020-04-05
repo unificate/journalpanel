@@ -1,4 +1,4 @@
 class Change < ApplicationRecord
-  belongs_to :Row_Entry, optional: true
-  belongs_to :Users, optional: true
+  belongs_to :row_entry, optional: true
+  belongs_to :user, optional: true
 end

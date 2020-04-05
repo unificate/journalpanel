@@ -56,7 +56,7 @@ class EditpageController < ApplicationController
         row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
         if(row != nil)
             # Been changed before, check for unexecuted changes.
-            changes = Change.find_by(Row_Entry_id: row.id)
+            changes = row.changes; 
             if( changes == nil)
                 # Insert new change here, row already exists
                 if(row != nil)
