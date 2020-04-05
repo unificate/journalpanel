@@ -75,4 +75,42 @@ class EditpageController < ApplicationController
 
         end
     end
+
+    def self.micro_get_row(microservice_id, table_id, row_id)
+        microservice = Microservice.find(microservice_id)
+        adr = microservice.address
+        conn = Faraday.new
+        if adr != nil and adr != ""
+            unless adr.include? 'http'
+                adr = 'http://'+adr+'/'+params[:tid]+'/'+params[:rid]
+            end
+            begin
+                response = conn.get(adr).body
+            rescue Faraday::Error::ConnectionFailed
+                response = "{}" 
+            end
+            data = JSON.parse(response).with_indifferent_access
+            return data
+        end
+        return nil
+    end
+
+    def self.micro_get_tables()
+        microservice = Microservice.find(params[:mid])
+        adr = microservice.address
+        conn = Faraday.new
+        if adr != nil and adr != ""
+            unless adr.include? 'http'
+                adr = 'http://'+adr
+            end
+            begin
+                response1 = conn.get(adr).body
+            rescue Faraday::Error::ConnectionFailed
+                response1 = "{'status':'Failed'}" 
+            end
+            return ((JSON.parse(response1).with_indifferent_access)[params[:table]])
+        end
+    
+    end
+
 end
