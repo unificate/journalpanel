@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
             unless adr.include? 'http'
                 adr = 'http://'+adr
             end
-            adr = adr+'/'+table_id+'/'+row_id
+            adr = adr + '/' + table_id + '/' + row_id
             begin
                 response = conn.get(adr).body
             rescue Faraday::ConnectionFailed => e 
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
             unless adr.include? 'http'
                 adr = 'http://'+adr
             end
-            adr = adr+'/'+table_name
+            adr = adr + '/' + table_name
             begin
                 response = conn.get(adr).body
             rescue Faraday::ConnectionFailed => e 
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
         conn = Faraday.new
         if adr != nil and adr != ""
             unless adr.include? 'http'
-                adr = 'http://'+adr
+                adr = 'http://' + adr
             end
             begin
                 response = conn.get(adr).body
