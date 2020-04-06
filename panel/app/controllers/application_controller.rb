@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
         conn = Faraday.new
         if adr != nil and adr != ""
             unless adr.include? 'http'
-                adr = 'http://'+adr
+                adr = 'http://' + adr
             end
             adr = adr + '/' + table_id + '/' + row_id
             begin
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
         conn = Faraday.new
         if adr != nil and adr != ""
             unless adr.include? 'http'
-                adr = 'http://'+adr
+                adr = 'http://' + adr
             end
             adr = adr + '/' + table_name
             begin
