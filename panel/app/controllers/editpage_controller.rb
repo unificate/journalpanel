@@ -5,47 +5,12 @@ class EditpageController < ApplicationController
         @mid = params[:id]
         @tid = params[:table]
         @rid = params[:rowid]
-        adr = @microservice.address
-        conn = Faraday.new
-        if adr != nil and adr != ""
-            unless adr.include? 'http'
-                adr = 'http://'+adr+'/'+params[:table]+'/'+params[:rowid]
-            end
-            begin
-                response = conn.get(adr).body
-            rescue Faraday::Error::ConnectionFailed
-                response = "{}" 
-            end
-            @data = JSON.parse(response).with_indifferent_access
-        end 
-        adr = @microservice.address
-        if adr != nil and adr != ""
-            unless adr.include? 'http'
-                adr = 'http://'+adr
-            end
-            begin
-                response1 = conn.get(adr).body
-            rescue Faraday::Error::ConnectionFailed
-                response1 = "{'status':'Failed'}" 
-            end
-            @table_data = ((JSON.parse(response1).with_indifferent_access)[params[:table]])
-        end
+        @data = micro_get_row(@mid,@tid,@rid) 
+        @table_data = micro_get_table(@mid,@tid)
     end
     def submit
         @microservice = Microservice.find(params[:mid])
-        adr = @microservice.address
-        conn = Faraday.new
-        if adr != nil and adr != ""
-            unless adr.include? 'http'
-                adr = 'http://'+adr+'/'+params[:tid]+'/'+params[:rid]
-            end
-            begin
-                response = conn.get(adr).body
-            rescue Faraday::Error::ConnectionFailed
-                response = "{}" 
-            end
-            @data = JSON.parse(response).with_indifferent_access
-        end
+        @data = micro_get_row(params[:mid],params[:tid],params[:rid])
         new_val = {}
         @data.each do |key,value|
             if( params[:"#{key}"] != @data[key])
@@ -76,41 +41,5 @@ class EditpageController < ApplicationController
         end
     end
 
-    def self.micro_get_row(microservice_id, table_id, row_id)
-        microservice = Microservice.find(microservice_id)
-        adr = microservice.address
-        conn = Faraday.new
-        if adr != nil and adr != ""
-            unless adr.include? 'http'
-                adr = 'http://'+adr+'/'+params[:tid]+'/'+params[:rid]
-            end
-            begin
-                response = conn.get(adr).body
-            rescue Faraday::Error::ConnectionFailed
-                response = "{}" 
-            end
-            data = JSON.parse(response).with_indifferent_access
-            return data
-        end
-        return nil
-    end
-
-    def self.micro_get_tables()
-        microservice = Microservice.find(params[:mid])
-        adr = microservice.address
-        conn = Faraday.new
-        if adr != nil and adr != ""
-            unless adr.include? 'http'
-                adr = 'http://'+adr
-            end
-            begin
-                response1 = conn.get(adr).body
-            rescue Faraday::Error::ConnectionFailed
-                response1 = "{'status':'Failed'}" 
-            end
-            return ((JSON.parse(response1).with_indifferent_access)[params[:table]])
-        end
-    
-    end
 
 end
