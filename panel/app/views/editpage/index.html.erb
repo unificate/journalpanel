@@ -1,61 +1,33 @@
-<div class="container">
+<!-- <div class="container">
   <h1 class="service-title">Changes</h1>
-    <div class="changesTable text-center">
-        <% unless @changes.nil? %>
-            <table class="table table-hover">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">
-                            Change Id
-                        </th>
-                        <th scope="col">
-                            Row Entry Id
-                        </th>
-                        <th scope="col">
-                            Microservice
-                        </th>
-                        <th scope="col">
-                            Table
-                        </th>
-                        <th scope="col">
-                            Old Value
-                        </th>
-                        <th scope="col">
-                            New Value
-                        </th>
-                        <th scope="col">
-                            Created At
-                        </th>
-                        <th scope="col">
-                            User Id
-                        </th>
-                        <th scope="col">
-                            Select
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
+    <% unless @changes.nil? %>
+        <div class="changesTable text-center">
+            <div class="row">
                 <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
-                    <tr>
-                        <td><%= change.id %></td>
-                        <td><%= change.Row_Entry_id %></td>
-                        <td><%= microservice.name %></td>
-                        <td><%= cmd.Table_Name %></td>
-                        <td>
-                            <div class="overflow-auto" style="height: 125px">
+                <div class="col-sm">
+                    <div class="card" style="width: 18rem;">
+                      <div class="card-header">
+                        Change: <%= change.id %>
+                        <br>
+                        Submitted by: <%= change.Users_id %>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Microservice: <%= microservice.name %></h5>
+                        <h6 class="card-title"><%= cmd.Table_Name %></h6>
+                        <div class="container card-text">
+                          <div class="row">
+                            <div class="col-sm">
                                 <% stringToJSON(change.old_value).each do |val| %>
-                                    <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                    <% if val[0].in? stringToJSON(change.new_value).keys and val[0] != "id" %>
                                         <%= val[0] + ": " + "\n" %>
                                         <br>
-                                        <%= val[1] + "\n" %>
+                                        <%= val[1] %>
                                         <br>
                                         <br>
                                     <% end %>
                                 <% end %>
                             </div>
-                        </td>
-                        <td>
-                            <div class="overflow-auto" style="height: 125px">
+                            <div class="col-sm">
                                 <% stringToJSON(change.new_value).each_with_index do |val, index| %>
                                     <% unless val[0].in? ["id", "created_at", "updated_at"] %>
                                         <%= val[0] + ": " + "\n" %>
@@ -66,14 +38,96 @@
                                     <% end %>
                                 <% end %>
                             </div>
-                        </td>
-                        <td><%= change.created_at %></td>
-                        <td><%= change.Users_id %></td>
-                        <td><%= check_box_tag('change', change) %></td>
-                    </tr>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
                 <% end %>
-                </tbody>
-            </table>
+            </div>
+        </div>
+    <% end %>
+</div> -->
+
+<div class="container">
+  <h1 class="service-title">Changes</h1>
+    <div class="changesTable text-center">
+        <% unless @changes.nil? %>
+            <%= form_with(url: "/search", method: "get") do %>
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                Change Id
+                            </th>
+                            <th scope="col">
+                                Row Entry Id
+                            </th>
+                            <th scope="col">
+                                Microservice
+                            </th>
+                            <th scope="col">
+                                Table
+                            </th>
+                            <th scope="col">
+                                Old Value
+                            </th>
+                            <th scope="col">
+                                New Value
+                            </th>
+                            <th scope="col">
+                                Created At
+                            </th>
+                            <th scope="col">
+                                User Id
+                            </th>
+                            <th scope="col">
+                                Select
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
+                            <tr>
+                                <td><%= change.id %></td>
+                                <td><%= change.Row_Entry_id %></td>
+                                <td><%= microservice.name %></td>
+                                <td><%= cmd.Table_Name %></td>
+                                <td>
+                                    <div>
+                                        <% stringToJSON(change.old_value).each do |val| %>
+                                            <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                                <%= val[0] + ": " + "\n" %>
+                                                <br>
+                                                <%= val[1] + "\n" %>
+                                                <br>
+                                                <br>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <% stringToJSON(change.new_value).each_with_index do |val, index| %>
+                                            <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                                <%= val[0] + ": " + "\n" %>
+                                                <br>
+                                                <%= val[1] + "\n" %>
+                                                <br>
+                                                <br>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                <td><%= change.created_at %></td>
+                                <td><%= change.Users_id %></td>
+                                <td><%= check_box_tag('change', change) %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <%= submit_tag("Push", class: "btn btn-primary mt-2 mb-5") %>
+            <% end %>
         <% end %>
     </div>
 </div>
