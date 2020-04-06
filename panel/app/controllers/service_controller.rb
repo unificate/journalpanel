@@ -7,16 +7,11 @@ class ServiceController < ApplicationController
     @schema = nil
     @table_names = nil
     @microservice = Microservice.find(params[:id])
-    adr = @microservice.address
-    conn = Faraday.new
-    if adr != nil and adr != ""
-        unless adr.include? 'http'
-            adr = 'http://'+adr
-        end
-        @schema = JSON.parse(conn.get(adr).body).with_indifferent_access
-        @table_names = @schema.keys.select do |el|
-            @schema[el] != nil
-        end
+    @schema = micro_get_tables(params[:id])
+    unless @schema == nil
+      @table_names = @schema.keys.select do |el|
+        @schema[el] != nil
+      end
     end
   end
   def show
