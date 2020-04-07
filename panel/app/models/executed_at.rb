@@ -1,4 +1,4 @@
 class ExecutedAt < ApplicationRecord
-  belongs_to :Row_Entry
-  belongs_to :Users
+  belongs_to :row_entry
+  belongs_to :user
 end
