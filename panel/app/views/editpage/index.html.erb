@@ -126,7 +126,13 @@
                         <% end %>
                     </tbody>
                 </table>
-                <%= submit_tag("Push", class: "btn btn-primary mt-2 mb-5") %>
+                <%= radio_button_tag("type", "Push Now", class: "form-check-input") %>
+                <%= label_tag("Push Now", nil, class: "form-check-label") %>
+                <br>
+                <%= radio_button_tag("type", "Create Transaction", class: "form-check-input") %>
+                <%= label_tag("Create Transaction", nil, class: "form-check-label") %>
+                <br>
+                <%= submit_tag("Submit", class: "btn btn-primary mt-2 mb-5") %>
             <% end %>
         <% end %>
     </div>
