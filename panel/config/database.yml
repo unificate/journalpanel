@@ -6,7 +6,7 @@ default: &default
   reconnect: false
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: paneluser
-  password: Mangoes!
+  password: <%= ENV.fetch("RAILS_DB_PASSWORD") %>
   host: 127.0.0.1
   socket: 3306
 
