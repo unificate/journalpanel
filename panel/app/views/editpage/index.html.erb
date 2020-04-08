@@ -1,17 +1,90 @@
 <div class="container">
-    <%= form_with :url => url_for(:controller => "editpage", :action => "submit"), :local => true do |form| %>
-    <%@data.each do |key, value| %>
-        <%= render "field_tile",name:key,value:value,form:form, html:{method:"post"}%>
-    <%end%>
-    <%= form.hidden_field :mid, value:@mid, class:"form-control" %>
-    <%= form.hidden_field :tid, value:@tid, class:"form-control" %>
-    <%= form.hidden_field :rid, value:@rid, class:"form-control" %>
-    <div class="form-check">
-        <%= check_box_tag :execute,"1",false,class:"form-check-input"%>
-        <%= label_tag "Execute Now",nil, class:"form-check-label" %>
+  <h1 class="service-title">Changes</h1>
+    <div class="changesTable text-center">
+        <% unless @changes.nil? %>
+            <%= form_with(url: "/search", method: "get") do %>
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                Change Id
+                            </th>
+                            <th scope="col">
+                                Row Entry Id
+                            </th>
+                            <th scope="col">
+                                Microservice
+                            </th>
+                            <th scope="col">
+                                Table
+                            </th>
+                            <th scope="col">
+                                Old Value
+                            </th>
+                            <th scope="col">
+                                New Value
+                            </th>
+                            <th scope="col">
+                                Created At
+                            </th>
+                            <th scope="col">
+                                User Id
+                            </th>
+                            <th scope="col">
+                                Select
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
+                            <tr>
+                                <td><%= change.id %></td>
+                                <td><%= change.Row_Entry_id %></td>
+                                <td><%= microservice.name %></td>
+                                <td><%= cmd.Table_Name %></td>
+                                <td>
+                                    <div>
+                                        <% stringToJSON(change.old_value).each do |val| %>
+                                            <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                                <%= val[0] + ": " + "\n" %>
+                                                <br>
+                                                <%= val[1] + "\n" %>
+                                                <br>
+                                                <br>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <% stringToJSON(change.new_value).each_with_index do |val, index| %>
+                                            <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                                <%= val[0] + ": " + "\n" %>
+                                                <br>
+                                                <%= val[1] + "\n" %>
+                                                <br>
+                                                <br>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                <td><%= change.created_at %></td>
+                                <td><%= change.Users_id %></td>
+                                <td><%= check_box_tag('change', change) %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <%= radio_button_tag("type", "Push Now", class: "form-check-input") %>
+                <%= label_tag("Push Now", nil, class: "form-check-label") %>
+                <br>
+                <%= radio_button_tag("type", "Create Transaction", class: "form-check-input") %>
+                <%= label_tag("Create Transaction", nil, class: "form-check-label") %>
+                <br>
+                <%= submit_tag("Submit", class: "btn btn-primary mt-2 mb-5") %>
+            <% end %>
+        <% end %>
     </div>
-    <%= form.submit "Submit",type: "submit",class:"btn btn-primary"%>
-<%end%>
 </div>
 
 

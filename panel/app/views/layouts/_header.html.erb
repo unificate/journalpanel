@@ -8,13 +8,23 @@
       <li class="nav-item active">
         <a class="nav-link" href="/list">Dashboard<span class="sr-only"></span></a>
       </li>
+
+      <% if current_user && current_user.role == "Admin" %>
+      <li class="nav-item active">
+        <a class="nav-link" href="/edit">Changes<span class="sr-only"></span></a>
+      </li>
+      <% else %>
+        <li class="nav-item disabled">
+        <a class="nav-link" href="/edit">Changes<span class="sr-only"></span></a>
+      </li>
+      <% end %>
       <% if current_user && current_user.role == "Admin" %>
       <li class="nav-item active">
         <a class="nav-link" href="/users">Users<span class="sr-only"></span></a>
       </li>
       <% else %>
         <li class="nav-item disabled">
-        <a class="nav-link" href="/users">Groups<span class="sr-only"></span></a>
+        <a class="nav-link" href="/users">Users<span class="sr-only"></span></a>
       </li>
       <% end %>
     </ul>
