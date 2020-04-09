@@ -20,22 +20,23 @@ class EditpageController < ApplicationController
         end
         row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
         if(row != nil)
-            puts "Row found"
             # Been changed before, check for unexecuted changes.
             changes = row.modifications; 
             if( changes == nil)
                 # Insert new change here, row already exists
-                puts "CHANGE BEING CREATED"
-                Change.create!( Users_id: current_user.id, Row_Entry_id: row.id,old_value: @data.to_json, new_value: new_val.to_json)
+                new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
+                #micro_put_change(params[:mid],new_change.id)
+                #execute_change(new_change.id);
                 redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
             else
-                puts "Change found"+changes.to_json
                 redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
             end 
         else
             # New change, new Row
             row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
-            Change.create!( Users_id: current_user.id, Row_Entry_id: row.id, old_value: @data.to_json, new_value: new_val.to_json)
+            new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
+            #micro_put_change(params[:mid],new_change.id)
+            #execute_change(new_change.id);
             redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
 
         end

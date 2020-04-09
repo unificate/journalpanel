@@ -13,25 +13,25 @@
 ActiveRecord::Schema.define(version: 2020_03_04_192923) do
 
   create_table "changes", force: :cascade do |t|
-    t.integer "Row_Entry_id", null: false
+    t.integer "row_entry_id", null: false
     t.string "old_value"
     t.string "new_value"
-    t.integer "Users_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Row_Entry_id"], name: "index_changes_on_Row_Entry_id"
-    t.index ["Users_id"], name: "index_changes_on_Users_id"
+    t.index ["row_entry_id"], name: "index_changes_on_row_entry_id"
+    t.index ["user_id"], name: "index_changes_on_user_id"
   end
 
   create_table "executed_ats", force: :cascade do |t|
-    t.integer "Row_Entry_id", null: false
+    t.integer "row_entry_id", null: false
     t.string "old_value"
     t.string "new_value"
-    t.integer "Users_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Row_Entry_id"], name: "index_executed_ats_on_Row_Entry_id"
-    t.index ["Users_id"], name: "index_executed_ats_on_Users_id"
+    t.index ["row_entry_id"], name: "index_executed_ats_on_row_entry_id"
+    t.index ["user_id"], name: "index_executed_ats_on_user_id"
   end
 
   create_table "microservices", force: :cascade do |t|
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2020_03_04_192923) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "changes", "Row_Entries"
-  add_foreign_key "changes", "Users", column: "Users_id"
-  add_foreign_key "executed_ats", "Row_Entries"
-  add_foreign_key "executed_ats", "Users", column: "Users_id"
+  add_foreign_key "changes", "row_entries"
+  add_foreign_key "changes", "users"
+  add_foreign_key "executed_ats", "row_entries"
+  add_foreign_key "executed_ats", "users"
 end
