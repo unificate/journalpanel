@@ -70,7 +70,7 @@
                                 </td>
                                 <td><%= change.created_at %></td>
                                 <td><%= change.Users_id %></td>
-                                <td><%= check_box_tag('change', change) %></td>
+                                <td><%= check_box_tag('changes[]', change) %></td>
                             </tr>
                         <% end %>
                     </tbody>
