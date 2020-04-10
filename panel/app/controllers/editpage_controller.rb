@@ -6,13 +6,13 @@ class EditpageController < ApplicationController
             # Get metadata for each change
             @metadata = []
             @changes.each do |change|
-                @metadata.push(RowEntry.where(id: change.Row_Entry_id).take)
+                @metadata.push(change.row_entry)
             end
 
             # Find microservice for each change
             @microservice = []
             @metadata.each do |cmd|
-                @microservice.push(Microservice.where(id: cmd.microservice_id).take)
+                @microservice.push(cmd.microservice)
             end
         else
           redirect_to '/'
