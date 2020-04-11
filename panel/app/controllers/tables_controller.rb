@@ -1,4 +1,6 @@
 class TablesController < ApplicationController
+
+  # GET /microservice/:microservice_id/tables --- display all tables in a microservice
   def index
     unless user_signed_in?
       redirect_to '/'
@@ -14,6 +16,7 @@ class TablesController < ApplicationController
     end
   end
 
+  # GET /microservice/:microservice_id/tables/:id --- display all rows in a table
   def show
     @service = params[:microservice_id]
     @tname = params[:id]

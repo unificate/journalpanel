@@ -1,4 +1,6 @@
 class ChangesController < ApplicationController
+
+  # GET /changes --- display all changes
   def index
     if user_signed_in? and current_user.role == "Admin"
       @changes = Change.all
@@ -19,6 +21,7 @@ class ChangesController < ApplicationController
     end
   end
 
+  # GET /changes/new --- display a form for creating a new change
   def new
     #params, id (microservice id), table (table name), rowid (row id)
     @microservice = Microservice.find(params[:id])
@@ -29,6 +32,7 @@ class ChangesController < ApplicationController
     @table_data = micro_get_table(@mid,@tid)
   end
 
+  # POST /changes --- create and store a new change
   def create
     @microservice = Microservice.find(params[:mid])
     @data = micro_get_row(params[:mid],params[:tid],params[:rid])
@@ -59,7 +63,6 @@ class ChangesController < ApplicationController
       #micro_put_change(params[:mid],new_change.id)
       #execute_change(new_change.id);
       redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
-
     end
   end
 
