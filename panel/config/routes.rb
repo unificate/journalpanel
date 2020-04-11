@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
   get '/', to: 'login#index'
-  get '/list', to: 'service_list#index'
-  get '/service/:id', to: 'service#index'
-  get '/transaction', to: 'transaction#index'
-  get 'viewtable/:id/:tid', to: 'viewtable#index'
 
+  get '/transaction', to: 'transaction#index'
+
+  # this will create:
+  # GET /microservice --- display all microservices
+  # GET /microservice/:microservice_id/tables --- display all tables in a microservice
+  # GET /microservice/:microservice_id/tables/:id --- display all rows in a table
+  resources :microservices, only: [:index] do
+    resources :tables, only: [:index, :show]
+  end
+
+  # this will create:
+  # GET /changes --- display all changes
+  # GET /changes/new --- display a form for creating a new change
+  # POST /changes --- create and store a new change
   resources :changes, only: [:index, :new, :create]
 
   get '/users', to: 'accounts#index'

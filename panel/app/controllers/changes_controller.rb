@@ -48,9 +48,9 @@ class ChangesController < ApplicationController
         new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
         #micro_put_change(params[:mid],new_change.id)
         #execute_change(new_change.id);
-        redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
+        redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
       else
-        redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
+        redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
       end
     else
       # New change, new Row
@@ -58,7 +58,7 @@ class ChangesController < ApplicationController
       new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
       #micro_put_change(params[:mid],new_change.id)
       #execute_change(new_change.id);
-      redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
+      redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
 
     end
   end
