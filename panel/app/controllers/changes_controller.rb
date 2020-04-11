@@ -62,4 +62,21 @@ class ChangesController < ApplicationController
 
     end
   end
+
+  def create
+    puts "Inside create function"
+    puts params[:type]
+    if params[:type] == "Push Now"
+      puts "Inside push now"
+      params[:changes].each do |change_id|
+        row = Change.find(change_id).row_entry
+        puts row
+        puts row.microservice_id
+        puts change_id
+        micro_put_change(row.microservice_id, change_id)
+        execute_change(change_id)
+      end
+    end
+    redirect_to "/edit"
+  end
 end
