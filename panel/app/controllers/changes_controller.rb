@@ -19,7 +19,7 @@ class ChangesController < ApplicationController
     end
   end
 
-  def show
+  def new
     #params, id (microservice id), table (table name), rowid (row id)
     @microservice = Microservice.find(params[:id])
     @mid = params[:id]
@@ -29,7 +29,7 @@ class ChangesController < ApplicationController
     @table_data = micro_get_table(@mid,@tid)
   end
 
-  def submit
+  def create
     @microservice = Microservice.find(params[:mid])
     @data = micro_get_row(params[:mid],params[:tid],params[:rid])
     new_val = {}
