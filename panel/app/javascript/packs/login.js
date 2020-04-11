@@ -8,7 +8,7 @@ document.addEventListener('turbolinks:load', () => {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = () => {
             if (xhttp.status == 200) {
-                window.location = 'list';
+                window.location = 'microservices';
             } else {
                 const error = document.querySelector('#login-error')
                 error.innerText = xhttp.response;
