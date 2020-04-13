@@ -39,7 +39,7 @@
                         <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
                             <tr>
                                 <td><%= change.id %></td>
-                                <td><%= change.Row_Entry_id %></td>
+                                <td><%= change.row_entry_id %></td>
                                 <td><%= microservice.name %></td>
                                 <td><%= cmd.Table_Name %></td>
                                 <td>
@@ -69,8 +69,8 @@
                                     </div>
                                 </td>
                                 <td><%= change.created_at %></td>
-                                <td><%= change.Users_id %></td>
-                                <td><%= check_box_tag('changes[]', change) %></td>
+                                <td><%= change.user_id %></td>
+                                <td><%= check_box_tag('change', change) %></td>
                             </tr>
                         <% end %>
                     </tbody>

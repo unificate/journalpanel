@@ -81,4 +81,39 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+    protected
+    def micro_put_change(microservice_id, change_id)
+        microservice = Microservice.find(microservice_id)
+        adr = microservice.address
+        change = Change.find(change_id)
+        row = change.row_entry
+        row_id = row.id
+        table_name = row.Table_Name
+        conn = Faraday.new
+        if adr != nil and adr != ""
+            unless adr.include? 'http'
+                adr = 'http://' + adr
+            end
+            adr = adr+'/'+table_name+'/'+row_id.to_s
+            begin
+                response = (conn.put(adr,change.new_value)).body
+            rescue Faraday::ConnectionFailed => e 
+                response = "{}" 
+            end
+            return (response)
+        end
+        return nil
+    end
+    protected
+    def execute_change(change_id)
+        change = Change.find(change_id)
+        row = change.row_entry
+        ExecutedAt.transaction do
+            Change.transaction do
+                row.executed_ats.create!(user_id: current_user.id, old_value: change.old_value, new_value: change.new_value)
+                change.destroy
+            end
+        end
+    end
+
 end
