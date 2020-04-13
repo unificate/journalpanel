@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   put '/users', to: 'accounts#update'
   get '/edit', to: 'editpage#index'
+  post '/edit', to: 'editpage#create'
   get '/edit/:id/:table/:rowid', to: 'editpage#show'
   post '/edit/submit', to: 'editpage#submit'
   get 'viewtable/:id/:tid', to: 'viewtable#index'
