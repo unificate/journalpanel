@@ -20,10 +20,25 @@ class AccountsController < ApplicationController
 
   def create
     # Make new variable with input from form
-
     @user = User.new(user_params)
     if @user.save
         redirect_to '/users'
+    end
+  end
+
+  def edit
+    if user_signed_in? and current_user.role == "Admin"
+      user = User.find_by(username: params[:user][:username])
+      user.reset_password(params[:user][:password], params[:user][:password])
+    end
+  end
+
+  def destroy
+    if user_signed_in? and current_user.role == "Admin"
+      unless params[:user][:username] == current_user.username
+        user = User.find_by(username: params[:user][:username])
+        user.destroy()
+      end
     end
   end
 
