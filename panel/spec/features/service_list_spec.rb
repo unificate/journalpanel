@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.feature 'Service_Lists', type: :feature do
   before(:each) do
-    create(:user)
+    admin = create(:admin)
+    login_as(admin, :scope => :user)
   end
-  #scenario 'User visits the login page' do
-  #  visit '/'
-  #  expect(page).to have_field('username')
-  #  expect(page).to have_field('password')
-  #  expect(page).to have_button('Login')
-  #end
-  
+
+  scenario 'The admin should be able to logout from the microservices page' do
+    visit '/list'
+    click_button('dropdownMenuButton')
+    page.find('.logoutDrop').click
+    expect(page).to have_current_path('/')
+    expect(page).to have_content('Log In')
+  end
 end
 
