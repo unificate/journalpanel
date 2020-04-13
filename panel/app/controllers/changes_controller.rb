@@ -43,7 +43,7 @@ class ChangesController < ApplicationController
     if(row != nil)
       # Been changed before, check for unexecuted changes.
       changes = row.modifications;
-      if( changes == nil)
+      if( changes == nil || !changes.any?)
         # Insert new change here, row already exists
         new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
         #micro_put_change(params[:mid],new_change.id)
