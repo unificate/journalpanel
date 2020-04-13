@@ -2,7 +2,7 @@
   <h1 class="service-title">Changes</h1>
     <div class="changesTable text-center">
         <% unless @changes.nil? %>
-            <%= form_with(url: "/search", method: "get") do %>
+            <%= form_with(url: "/edit", method: "post") do %>
                 <table class="table table-hover">
                     <thead class="thead-light">
                         <tr>
@@ -70,7 +70,7 @@
                                 </td>
                                 <td><%= change.created_at %></td>
                                 <td><%= change.user_id %></td>
-                                <td><%= check_box_tag('change', change) %></td>
+                                <td><%= check_box_tag('changes[]', change.id) %></td>
                             </tr>
                         <% end %>
                     </tbody>

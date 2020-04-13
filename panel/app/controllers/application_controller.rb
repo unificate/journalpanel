@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
             adr = adr + '/' + table_id + '/' + row_id
             begin
                 response = conn.get(adr).body
-            rescue Faraday::ConnectionFailed => e 
-                response = "{}" 
+            rescue Faraday::ConnectionFailed => e
+                response = "{}"
             end
             data = JSON.parse(response).with_indifferent_access
             return data
@@ -38,8 +38,8 @@ class ApplicationController < ActionController::Base
             adr = adr + '/' + table_name
             begin
                 response = conn.get(adr).body
-            rescue Faraday::ConnectionFailed => e 
-                response = "{}" 
+            rescue Faraday::ConnectionFailed => e
+                response = "{}"
             end
             return ((JSON.parse(response)))
         end
@@ -56,8 +56,8 @@ class ApplicationController < ActionController::Base
             end
             begin
                 response = conn.get(adr).body
-            rescue Faraday::ConnectionFailed => e 
-                response = "{}" 
+            rescue Faraday::ConnectionFailed => e
+                response = "{}"
             end
             return ((JSON.parse(response).with_indifferent_access)[table_name])
         end
@@ -74,8 +74,8 @@ class ApplicationController < ActionController::Base
             end
             begin
                 response = conn.get(adr).body
-            rescue Faraday::ConnectionFailed => e 
-                response = "{}" 
+            rescue Faraday::ConnectionFailed => e
+                response = "{}"
             end
             return (JSON.parse(response).with_indifferent_access)
         end
@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
         adr = microservice.address
         change = Change.find(change_id)
         row = change.row_entry
-        row_id = row.id
+        row_id = row.record_id
         table_name = row.Table_Name
         conn = Faraday.new
         if adr != nil and adr != ""
@@ -97,8 +97,8 @@ class ApplicationController < ActionController::Base
             adr = adr+'/'+table_name+'/'+row_id.to_s
             begin
                 response = (conn.put(adr,change.new_value)).body
-            rescue Faraday::ConnectionFailed => e 
-                response = "{}" 
+            rescue Faraday::ConnectionFailed => e
+                response = "{}"
             end
             return (response)
         end
