@@ -77,6 +77,6 @@ class ChangesController < ApplicationController
         execute_change(change_id)
       end
     end
-    redirect_to "/edit"
+    redirect_to "/changes"
   end
 end
