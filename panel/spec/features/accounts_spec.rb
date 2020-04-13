@@ -16,14 +16,6 @@ RSpec.feature 'Accounts', type: :feature do
 
   scenario 'The admin should be able to logout from the panel' do
     visit '/users'
-    click_button('user-button')
-    page.find('li', :text => 'Logout').click
-    expect(page).to have_current_path('/')
-    expect(page).to have_content('Login')
-  end
-
-  scenario 'The admin should be able to logout from the microservices page' do
-    visit '/microservices'
     click_button('dropdownMenuButton')
     page.find('.logoutDrop').click
     expect(page).to have_current_path('/')
@@ -119,7 +111,7 @@ RSpec.feature 'Accounts', type: :feature do
     fill_in 'username', with: 'tester'
     fill_in 'password', with: 'password2'
     click_button 'Log In'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_current_path('/microservices')
   end
 
   scenario 'An admin can delete a user' do
