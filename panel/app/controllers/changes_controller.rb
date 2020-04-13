@@ -66,7 +66,7 @@ class ChangesController < ApplicationController
     end
   end
 
-  def create
+  def push
     puts "Inside create function"
     puts params[:type]
     if params[:type] == "Push Now"

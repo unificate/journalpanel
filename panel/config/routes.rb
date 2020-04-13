@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   # GET /changes/new --- display a form for creating a new change
   # POST /changes --- create and store a new change
   resources :changes, only: [:index, :new, :create]
+  # this is a custom route to push changes to the MicroManage engine
+  post '/changes/push', to: 'changes#push'
 
   get '/users', to: 'accounts#index'
   post '/users', to: 'accounts#create'
