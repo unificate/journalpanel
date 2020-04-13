@@ -18,7 +18,7 @@
                 <% tuple.keys.each do |attr| %>
                     <td><%= tuple[attr] %></td>
                 <% end %>
-                <td><%= link_to "/edit/"+(@service.id).to_s+"/"+@tname+"/"+(tuple["id"]).to_s,:controller=>"editpage",:id => (@service.id).to_s, :table => @tname, :rowid =>(tuple["id"]).to_s%></td>
+                <td><%= link_to "/changes/"+(@service.id).to_s+"/"+@tname+"/"+(tuple["id"]).to_s,:controller=>"changes",:id => (@service.id).to_s, :table => @tname, action: "show", :rowid =>(tuple["id"]).to_s%></td>
                 </tr>
             <% end %>
             </tr>

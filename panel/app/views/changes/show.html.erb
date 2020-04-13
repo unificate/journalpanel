@@ -1,5 +1,5 @@
 <div class="container">
-    <%= form_with :url => url_for(:controller => "editpage", :action => "submit"), :local => true do |form| %>
+    <%= form_with :url => url_for(:controller => "changes", :action => "submit"), :local => true do |form| %>
     <%@data.each do |key, value| %>
         <%= render "field_tile",name:key,value:value,form:form, html:{method:"post"}%>
     <%end%>
