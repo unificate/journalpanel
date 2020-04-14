@@ -9,6 +9,12 @@
         <a class="nav-link" href="/list">Dashboard<span class="sr-only"></span></a>
       </li>
 
+      <% if current_user && current_user.role == "Admin" || (current_user && current_user.role == "Release Manager") || (current_user && current_user.role == "Product Owner") %>
+	<li class="nav-item active">
+        <a class="nav-link" href="/transaction">Transactions<span class="sr-only"></span></a>
+	</li>
+      <% end %>
+
       <% if current_user && current_user.role == "Admin" %>
       <li class="nav-item active">
         <a class="nav-link" href="/changes">Changes<span class="sr-only"></span></a>

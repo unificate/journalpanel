@@ -2,7 +2,7 @@ require 'net/http'
 class ServiceListController < ApplicationController
   def index
       unless user_signed_in?
-        redirect_to '/'
+	render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
       end
       @services = Microservice.order('name')
       @service_names = Microservice.pluck(:name)

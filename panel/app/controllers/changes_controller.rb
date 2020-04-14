@@ -15,7 +15,7 @@ class ChangesController < ApplicationController
         @microservice.push(cmd.microservice)
       end
     else
-      redirect_to '/'
+      render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
     end
   end
 
