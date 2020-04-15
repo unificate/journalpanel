@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
     if user_signed_in? and current_user.role == "Admin"
       @users = User.order('username') #load the admin panel
     else
-      redirect_to '/'
+	    render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
     end
   end
 

@@ -43,7 +43,7 @@ RSpec.feature 'Accounts', type: :feature do
     productOwner = create(:product_owner)
     login_as(productOwner, :scope => :user)
     visit '/users'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_content("403 Forbidden")
   end
 
   scenario 'Developer can view microservices' do
@@ -57,7 +57,7 @@ RSpec.feature 'Accounts', type: :feature do
     developer = create(:developer)
     login_as(developer, :scope => :user)
     visit '/users'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_content("403 Forbidden")
   end
 
   scenario 'Release manager can view microservices' do
@@ -71,7 +71,7 @@ RSpec.feature 'Accounts', type: :feature do
     rm = create(:release_manager)
     login_as(rm, :scope => :user)
     visit '/users'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_content("403 Forbidden")
   end
 
   scenario 'An admin can update a user\'s role' do

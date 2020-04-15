@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_04_192923) do
+ActiveRecord::Schema.define(version: 2020_04_14_203448) do
 
   create_table "changes", force: :cascade do |t|
     t.integer "row_entry_id", null: false
@@ -49,6 +49,23 @@ ActiveRecord::Schema.define(version: 2020_03_04_192923) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "transaction_entries", force: :cascade do |t|
+    t.integer "User_id"
+    t.integer "Change_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["Change_id"], name: "index_transaction_entries_on_Change_id"
+    t.index ["User_id"], name: "index_transaction_entries_on_User_id"
+  end
+
+  create_table "trasactions", force: :cascade do |t|
+    t.integer "User_id", null: false
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["User_id"], name: "index_trasactions_on_User_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,4 +83,6 @@ ActiveRecord::Schema.define(version: 2020_03_04_192923) do
   add_foreign_key "changes", "users"
   add_foreign_key "executed_ats", "row_entries"
   add_foreign_key "executed_ats", "users"
+  add_foreign_key "transaction_entries", "Changes"
+  add_foreign_key "trasactions", "Users"
 end
