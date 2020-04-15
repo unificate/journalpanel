@@ -1,4 +1,6 @@
 class ChangesController < ApplicationController
+
+  # GET /changes --- display all changes
   def index
     if user_signed_in? and current_user.role == "Admin"
       @changes = Change.all
@@ -19,7 +21,8 @@ class ChangesController < ApplicationController
     end
   end
 
-  def show
+  # GET /changes/new --- display a form for creating a new change
+  def new
     #params, id (microservice id), table (table name), rowid (row id)
     @microservice = Microservice.find(params[:id])
     @mid = params[:id]
@@ -29,7 +32,8 @@ class ChangesController < ApplicationController
     @table_data = micro_get_table(@mid,@tid)
   end
 
-  def submit
+  # POST /changes --- create and store a new change
+  def create
     @microservice = Microservice.find(params[:mid])
     @data = micro_get_row(params[:mid],params[:tid],params[:rid])
     new_val = {}
@@ -48,9 +52,9 @@ class ChangesController < ApplicationController
         new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
         #micro_put_change(params[:mid],new_change.id)
         #execute_change(new_change.id);
-        redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
+        redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
       else
-        redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
+        redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
       end
     else
       # New change, new Row
@@ -58,12 +62,11 @@ class ChangesController < ApplicationController
       new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
       #micro_put_change(params[:mid],new_change.id)
       #execute_change(new_change.id);
-      redirect_to url_for(:controller => "viewtable", :action => "index", :id => params[:mid], :tid => params[:tid])
-
+      redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
     end
   end
 
-  def create
+  def push
     puts "Inside create function"
     puts params[:type]
     if params[:type] == "Push Now"

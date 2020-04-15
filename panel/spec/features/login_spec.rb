@@ -24,7 +24,7 @@ RSpec.feature 'Logins', type: :feature do
     fill_in 'username', with: 'tester'
     fill_in 'password', with: 'tester'
     click_button 'Log In'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_current_path('/microservices')
   end
   scenario "User visits login page while logged in" do
     visit '/'
@@ -32,6 +32,6 @@ RSpec.feature 'Logins', type: :feature do
     fill_in 'password', with: 'tester'
     click_button 'Log In'
     visit '/'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_current_path('/microservices')
   end
 end

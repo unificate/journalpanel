@@ -1,5 +1,5 @@
 <div class="card bg-light mb-3" style="max-width: 18rem;">
-<%= link_to "/viewtable/"+id+"/"+name, class: "service-tile", style: "color: #000000", :action => 'go' do%>
+<%= link_to "/microservices/"+id+"/tables/"+name, class: "service-tile", style: "color: #000000", :action => 'go' do%>
     <div class="card-header">
         <% tableTitle = []%>
         <% name.split(/\s|'|,|_/).each {|n| tableTitle.push(n.capitalize())} %>

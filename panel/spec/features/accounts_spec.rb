@@ -35,8 +35,8 @@ RSpec.feature 'Accounts', type: :feature do
   scenario 'Product owner can view microservices' do
     productOwner = create(:product_owner)
     login_as(productOwner, :scope => :user)
-    visit '/list'
-    expect(page).to have_current_path('/list')
+    visit '/microservices'
+    expect(page).to have_current_path('/microservices')
   end
 
   scenario 'Product owner cannot view the admin panel' do
@@ -49,8 +49,8 @@ RSpec.feature 'Accounts', type: :feature do
   scenario 'Developer can view microservices' do
     developer = create(:developer)
     login_as(developer, :scope => :user)
-    visit '/list'
-    expect(page).to have_current_path('/list')
+    visit '/microservices'
+    expect(page).to have_current_path('/microservices')
   end
 
   scenario 'Developer cannot access the admin panel' do
@@ -63,8 +63,8 @@ RSpec.feature 'Accounts', type: :feature do
   scenario 'Release manager can view microservices' do
     rm = create(:release_manager)
     login_as(rm, :scope => :user)
-    visit '/list'
-    expect(page).to have_current_path('/list')
+    visit '/microservices'
+    expect(page).to have_current_path('/microservices')
   end
 
   scenario 'Release manager cannot access the admin panel' do
@@ -111,7 +111,7 @@ RSpec.feature 'Accounts', type: :feature do
     fill_in 'username', with: 'tester'
     fill_in 'password', with: 'password2'
     click_button 'Log In'
-    expect(page).to have_current_path('/list')
+    expect(page).to have_current_path('/microservices')
   end
 
   scenario 'An admin can delete a user' do
