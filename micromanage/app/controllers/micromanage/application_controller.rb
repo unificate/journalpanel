@@ -5,6 +5,9 @@ module Micromanage
     # we may want to figure out how to support this later
     skip_before_action :verify_authenticity_token
 
+    # GET /micromanage --- return all tables with schemas
+    # uses the 'tables' config value to only return approved tables
+    # see /lib/micromanage.rb
     def index
       schemas = ActiveRecord::Base.connection.tables
       out = {}
@@ -16,6 +19,7 @@ module Micromanage
       render json: out, status: :ok
     end
 
+    # GET /micromanage/:table --- return all records in :table
     def show
       if ActiveRecord::Base.connection.tables.include? params[:table]
         table = params[:table].classify.constantize
@@ -26,6 +30,16 @@ module Micromanage
       end
     end
 
+    # GET /micromanage/:table/:row --- return a single record from table
+    def getrow
+      if ActiveRecord::Base.connection.tables.include? params[:table]
+        table = params[:table].classify.constantize
+        row = table.find(params[:row])
+        render json: row, status: :ok
+      end
+    end
+
+    # PUT /micromanage/:table/:row --- update a record in :table
     def update
       if ActiveRecord::Base.connection.tables.include? params[:table]
         table = params[:table].classify.constantize
@@ -35,29 +49,13 @@ module Micromanage
       end
     end
 
+    # POST /:table --- create a new record in :table
     def create
       if ActiveRecord::Base.connection.tables.include? params[:table]
         table = params[:table].classify.constantize
         # create new entry using parsed JSON
         table.create(JSON.parse(request.body.read))
-
-        # we may want to check that the request has all the required
-        # attributes, unless we can just store null
-
-        # we may also want to try and detect duplicate requests
-        # somehow, not sure if that's needed
       end
     end
-    def getrow
-      if ActiveRecord::Base.connection.tables.include? params[:table]
-        table = params[:table].classify.constantize
-        row = table.find(params[:row])
-        # update row using parsed JSON
-        render json: row, status: :ok
-      end
-    
-    end
-
-
   end
 end

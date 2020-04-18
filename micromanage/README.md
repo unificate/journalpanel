@@ -5,21 +5,24 @@ web application, to allow for the easy management of databases in multiple
 Microservices.
 
 ## Usage
-Micromanage does not add any functionallity accessible in the Microservice
-itself. It exposes the following API endpoints:
+Micromanage does not add any functionality accessible to the host application.
+It simply exposes the following API endpoints:
 
 ```ruby
 # retrieve all tables the Microservice has exposed
-get  /
+get  /micromanage
 
 # retrieve all records from a table
-GET  /table
+GET  /micromanage/table
+
+# retrieve a single record from a table
+GET /micromanage/table/row
 
 # update a record in a table
-PUT  /table/row
+PUT  /micromanage/table/row
 
 # add a new record to a table
-POST  /table
+POST  /micromanage/table
 ```
 
 Micromanage does not provide an endpoint to delete a record from a table.
@@ -31,7 +34,7 @@ Add this line to your application's Gemfile:
 gem 'micromanage'
 ```
 
-Create the file config/initializers/micromange.rb in your application with
+Create the file `config/initializers/micromange.rb` in your application with
 the following:
 
 ```ruby
