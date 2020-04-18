@@ -36,6 +36,9 @@ module Micromanage
         table = params[:table].classify.constantize
         row = table.find(params[:row])
         render json: row, status: :ok
+      else
+        error = {Response: "Table does not exist"}
+        render json: error, status: :not_found
       end
     end
 
