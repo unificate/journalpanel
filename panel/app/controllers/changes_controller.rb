@@ -4,6 +4,7 @@ class ChangesController < ApplicationController
   def index
     if user_signed_in? and current_user.role == "Admin"
       @changes = Change.all
+      @executed = ExecutedAt.all.order('created_at DESC')
 
       # Get metadata for each change
       @metadata = []
@@ -15,6 +16,19 @@ class ChangesController < ApplicationController
       @microservice = []
       @metadata.each do |cmd|
         @microservice.push(cmd.microservice)
+      end
+
+      # Get same data but for executed table
+      # Get metadata for each executed
+      @metadataEx = []
+      @executed.each do |ex|
+        @metadataEx.push(ex.row_entry)
+      end
+
+      # Find microservice for each executed
+      @microserviceEx = []
+      @metadataEx.each do |cmd|
+        @microserviceEx.push(cmd.microservice)
       end
     else
       render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
