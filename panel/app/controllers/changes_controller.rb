@@ -92,6 +92,7 @@ class ChangesController < ApplicationController
         puts change_id
         micro_put_change(row.microservice_id, change_id)
         execute_change(change_id)
+        redirect_to url_for(:controller => "changes", :action => "index")
       end
     end
     if params[:type] == "Create Transaction"
