@@ -33,3 +33,11 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore IntelliJ project files
+.idea/*
+*.iml
+
+# Ignore generators and rake stuff
+.generators
+.rakeTasks

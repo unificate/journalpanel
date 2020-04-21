@@ -452,6 +452,16 @@
     };
     version = "2.1.1";
   };
+  mysql2 = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0d14pcy5m4hjig0zdxnl9in5f4izszc7v9zcczf2gyi5kiyxk8jw";
+      type = "gem";
+    };
+    version = "0.5.3";
+  };
   nio4r = {
     groups = ["default"];
     platforms = [];
@@ -803,16 +813,6 @@
       type = "gem";
     };
     version = "3.2.1";
-  };
-  sqlite3 = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "0lja01cp9xd5m6vmx99zwn4r7s97r1w5cb76gqd8xhbm1wxyzf78";
-      type = "gem";
-    };
-    version = "1.4.2";
   };
   thor = {
     groups = ["default" "development" "test"];
