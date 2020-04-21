@@ -12,36 +12,36 @@
 
 ActiveRecord::Schema.define(version: 2020_04_14_203448) do
 
-  create_table "changes", force: :cascade do |t|
-    t.integer "row_entry_id", null: false
+  create_table "changes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "row_entry_id", null: false
     t.string "old_value"
     t.string "new_value"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["row_entry_id"], name: "index_changes_on_row_entry_id"
     t.index ["user_id"], name: "index_changes_on_user_id"
   end
 
-  create_table "executed_ats", force: :cascade do |t|
-    t.integer "row_entry_id", null: false
+  create_table "executed_ats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "row_entry_id", null: false
     t.string "old_value"
     t.string "new_value"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["row_entry_id"], name: "index_executed_ats_on_row_entry_id"
     t.index ["user_id"], name: "index_executed_ats_on_user_id"
   end
 
-  create_table "microservices", force: :cascade do |t|
+  create_table "microservices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "address"
   end
 
-  create_table "row_entries", force: :cascade do |t|
+  create_table "row_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "Table_Name"
     t.integer "microservice_id"
     t.integer "record_id"
@@ -49,24 +49,24 @@ ActiveRecord::Schema.define(version: 2020_04_14_203448) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "transaction_entries", force: :cascade do |t|
-    t.integer "User_id"
-    t.integer "Change_id", null: false
+  create_table "transaction_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "change_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Change_id"], name: "index_transaction_entries_on_Change_id"
-    t.index ["User_id"], name: "index_transaction_entries_on_User_id"
+    t.index ["change_id"], name: "index_transaction_entries_on_change_id"
+    t.index ["user_id"], name: "index_transaction_entries_on_user_id"
   end
 
-  create_table "trasactions", force: :cascade do |t|
-    t.integer "User_id", null: false
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["User_id"], name: "index_trasactions_on_User_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -83,6 +83,6 @@ ActiveRecord::Schema.define(version: 2020_04_14_203448) do
   add_foreign_key "changes", "users"
   add_foreign_key "executed_ats", "row_entries"
   add_foreign_key "executed_ats", "users"
-  add_foreign_key "transaction_entries", "Changes"
-  add_foreign_key "trasactions", "Users"
+  add_foreign_key "transaction_entries", "changes"
+  add_foreign_key "transactions", "users"
 end
