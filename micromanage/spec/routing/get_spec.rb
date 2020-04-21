@@ -14,7 +14,7 @@ describe "GET" do
                     address: "456 River Dr."})
   end
 
-  describe "/micromanage", :type => :request do
+  describe "Request to /micromanage", :type => :request do
     before do
       # make the request
       get '/micromanage'
@@ -30,7 +30,7 @@ describe "GET" do
     end
   end
 
-  describe "/micromanage/:table", :type => :request do
+  describe "Good request to /micromanage/:table", :type => :request do
     before do
       get '/micromanage/contacts'
     end
@@ -45,7 +45,21 @@ describe "GET" do
     end
   end
 
-  describe "micromanage/:table/:row", :type => :request do
+  describe "Bad request to /micromange/:table", :type => :request do
+    before do
+      get '/micromanage/blah'
+    end
+
+    it 'returns an error message' do
+      expect(JSON.parse(response.body)).to eq({"Response" => "Table does not exist"})
+    end
+
+    it 'returns status :not_found' do
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
+  describe "Good request to micromanage/:table/:row", :type => :request do
     before do
       get '/micromanage/contacts/1'
     end
@@ -56,6 +70,20 @@ describe "GET" do
 
     it 'returns status :success' do
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "Bad request to /micromange/:table/:row", :type => :request do
+    before do
+      get '/micromanage/blah/blah'
+    end
+
+    it 'returns an error message' do
+      expect(JSON.parse(response.body)).to eq({"Response" => "Table does not exist"})
+    end
+
+    it 'returns status :not_found' do
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
