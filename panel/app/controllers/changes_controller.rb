@@ -94,6 +94,8 @@ class ChangesController < ApplicationController
         execute_change(change_id)
       end
     end
-    redirect_to "/changes"
+    if params[:type] == "Create Transaction"
+      redirect_to url_for(:controller => "transaction", :action => "create", :changes => params[:changes])
+    end
   end
 end
