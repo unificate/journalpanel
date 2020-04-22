@@ -28,7 +28,7 @@
                                 Created At
                             </th>
                             <th scope="col">
-                                User Id
+                                Username
                             </th>
                             <th scope="col">
                                 Select
@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
+                        <% @changes.zip(@metadata, @microservice, @users).each do |change, cmd, microservice, user| %>
                             <tr>
                                 <td><%= change.id %></td>
                                 <td><%= change.row_entry_id %></td>
@@ -69,7 +69,7 @@
                                     </div>
                                 </td>
                                 <td><%= change.created_at %></td>
-                                <td><%= change.user_id %></td>
+                                <td><%= user %></td>
                                 <td><%= check_box_tag('changes[]', change.id) %></td>
                             </tr>
                         <% end %>

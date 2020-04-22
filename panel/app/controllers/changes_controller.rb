@@ -5,10 +5,12 @@ class ChangesController < ApplicationController
     if user_signed_in? and current_user.role == "Admin"
       @changes = Change.all
 
-      # Get metadata for each change
+      # Get metadata and username for each change
       @metadata = []
+      @users = []
       @changes.each do |change|
         @metadata.push(change.row_entry)
+        @users.push(User.find(change.user_id).username)
       end
 
       # Find microservice for each change
