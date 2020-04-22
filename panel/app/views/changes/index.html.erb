@@ -10,13 +10,13 @@
                                 Change Id
                             </th>
                             <th scope="col">
-                                Row Entry Id
-                            </th>
-                            <th scope="col">
                                 Microservice
                             </th>
                             <th scope="col">
                                 Table
+                            </th>
+                            <th scope="col">
+                                Row
                             </th>
                             <th scope="col">
                                 Old Value
@@ -39,9 +39,9 @@
                         <% @changes.zip(@metadata, @microservice, @users).each do |change, cmd, microservice, user| %>
                             <tr>
                                 <td><%= change.id %></td>
-                                <td><%= change.row_entry_id %></td>
                                 <td><%= microservice.name %></td>
                                 <td><%= cmd.Table_Name %></td>
+                                <td><%= change.row_entry_id %></td>
                                 <td>
                                     <div>
                                         <% stringToJSON(change.old_value).each do |val| %>
