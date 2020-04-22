@@ -76,8 +76,9 @@ class ChangesController < ApplicationController
         puts row
         puts row.microservice_id
         puts change_id
-        micro_put_change(row.microservice_id, change_id)
-        execute_change(change_id)
+        unless micro_put_change(row.microservice_id, change_id) == nil
+          execute_change(change_id)
+        end
       end
     end
     redirect_to "/changes"
