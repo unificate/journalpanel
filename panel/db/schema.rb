@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_203448) do
+ActiveRecord::Schema.define(version: 2020_04_22_032646) do
 
   create_table "changes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "row_entry_id", null: false
-    t.string "old_value"
-    t.string "new_value"
+    t.text "old_value"
+    t.text "new_value"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 2020_04_14_203448) do
 
   create_table "executed_ats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "row_entry_id", null: false
-    t.string "old_value"
-    t.string "new_value"
+    t.text "old_value"
+    t.text "new_value"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

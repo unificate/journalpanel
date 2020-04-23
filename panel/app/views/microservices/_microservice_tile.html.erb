@@ -5,9 +5,9 @@
         <% name.split(/\s|'|,|_/).each {|n| microservice.push(n.capitalize())} %>
       <b><%= microservice.join(" ") %></b>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><%=changes%></li>
-    </ul>
 <% end %>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Changes pending: <%=changes%></li>
+    </ul>
 </div>
 

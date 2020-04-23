@@ -1,6 +1,16 @@
+<%= javascript_pack_tag 'changes.js', 'data-turbolinks-track': 'reload' %>
+
 <div class="container">
-  <h1 class="service-title">Changes</h1>
-    <div class="changesTable text-center">
+    <h1 class="service-title">Changes</h1>
+    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="queued" autocomplete="off" checked> Queued
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="committed" autocomplete="off"> Committed
+        </label>
+    </div>
+    <div class="changesTable text-center" id="changes">
         <% unless @changes.nil? %>
             <%= form_with :url => url_for(:controller => "changes", :action => "push"), :local => true do %>
                 <table class="table table-hover">
@@ -10,13 +20,13 @@
                                 Change Id
                             </th>
                             <th scope="col">
-                                Row Entry Id
-                            </th>
-                            <th scope="col">
                                 Microservice
                             </th>
                             <th scope="col">
                                 Table
+                            </th>
+                            <th scope="col">
+                                Row
                             </th>
                             <th scope="col">
                                 Old Value
@@ -28,7 +38,7 @@
                                 Created At
                             </th>
                             <th scope="col">
-                                User Id
+                                Username
                             </th>
                             <th scope="col">
                                 Select
@@ -36,12 +46,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
+                        <% @changes.zip(@metadata, @microservice, @users).each do |change, cmd, microservice, user| %>
                             <tr>
                                 <td><%= change.id %></td>
-                                <td><%= change.row_entry_id %></td>
                                 <td><%= microservice.name %></td>
                                 <td><%= cmd.Table_Name %></td>
+                                <td><%= change.row_entry_id %></td>
                                 <td>
                                     <div>
                                         <% stringToJSON(change.old_value).each do |val| %>
@@ -59,7 +69,7 @@
                                     <div>
                                         <% stringToJSON(change.new_value).each_with_index do |val, index| %>
                                             <% unless val[0].in? ["id", "created_at", "updated_at"] %>
-                                                <%= val[0] + ": " + "\n" %>
+                                                <%= val[0] + ":" + "\n" %>
                                                 <br>
                                                 <%= val[1] + "\n" %>
                                                 <br>
@@ -69,7 +79,7 @@
                                     </div>
                                 </td>
                                 <td><%= change.created_at %></td>
-                                <td><%= change.user_id %></td>
+                                <td><%= user %></td>
                                 <td><%= check_box_tag('changes[]', change.id) %></td>
                             </tr>
                         <% end %>
@@ -85,6 +95,79 @@
             <% end %>
         <% end %>
     </div>
+    <% unless @executed.nil? %>
+        <div class="changesTable text-center" id="executed" style="display: none;">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <!-- <th scope="col">
+                            Id
+                        </th>
+                        <th scope="col">
+                            Row Entry Id
+                        </th> -->
+                        <th scope="col">
+                            User
+                        </th>
+                        <th scope="col">
+                            Microservice
+                        </th>
+                        <th scope="col">
+                            Table
+                        </th>
+                        <th scope="col">
+                            Old Value
+                        </th>
+                        <th scope="col">
+                            New Value
+                        </th>
+                        <th scope="col">
+                            Created At
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                <% @executed.zip(@metadataEx, @microserviceEx).each do |x, cmd, microservice| %>
+                <tr>
+                    <!-- <td><%= x.id %></td>
+                    <td><%= x.row_entry_id %></td> -->
+                    <td><%= x.user_id %></td>
+                    <td><%= microservice.name %></td>
+                    <td><%= cmd.Table_Name %></td>
+                    <td>
+                        <div>
+                            <% stringToJSON(x.old_value).each do |val| %>
+                                <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                    <%= val[0] + ": " + "\n" %>
+                                    <br>
+                                    <%= val[1] + "\n" %>
+                                    <br>
+                                    <br>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <% stringToJSON(x.new_value).each_with_index do |val, index| %>
+                                <% unless val[0].in? ["id", "created_at", "updated_at"] %>
+                                    <%= val[0] + ": " + "\n" %>
+                                    <br>
+                                    <%= val[1] + "\n" %>
+                                    <br>
+                                    <br>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </td>
+                    <td><%= x.created_at %></td>
+                </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    <% end %>
 </div>
 
 
