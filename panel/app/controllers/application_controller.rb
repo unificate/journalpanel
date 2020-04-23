@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
             begin
                 response = (conn.put(adr,change.new_value)).body
             rescue Faraday::ConnectionFailed => e
-                response = "{}"
+                response = nil 
             end
             return (response)
         end

@@ -9,7 +9,7 @@ class TablesController < ApplicationController
     @table_names = nil
     @microservice = Microservice.find(params[:microservice_id])
     @schema = micro_get_tables(params[:microservice_id])
-    unless @schema == nil
+    unless @schema == {}
       @table_names = @schema.keys.select do |el|
         @schema[el] != nil
       end
