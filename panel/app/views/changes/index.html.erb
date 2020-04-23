@@ -10,13 +10,13 @@
                                 Change Id
                             </th>
                             <th scope="col">
-                                Row Entry Id
-                            </th>
-                            <th scope="col">
                                 Microservice
                             </th>
                             <th scope="col">
                                 Table
+                            </th>
+                            <th scope="col">
+                                Row
                             </th>
                             <th scope="col">
                                 Old Value
@@ -28,7 +28,7 @@
                                 Created At
                             </th>
                             <th scope="col">
-                                User Id
+                                Username
                             </th>
                             <th scope="col">
                                 Select
@@ -36,12 +36,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @changes.zip(@metadata, @microservice).each do |change, cmd, microservice| %>
+                        <% @changes.zip(@metadata, @microservice, @users).each do |change, cmd, microservice, user| %>
                             <tr>
                                 <td><%= change.id %></td>
-                                <td><%= change.row_entry_id %></td>
                                 <td><%= microservice.name %></td>
                                 <td><%= cmd.Table_Name %></td>
+                                <td><%= change.row_entry_id %></td>
                                 <td>
                                     <div>
                                         <% stringToJSON(change.old_value).each do |val| %>
@@ -59,7 +59,7 @@
                                     <div>
                                         <% stringToJSON(change.new_value).each_with_index do |val, index| %>
                                             <% unless val[0].in? ["id", "created_at", "updated_at"] %>
-                                                <%= val[0] + ": " + "\n" %>
+                                                <%= val[0] + ":" + "\n" %>
                                                 <br>
                                                 <%= val[1] + "\n" %>
                                                 <br>
@@ -69,7 +69,7 @@
                                     </div>
                                 </td>
                                 <td><%= change.created_at %></td>
-                                <td><%= change.user_id %></td>
+                                <td><%= user %></td>
                                 <td><%= check_box_tag('changes[]', change.id) %></td>
                             </tr>
                         <% end %>

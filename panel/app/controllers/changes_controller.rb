@@ -5,10 +5,12 @@ class ChangesController < ApplicationController
     if user_signed_in? and current_user.role == "Admin"
       @changes = Change.all
 
-      # Get metadata for each change
+      # Get metadata and username for each change
       @metadata = []
+      @users = []
       @changes.each do |change|
         @metadata.push(change.row_entry)
+        @users.push(User.find(change.user_id).username)
       end
 
       # Find microservice for each change
@@ -37,21 +39,21 @@ class ChangesController < ApplicationController
     @microservice = Microservice.find(params[:mid])
     @data = micro_get_row(params[:mid],params[:tid],params[:rid])
     new_val = {}
+    old_val = {}
     @data.each do |key,value|
       if( params[:"#{key}"] != @data[key])
         new_val[key] = params[:"#{key}"]
+        old_val[key] = @data[key]
         puts "Different Value "+ params[:"#{key}"]
       end
     end
     row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
     if(row != nil)
       # Been changed before, check for unexecuted changes.
-      changes = row.modifications;
+      changes = row.modifications
       if( changes == nil || !changes.any?)
         # Insert new change here, row already exists
-        new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
-        #micro_put_change(params[:mid],new_change.id)
-        #execute_change(new_change.id);
+        row.modifications.create!( user_id: current_user.id, old_value: old_val.to_json, new_value: new_val.to_json)
         redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
       else
         redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
@@ -59,9 +61,7 @@ class ChangesController < ApplicationController
     else
       # New change, new Row
       row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
-      new_change = row.modifications.create!( user_id: current_user.id, old_value: @data.to_json, new_value: new_val.to_json)
-      #micro_put_change(params[:mid],new_change.id)
-      #execute_change(new_change.id);
+      row.modifications.create!( user_id: current_user.id, old_value: old_val.to_json, new_value: new_val.to_json)
       redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
     end
   end
