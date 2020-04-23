@@ -45,7 +45,7 @@
                                 <td>
                                     <div>
                                         <% stringToJSON(change.old_value).each do |val| %>
-                                            <% unless val[0].in? ["id", "created_at", "updated_at"] or !val[0].in? stringToJSON(change.new_value)%>
+                                            <% unless val[0].in? ["id", "created_at", "updated_at"] %>
                                                 <%= val[0] + ": " + "\n" %>
                                                 <br>
                                                 <%= val[1] + "\n" %>
