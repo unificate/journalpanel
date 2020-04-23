@@ -11,11 +11,18 @@ class TransactionController < ApplicationController
     def create
         puts params[:changes]
 	rowList = params[:changes].split("/")
+
 	@transaction = Change.find(rowList)
-	puts "DEBUG"
-	puts @transaction[0].user_id.class
 	result = Transaction.create!(user_id: @transaction[0].user_id, description: "description goes here")
-	
+	@primaryKeyTransactionTable = @transaction[0].id 
+	puts "DEBUG1"
+	puts @primaryKeyTransactionTable
+	puts "DEBUG 2"
+	@transaction.each do |change_id|
+	    puts change_id.id
+	    result = TransactionEntry.create!(change_id: change_id.id, transaction_id: @primaryKeyTransactionTable)
+        end
+
         params[:changes].split("/").each do |change_id|
             row = Change.find(change_id).row_entry
             puts row
