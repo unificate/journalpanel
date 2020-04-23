@@ -4,31 +4,13 @@
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
-	  <th scope="col">Old Data</th>
-	  <th scope="edit">New Data</th>
+	  <th scope="col">Transaction Change List</th>
 	</tr>
       </thead>
       <tbody>
-        <% @changes.each do |item| %>
 	  <tr>
-	    <%display = ""%>
-	    <%newItem = ""%>
-	    <% parsedOld = JSON.parse(item.old_value) %>
-	    <% parsedNew = JSON.parse(item.new_value) %>
-	    <% parsedOld.each do |key| %>
-	      <%unless key[1] == nil or key[0] == "created_at" or key[0] == "updated_at"%>
-	        <%display = display + key[0] + ":" + key[1].to_s + "\t"%>
-	      <%end%>
-      	    <%end%>
-	    <td><%=display%></td>
-	    <% parsedNew.each do |key| %>
-	      <%unless key[1] == nil%>
-	        <% newItem = newItem + key[0] + ":" + key[1].to_s + "\t"%>
- 	      <%end%>
-	    <%end%>
-	    <td><%=newItem%></td>
+	    <td>Change Id List (user_id): <% @transaction.each do |show|%> <%=show.user_id%> <%end%> </td>
 	  </tr>
-      <% end %>
       </tbody>
     </table> 
   </div>

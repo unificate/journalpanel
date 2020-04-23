@@ -10,6 +10,12 @@ class TransactionController < ApplicationController
 
     def create
         puts params[:changes]
+	rowList = params[:changes].split("/")
+	@transaction = Change.find(rowList)
+	puts "DEBUG"
+	puts @transaction[0].user_id.class
+	result = Transaction.create!(user_id: @transaction[0].user_id, description: "description goes here")
+	
         params[:changes].split("/").each do |change_id|
             row = Change.find(change_id).row_entry
             puts row
