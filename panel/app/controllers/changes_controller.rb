@@ -55,7 +55,8 @@ class ChangesController < ApplicationController
     new_val = {}
     old_val = {}
     @data.each do |key,value|
-      if( params[:"#{key}"] != @data[key].to_s)
+      # check for values that have changed, ignoring attributes that can't be changed
+      if params[:"#{key}"] != @data[key].to_s and !key.in? ["id", "created_at", "updated_at"]
         new_val[key] = params[:"#{key}"]
         old_val[key] = @data[key]
         puts "Different Value "+ params[:"#{key}"]
