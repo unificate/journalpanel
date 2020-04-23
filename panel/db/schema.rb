@@ -50,12 +50,12 @@ ActiveRecord::Schema.define(version: 2020_04_22_032646) do
   end
 
   create_table "transaction_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
     t.bigint "change_id", null: false
+    t.bigint "transaction_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["change_id"], name: "index_transaction_entries_on_change_id"
-    t.index ["user_id"], name: "index_transaction_entries_on_user_id"
+    t.index ["transaction_id"], name: "index_transaction_entries_on_transaction_id"
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -84,5 +84,6 @@ ActiveRecord::Schema.define(version: 2020_04_22_032646) do
   add_foreign_key "executed_ats", "row_entries"
   add_foreign_key "executed_ats", "users"
   add_foreign_key "transaction_entries", "changes"
+  add_foreign_key "transaction_entries", "transactions"
   add_foreign_key "transactions", "users"
 end
