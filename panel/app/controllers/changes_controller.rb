@@ -23,8 +23,10 @@ class ChangesController < ApplicationController
       # Get same data but for executed table
       # Get metadata for each executed
       @metadataEx = []
+      @users = []
       @executed.each do |ex|
         @metadataEx.push(ex.row_entry)
+        @users.push(User.find(ex.user_id).username)
       end
 
       # Find microservice for each executed
