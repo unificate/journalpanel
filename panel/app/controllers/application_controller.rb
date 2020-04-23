@@ -115,5 +115,8 @@ class ApplicationController < ActionController::Base
             end
         end
     end
+    protected
+    def send_transaction(transaction_id){
 
+    }
 end
