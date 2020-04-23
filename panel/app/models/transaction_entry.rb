@@ -1,3 +1,4 @@
 class TransactionEntry < ApplicationRecord
-  belongs_to :change
+  has_one :change
+  belongs_to :transaction
 end
