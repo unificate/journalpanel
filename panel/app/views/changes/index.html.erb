@@ -102,18 +102,15 @@
                     <tr>
                         <!-- <th scope="col">
                             Id
-                        </th>
-                        <th scope="col">
-                            Row Entry Id
                         </th> -->
-                        <th scope="col">
-                            User
-                        </th>
                         <th scope="col">
                             Microservice
                         </th>
                         <th scope="col">
                             Table
+                        </th>
+                        <th scope="col">
+                          Row
                         </th>
                         <th scope="col">
                             Old Value
@@ -124,17 +121,18 @@
                         <th scope="col">
                             Created At
                         </th>
-
+                        <th scope="col">
+                          Username
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                 <% @executed.zip(@metadataEx, @microserviceEx, @users).each do |x, cmd, microservice, user| %>
                 <tr>
-                    <!-- <td><%= x.id %></td>
-                    <td><%= x.row_entry_id %></td> -->
-                    <td><%= user %></td>
+                    <!-- <td><%= x.id %></td> -->
                     <td><%= microservice.name %></td>
                     <td><%= cmd.Table_Name %></td>
+                    <td><%= x.row_entry_id %></td>
                     <td>
                         <div>
                             <% stringToJSON(x.old_value).each do |val| %>
@@ -162,6 +160,7 @@
                         </div>
                     </td>
                     <td><%= x.created_at %></td>
+                    <td><%= user %></td>
                 </tr>
                 <% end %>
                 </tbody>
