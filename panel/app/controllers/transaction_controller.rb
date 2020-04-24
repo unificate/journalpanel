@@ -17,16 +17,16 @@ class TransactionController < ApplicationController
 
 
        else render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+      end
     end
-end
 
     def create
         puts params[:changes]
 	rowList = params[:changes].split("/")
 
 	@transaction = Change.find(rowList)
-	result = Transaction.create!(user_id: @transaction[0].user_id, description: "description goes here")
-	@primaryKeyTransactionTable = @transaction[0].id 
+	result = Transaction.create!(user_id: current_user.id, description: "description goes here")
+	@primaryKeyTransactionTable = result.id #@transaction[0].id #needs to be transaction_id not Change's id 
 	puts "DEBUG1"
 	puts @primaryKeyTransactionTable
 	puts "DEBUG 2"
@@ -35,13 +35,6 @@ end
 	    result = TransactionEntry.create!(change_id: change_id.id, transaction_id: @primaryKeyTransactionTable)
         end
 
-        params[:changes].split("/").each do |change_id|
-            row = Change.find(change_id).row_entry
-            puts row
-            puts row.microservice_id
-            puts change_id
-            puts ""
-        end
         @changes = Change.all
         render "index"
     end
