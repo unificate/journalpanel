@@ -57,11 +57,17 @@ class ChangesController < ApplicationController
     new_val = {}
     old_val = {}
     @data.each do |key,value|
-      if( params[:"#{key}"] != @data[key])
+      # check for values that have changed, ignoring attributes that can't be changed
+      if params[:"#{key}"] != @data[key].to_s and !key.in? ["id", "created_at", "updated_at"]
         new_val[key] = params[:"#{key}"]
         old_val[key] = @data[key]
         puts "Different Value "+ params[:"#{key}"]
       end
+    end
+    # Ignore submission if no change was made
+    unless new_val.any?
+      redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
+      return
     end
     row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
     if(row != nil)
