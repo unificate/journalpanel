@@ -116,7 +116,15 @@ class ApplicationController < ActionController::Base
         end
     end
     protected
-    def send_transaction(transaction_id){
-        
-    }
+    def send_transaction(transaction_id)
+        transaction = Transaction.find(transaction_id);
+        unless transaction == nil
+            changes = transaction.modifications
+            changes.each do |change|
+                unless micro_put_change(change.row_entry.microservice_id,change.id) == nil
+                    execute_change(change.id);
+                end
+            end
+        end
+    end
 end
