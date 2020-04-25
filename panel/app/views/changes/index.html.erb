@@ -48,6 +48,11 @@
                                     Select
                                 </th>
                             <% end %>
+                            <% if checkRole >= 3 %>
+                                <th scope="col">
+                                    Delete
+                                </th>
+                            <% end %>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,6 +92,12 @@
                                 <td><%= user %></td>
                                 <% if checkRole() >= 2 %>
                                     <td><%= check_box_tag('changes[]', change.id) %></td>
+                                <% end %>
+                                <% if checkRole >= 3 %>
+                                    <td><%= link_to "Delete", change_path(change.id),
+                                                    class: "btn btn-danger",
+                                                    method: :delete %>
+                                    </td>
                                 <% end %>
                             </tr>
                         <% end %>

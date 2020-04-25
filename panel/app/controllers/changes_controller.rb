@@ -96,6 +96,15 @@ class ChangesController < ApplicationController
     end
   end
 
+  # DELETE /changes/:id --- Destroy a stored change
+  def destroy
+    if checkRole >= 3
+      @change = Change.find(params[:id])
+      @change.destroy
+    end
+    redirect_to url_for(controller: :changes, action: :index)
+  end
+
   # POST /changes/push --- Execute a change request by posting the change to the MicroManage API
   def push
     if checkRole() >= 1
