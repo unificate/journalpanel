@@ -3,10 +3,6 @@ const changesTable = document.getElementById("changes");
 const committedButton = document.getElementById("committed");
 const executedTable = document.getElementById("executed");
 
-console.log("2")
-console.log(queuedButton)
-console.log(committedButton)
-
 queuedButton.onclick = () => {
     console.log("Clicked")
     executedTable.style.display = "none";

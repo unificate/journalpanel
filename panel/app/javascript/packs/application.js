@@ -10,6 +10,5 @@ require("channels")
 
 document.addEventListener('turbolinks:load', () => {
     $("#dropdownMenuButton").dropdown();
-    console.log("1")
 });
 
