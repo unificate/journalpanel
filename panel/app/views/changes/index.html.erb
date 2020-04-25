@@ -13,6 +13,7 @@
     <div class="changesTable text-center" id="changes">
         <% unless @changes.nil? %>
             <%= form_with :url => url_for(:controller => "changes", :action => "push"), :local => true do %>
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <table class="table table-hover">
                     <thead class="thead-light">
                         <tr>
@@ -85,13 +86,9 @@
                         <% end %>
                     </tbody>
                 </table>
-                <%= radio_button_tag("type", "Push Now", class: "form-check-input") %>
-                <%= label_tag("Push Now", nil, class: "form-check-label") %>
-                <br>
-                <%= radio_button_tag("type", "Create Transaction", class: "form-check-input") %>
-                <%= label_tag("Create Transaction", nil, class: "form-check-label") %>
-                <br>
-                <%= submit_tag("Submit", class: "btn btn-primary mt-2 mb-5") %>
+                <%= submit_tag("Execute Now", class: "btn btn-primary mt-2 mb-5") %>
+                <%= submit_tag("Create Transaction", class: "btn btn-primary mt-2 mb-5",
+                               formaction: "transaction#create") %>
             <% end %>
         <% end %>
     </div>

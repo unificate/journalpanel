@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   get '/', to: 'login#index'
 
-  get '/transaction', to: 'transaction#index'
-  get '/transaction/:changes', to: 'transaction#create'
+  resources :transaction, only: [:index, :create]
 
   # this will create:
   # GET /microservice --- display all microservices

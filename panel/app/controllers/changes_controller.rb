@@ -88,24 +88,15 @@ class ChangesController < ApplicationController
     end
   end
 
+  # POST /changes/push --- Execute a change request by posting the change to the MicroManage API
   def push
-    puts "Inside create function"
-    puts params[:type]
-    if params[:type] == "Push Now"
-      puts "Inside push now"
-      params[:changes].each do |change_id|
-        row = Change.find(change_id).row_entry
-        puts row
-        puts row.microservice_id
-        puts change_id
-        unless micro_put_change(row.microservice_id, change_id) == nil
-          execute_change(change_id)
-          redirect_to url_for(:controller => "changes", :action => "index")
-        end
+    params[:changes].each do |change_id|
+      row = Change.find(change_id).row_entry
+      unless micro_put_change(row.microservice_id, change_id) == nil
+        # move the change request to the executed table
+        execute_change(change_id)
+        redirect_to url_for(:controller => "changes", :action => "index")
       end
-    end
-    if params[:type] == "Create Transaction"
-      redirect_to url_for(:controller => "transaction", :action => "create", :changes => params[:changes])
     end
   end
 end
