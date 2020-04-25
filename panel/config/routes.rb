@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get '/', to: 'login#index'
 
-  get '/transaction', to: 'transaction#index'
-  get '/transaction/:changes', to: 'transaction#create'
+  # this will create:
+  # GET /transaction --- display all saved transactions
+  # POST /transaction --- create a new transaction; this is called from the changes#index form
+  resources :transaction, only: [:index, :create]
 
   # this will create:
   # GET /microservice --- display all microservices
