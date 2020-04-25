@@ -18,8 +18,12 @@ class TablesController < ApplicationController
 
   # GET /microservice/:microservice_id/tables/:id --- display all rows in a table
   def show
-    @service = params[:microservice_id]
-    @tname = params[:id]
-    @records = micro_get_rows(@service, @tname)
+    if checkRole() >= 1
+      @service = params[:microservice_id]
+      @tname = params[:id]
+      @records = micro_get_rows(@service, @tname)
+    else
+      render403()
+    end
   end
 end
