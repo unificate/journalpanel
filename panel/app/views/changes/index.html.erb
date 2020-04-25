@@ -6,9 +6,11 @@
         <label class="btn btn-secondary active">
             <input type="radio" name="options" id="queued" autocomplete="off" checked> Queued
         </label>
+        <% if checkRole() >= 2 %>
         <label class="btn btn-secondary">
             <input type="radio" name="options" id="committed" autocomplete="off"> Committed
         </label>
+        <% end %>
     </div>
     <div class="changesTable text-center" id="changes">
         <% unless @changes.nil? %>
@@ -41,9 +43,11 @@
                             <th scope="col">
                                 Username
                             </th>
-                            <th scope="col">
-                                Select
-                            </th>
+                            <% if checkRole() >= 2 %>
+                                <th scope="col">
+                                    Select
+                                </th>
+                            <% end %>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,14 +85,20 @@
                                 </td>
                                 <td><%= change.created_at %></td>
                                 <td><%= user %></td>
-                                <td><%= check_box_tag('changes[]', change.id) %></td>
+                                <% if checkRole() >= 2 %>
+                                    <td><%= check_box_tag('changes[]', change.id) %></td>
+                                <% end %>
                             </tr>
                         <% end %>
                     </tbody>
                 </table>
-                <%= submit_tag("Execute Now", class: "btn btn-primary mt-2 mb-5") %>
-                <%= submit_tag("Create Transaction", class: "btn btn-primary mt-2 mb-5",
-                               formaction: "transaction#create") %>
+                <% if checkRole() >= 3 %>
+                    <%= submit_tag("Execute Now", class: "btn btn-primary mt-2 mb-5") %>
+                <% end %>
+                <% if checkRole() >= 2 %>
+                    <%= submit_tag("Create Transaction", class: "btn btn-primary mt-2 mb-5",
+                                   formaction: "transaction#create") %>
+                <% end %>
             <% end %>
         <% end %>
     </div>

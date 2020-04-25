@@ -2,7 +2,7 @@ class ChangesController < ApplicationController
 
   # GET /changes --- display all changes
   def index
-    if user_signed_in? and current_user.role == "Admin"
+    if checkRole() >= 1
       @changes = Change.all
       @executed = ExecutedAt.all.order('created_at DESC')
 
@@ -35,68 +35,80 @@ class ChangesController < ApplicationController
         @microserviceEx.push(cmd.microservice)
       end
     else
-      render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+      render403()
     end
   end
 
   # GET /changes/new --- display a form for creating a new change
   def new
-    #params, id (microservice id), table (table name), rowid (row id)
-    @microservice = Microservice.find(params[:id])
-    @mid = params[:id]
-    @tid = params[:table]
-    @rid = params[:rowid]
-    @data = micro_get_row(@mid,@tid,@rid)
-    @table_data = micro_get_table(@mid,@tid)
+    if checkRole() >= 1
+      #params, id (microservice id), table (table name), rowid (row id)
+      @microservice = Microservice.find(params[:id])
+      @mid = params[:id]
+      @tid = params[:table]
+      @rid = params[:rowid]
+      @data = micro_get_row(@mid,@tid,@rid)
+      @table_data = micro_get_table(@mid,@tid)
+    else
+      render403()
+    end
   end
 
   # POST /changes --- create and store a new change
   def create
-    @microservice = Microservice.find(params[:mid])
-    @data = micro_get_row(params[:mid],params[:tid],params[:rid])
-    new_val = {}
-    old_val = {}
-    @data.each do |key,value|
-      # check for values that have changed, ignoring attributes that can't be changed
-      if params[:"#{key}"] != @data[key].to_s and !key.in? ["id", "created_at", "updated_at"]
-        new_val[key] = params[:"#{key}"]
-        old_val[key] = @data[key]
-        puts "Different Value "+ params[:"#{key}"]
+    if checkRole() >= 1
+      @microservice = Microservice.find(params[:mid])
+      @data = micro_get_row(params[:mid],params[:tid],params[:rid])
+      new_val = {}
+      old_val = {}
+      @data.each do |key,value|
+        # check for values that have changed, ignoring attributes that can't be changed
+        if params[:"#{key}"] != @data[key].to_s and !key.in? ["id", "created_at", "updated_at"]
+          new_val[key] = params[:"#{key}"]
+          old_val[key] = @data[key]
+          puts "Different Value "+ params[:"#{key}"]
+        end
       end
-    end
-    # Ignore submission if no change was made
-    unless new_val.any?
-      redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
-      return
-    end
-    row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
-    if(row != nil)
-      # Been changed before, check for unexecuted changes.
-      changes = row.modifications
-      if( changes == nil || !changes.any?)
-        # Insert new change here, row already exists
-        row.modifications.create!( user_id: current_user.id, old_value: old_val.to_json, new_value: new_val.to_json)
+      # Ignore submission if no change was made
+      unless new_val.any?
         redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
+        return
+      end
+      row = RowEntry.find_by(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
+      if(row != nil)
+        # Been changed before, check for unexecuted changes.
+        changes = row.modifications
+        if( changes == nil || !changes.any?)
+          # Insert new change here, row already exists
+          row.modifications.create!( user_id: current_user.id, old_value: old_val.to_json, new_value: new_val.to_json)
+          redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
+        else
+          redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
+        end
       else
+        # New change, new Row
+        row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
+        row.modifications.create!( user_id: current_user.id, old_value: old_val.to_json, new_value: new_val.to_json)
         redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
       end
     else
-      # New change, new Row
-      row = RowEntry.create!(Table_Name: params[:tid], microservice_id: params[:mid], record_id: params[:rid])
-      row.modifications.create!( user_id: current_user.id, old_value: old_val.to_json, new_value: new_val.to_json)
-      redirect_to url_for(:controller => "tables", :action => "show", :microservice_id => params[:mid], :id => params[:tid])
+      render403()
     end
   end
 
   # POST /changes/push --- Execute a change request by posting the change to the MicroManage API
   def push
-    params[:changes].each do |change_id|
-      row = Change.find(change_id).row_entry
-      unless micro_put_change(row.microservice_id, change_id) == nil
-        # move the change request to the executed table
-        execute_change(change_id)
-        redirect_to url_for(:controller => "changes", :action => "index")
+    if checkRole() >= 1
+      params[:changes].each do |change_id|
+        row = Change.find(change_id).row_entry
+        unless micro_put_change(row.microservice_id, change_id) == nil
+          # move the change request to the executed table
+          execute_change(change_id)
+          redirect_to url_for(:controller => "changes", :action => "index")
+        end
       end
+    else
+      render403()
     end
   end
 end
