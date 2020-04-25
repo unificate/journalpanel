@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get '/', to: 'login#index'
 
+  # this will create:
+  # GET /transaction --- display all saved transactions
+  # POST /transaction --- create a new transaction; this is called from the changes#index form
   resources :transaction, only: [:index, :create]
 
   # this will create:
