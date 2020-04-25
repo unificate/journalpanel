@@ -1,17 +1,20 @@
-document.addEventListener('turbolinks:load', () => {
-    const queuedButton = document.getElementById("queued");
-    const changesTable = document.getElementById("changes");
-    const committedButton = document.getElementById("committed");
-    const executedTable = document.getElementById("executed");
+const queuedButton = document.getElementById("queued");
+const changesTable = document.getElementById("changes");
+const committedButton = document.getElementById("committed");
+const executedTable = document.getElementById("executed");
 
-    // New user is submitted
-    queuedButton.onclick = () => {
-        executedTable.style.display = "none";
-        changesTable.style.display = "block";
-    }
+console.log("2")
+console.log(queuedButton)
+console.log(committedButton)
 
-    committedButton.onclick = () => {
-        executedTable.style.display = "block";
-        changesTable.style.display = "none";
-    }
-});
+queuedButton.onclick = () => {
+    console.log("Clicked")
+    executedTable.style.display = "none";
+    changesTable.style.display = "block";
+}
+
+committedButton.onclick = () => {
+    console.log("Clicked")
+    executedTable.style.display = "block";
+    changesTable.style.display = "none";
+}
