@@ -34,7 +34,7 @@ class TransactionController < ApplicationController
 	    puts change_id.id
 	    result2 = result1.transaction_entries.create!(change_id: change_id.id)
 		end
-		send_transaction(result1.id)
+		#send_transaction(result1.id)
 
         @changes = Change.all
         render "index"
