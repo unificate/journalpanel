@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   def index
     #make sure the user is an administrator
-    if user_signed_in? and current_user.role == "Admin"
+    if checkRole() == 4
       @users = User.order('username') #load the admin panel
     else
 	    render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
 
   def update
     #make sure the user is an administrator
-    if user_signed_in? and current_user.role == "Admin"
+    if checkRole() == 4
       unless params[:user][:username] == current_user.username
         user = User.find_by(username: params[:user][:username])
         user.update(role: params[:user][:role])
@@ -27,14 +27,14 @@ class AccountsController < ApplicationController
   end
 
   def edit
-    if user_signed_in? and current_user.role == "Admin"
+    if checkRole() == 4
       user = User.find_by(username: params[:user][:username])
       user.reset_password(params[:user][:password], params[:user][:password])
     end
   end
 
   def destroy
-    if user_signed_in? and current_user.role == "Admin"
+    if checkRole() == 4
       unless params[:user][:username] == current_user.username
         user = User.find_by(username: params[:user][:username])
         user.destroy()

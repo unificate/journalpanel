@@ -2,7 +2,8 @@ class ChangesController < ApplicationController
 
   # GET /changes --- display all changes
   def index
-    if user_signed_in? and current_user.role == "Admin"
+    #if user_signed_in? and current_user.role == "Admin"
+    if checkRole() >= 1
       @changes = Change.all
       @executed = ExecutedAt.all.order('created_at DESC')
 

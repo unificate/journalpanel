@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
 	  devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :password, :role])
   end
+
   protected
   def micro_get_row(microservice_id, table_id, row_id)
         microservice = Microservice.find(microservice_id)
@@ -98,7 +99,7 @@ class ApplicationController < ActionController::Base
             begin
                 response = (conn.put(adr,change.new_value)).body
             rescue Faraday::ConnectionFailed => e
-                response = nil 
+                response = nil
             end
             return (response)
         end
@@ -114,6 +115,25 @@ class ApplicationController < ActionController::Base
                 change.destroy
             end
         end
+    end
+
+    protected
+    def checkRole
+        if current_user
+            case current_user.role
+                when "Admin"
+                    return 4
+                when "Release Manager"
+                    return 3
+                when "Product Owner"
+                    return 2
+                when "Developer"
+                    return 1
+                else
+                    return 0
+            end
+        end
+        return 0
     end
 
 end
