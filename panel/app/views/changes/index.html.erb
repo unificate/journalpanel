@@ -98,9 +98,12 @@
                                     </td>
                                 <% end %>
                                 <% if checkRole >= 3 %>
-                                    <td><%= link_to "Delete", change_path(change.id),
-                                                    class: "btn btn-danger",
-                                                    method: :delete %>
+                                    <td>
+                                        <% unless change.id.in? @changes_in_use %>
+                                            <%= link_to "Delete", change_path(change.id),
+                                                        class: "btn btn-danger",
+                                                        method: :delete %>
+                                        <% end %>
                                     </td>
                                 <% end %>
                             </tr>
@@ -149,7 +152,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <% @executed.zip(@metadataEx, @microserviceEx, @users).each do |x, cmd, microservice, user| %>
+                <% @executed.zip(@metadataEx, @microserviceEx, @usersEx).each do |x, cmd, microservice, user| %>
                 <tr>
                     <!-- <td><%= x.id %></td> -->
                     <td><%= microservice.name %></td>
