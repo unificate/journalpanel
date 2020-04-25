@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_get_rows(microservice_id, table_name)
         microservice = Microservice.find(microservice_id)
@@ -46,6 +47,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_get_table(microservice_id, table_name)
         microservice = Microservice.find(microservice_id)
@@ -64,6 +66,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_get_tables(microservice_id)
         microservice = Microservice.find(microservice_id)
@@ -82,6 +85,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_put_change(microservice_id, change_id)
         microservice = Microservice.find(microservice_id)
@@ -105,6 +109,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def execute_change(change_id)
         change = Change.find(change_id)
@@ -136,4 +141,8 @@ class ApplicationController < ActionController::Base
         return 0
     end
 
+    protected
+    def render403
+        render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+    end
 end
