@@ -1,24 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="background-color: #01A0D7 !important;">
-  <a class="navbar-brand" href="#">HP MicroManage</a>
+  <a class="navbar-brand">HP MicroManage</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/microservices">Dashboard<span class="sr-only"></span></a>
-      </li>
-      <% if current_user && current_user.role == "Admin" %>
+      <% if checkRole() >= 1 %>
+        <li class="nav-item active">
+          <a class="nav-link" href="/microservices">Dashboard<span class="sr-only"></span></a>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" href="/changes">Changes<span class="sr-only"></span></a>
         </li>
-      <% end %>
-      <% if current_user && current_user.role == "Admin" || (current_user && current_user.role == "Release Manager") || (current_user && current_user.role == "Product Owner") %>
 	      <li class="nav-item active">
           <a class="nav-link" href="/transaction">Transactions<span class="sr-only"></span></a>
 	      </li>
       <% end %>
-      <% if current_user && current_user.role == "Admin" %>
+      <% if checkRole() == 4 %>
       <li class="nav-item active">
         <a class="nav-link" href="/users">Users<span class="sr-only"></span></a>
       </li>

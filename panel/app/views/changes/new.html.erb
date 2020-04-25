@@ -1,4 +1,5 @@
 <div class="container">
+    <h1 class="service-title">New Change Request</h1>
     <%= form_with :url => url_for(:controller => "changes", :action => "create"), :local => true do |form| %>
     <%@data.each do |key, value| %>
         <% unless key.in? ["id", "created_at", "updated_at"] %>
@@ -8,12 +9,7 @@
     <%= form.hidden_field :mid, value:@mid, class:"form-control" %>
     <%= form.hidden_field :tid, value:@tid, class:"form-control" %>
     <%= form.hidden_field :rid, value:@rid, class:"form-control" %>
-    <div class="form-check">
-        <%= check_box_tag :execute,"1",false,class:"form-check-input"%>
-        <%= label_tag "Execute Now",nil, class:"form-check-label" %>
-    </div>
-    <%= form.submit "Submit",type: "submit",class:"btn btn-primary"%>
-<%end%>
+    <%= form.submit "Submit", type: "submit", class:"btn btn-primary"%>
+    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+    <%end%>
 </div>
-
-

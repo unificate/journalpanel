@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
 	  devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :password, :role])
   end
+
   protected
   def micro_get_row(microservice_id, table_id, row_id)
         microservice = Microservice.find(microservice_id)
@@ -26,6 +27,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_get_rows(microservice_id, table_name)
         microservice = Microservice.find(microservice_id)
@@ -45,6 +47,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_get_table(microservice_id, table_name)
         microservice = Microservice.find(microservice_id)
@@ -63,6 +66,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_get_tables(microservice_id)
         microservice = Microservice.find(microservice_id)
@@ -81,6 +85,7 @@ class ApplicationController < ActionController::Base
         end
         return nil
     end
+
     protected
     def micro_put_change(microservice_id, change_id)
         microservice = Microservice.find(microservice_id)
@@ -98,12 +103,13 @@ class ApplicationController < ActionController::Base
             begin
                 response = (conn.put(adr,change.new_value)).body
             rescue Faraday::ConnectionFailed => e
-                response = nil 
+                response = nil
             end
             return (response)
         end
         return nil
     end
+
     protected
     def execute_change(change_id)
         change = Change.find(change_id)
@@ -135,4 +141,31 @@ class ApplicationController < ActionController::Base
             end
         end
     end
+<<<<<<< HEAD
+=======
+
+    protected
+    def checkRole
+        if current_user
+            case current_user.role
+                when "Admin"
+                    return 4
+                when "Release Manager"
+                    return 3
+                when "Product Owner"
+                    return 2
+                when "Developer"
+                    return 1
+                else
+                    return 0
+            end
+        end
+        return 0
+    end
+
+    protected
+    def render403
+        render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+    end
+>>>>>>> master
 end

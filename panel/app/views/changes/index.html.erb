@@ -1,4 +1,4 @@
-<%= javascript_pack_tag 'changes.js', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'changes.js', 'data-turbolinks-track': 'reload', defer: true %>
 
 <div class="container">
     <h1 class="service-title">Changes</h1>
@@ -6,13 +6,16 @@
         <label class="btn btn-secondary active">
             <input type="radio" name="options" id="queued" autocomplete="off" checked> Queued
         </label>
+        <% if checkRole() >= 2 %>
         <label class="btn btn-secondary">
             <input type="radio" name="options" id="committed" autocomplete="off"> Committed
         </label>
+        <% end %>
     </div>
     <div class="changesTable text-center" id="changes">
         <% unless @changes.nil? %>
             <%= form_with :url => url_for(:controller => "changes", :action => "push"), :local => true do %>
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <table class="table table-hover">
                     <thead class="thead-light">
                         <tr>
@@ -40,18 +43,25 @@
                             <th scope="col">
                                 Username
                             </th>
-                            <th scope="col">
-                                Select
-                            </th>
+                            <% if checkRole() >= 2 %>
+                                <th scope="col">
+                                    Select
+                                </th>
+                            <% end %>
+                            <% if checkRole >= 3 %>
+                                <th scope="col">
+                                    Delete
+                                </th>
+                            <% end %>
                         </tr>
                     </thead>
                     <tbody>
                         <% @changes.zip(@metadata, @microservice, @users).each do |change, cmd, microservice, user| %>
-                            <tr>
+                            <tr class="<%= 'table-secondary' if change.id.in? @changes_in_use %>">
                                 <td><%= change.id %></td>
                                 <td><%= microservice.name %></td>
                                 <td><%= cmd.Table_Name %></td>
-                                <td><%= change.row_entry_id %></td>
+                                <td><%= cmd.record_id %></td>
                                 <td>
                                     <div>
                                         <% stringToJSON(change.old_value).each do |val| %>
@@ -80,18 +90,33 @@
                                 </td>
                                 <td><%= change.created_at %></td>
                                 <td><%= user %></td>
-                                <td><%= check_box_tag('changes[]', change.id) %></td>
+                                <% if checkRole() >= 2 %>
+                                    <td>
+                                        <% unless change.id.in? @changes_in_use %>
+                                            <%= check_box_tag('changes[]', change.id) %>
+                                        <% end %>
+                                    </td>
+                                <% end %>
+                                <% if checkRole >= 3 %>
+                                    <td>
+                                        <% unless change.id.in? @changes_in_use %>
+                                            <%= link_to "Delete", change_path(change.id),
+                                                        class: "btn btn-danger",
+                                                        method: :delete %>
+                                        <% end %>
+                                    </td>
+                                <% end %>
                             </tr>
                         <% end %>
                     </tbody>
                 </table>
-                <%= radio_button_tag("type", "Push Now", class: "form-check-input") %>
-                <%= label_tag("Push Now", nil, class: "form-check-label") %>
-                <br>
-                <%= radio_button_tag("type", "Create Transaction", class: "form-check-input") %>
-                <%= label_tag("Create Transaction", nil, class: "form-check-label") %>
-                <br>
-                <%= submit_tag("Submit", class: "btn btn-primary mt-2 mb-5") %>
+                <% if checkRole() >= 3 %>
+                    <%= submit_tag("Execute Now", class: "btn btn-primary mt-2 mb-5") %>
+                <% end %>
+                <% if checkRole() >= 2 %>
+                    <%= submit_tag("Create Transaction", class: "btn btn-primary mt-2 mb-5",
+                                   formaction: "transaction#create") %>
+                <% end %>
             <% end %>
         <% end %>
     </div>
@@ -127,12 +152,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                <% @executed.zip(@metadataEx, @microserviceEx, @users).each do |x, cmd, microservice, user| %>
+                <% @executed.zip(@metadataEx, @microserviceEx, @usersEx).each do |x, cmd, microservice, user| %>
                 <tr>
                     <!-- <td><%= x.id %></td> -->
                     <td><%= microservice.name %></td>
                     <td><%= cmd.Table_Name %></td>
-                    <td><%= x.row_entry_id %></td>
+                    <td><%= cmd.record_id %></td>
                     <td>
                         <div>
                             <% stringToJSON(x.old_value).each do |val| %>
