@@ -141,8 +141,6 @@ class ApplicationController < ActionController::Base
             end
         end
     end
-<<<<<<< HEAD
-=======
 
     protected
     def checkRole
@@ -167,5 +165,4 @@ class ApplicationController < ActionController::Base
     def render403
         render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
     end
->>>>>>> master
 end
