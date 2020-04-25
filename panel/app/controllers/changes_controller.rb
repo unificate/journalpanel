@@ -34,6 +34,13 @@ class ChangesController < ApplicationController
       @metadataEx.each do |cmd|
         @microserviceEx.push(cmd.microservice)
       end
+
+      # Keep track of changes already in a transaction
+      transactions = TransactionEntry.all
+      @changes_in_use = []
+      transactions.each do |t|
+        @changes_in_use.push(t.change_id)
+      end
     else
       render403()
     end

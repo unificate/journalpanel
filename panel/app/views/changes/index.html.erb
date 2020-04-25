@@ -57,7 +57,7 @@
                     </thead>
                     <tbody>
                         <% @changes.zip(@metadata, @microservice, @users).each do |change, cmd, microservice, user| %>
-                            <tr>
+                            <tr class="<%= 'table-secondary' if change.id.in? @changes_in_use %>">
                                 <td><%= change.id %></td>
                                 <td><%= microservice.name %></td>
                                 <td><%= cmd.Table_Name %></td>
@@ -91,7 +91,11 @@
                                 <td><%= change.created_at %></td>
                                 <td><%= user %></td>
                                 <% if checkRole() >= 2 %>
-                                    <td><%= check_box_tag('changes[]', change.id) %></td>
+                                    <td>
+                                        <% unless change.id.in? @changes_in_use %>
+                                            <%= check_box_tag('changes[]', change.id) %>
+                                        <% end %>
+                                    </td>
                                 <% end %>
                                 <% if checkRole >= 3 %>
                                     <td><%= link_to "Delete", change_path(change.id),
