@@ -26,7 +26,7 @@ class TransactionController < ApplicationController
 
 	@transaction = Change.find(rowList)
 	result = Transaction.create!(user_id: current_user.id, description: "description goes here")
-	@primaryKeyTransactionTable = result.id #@transaction[0].id #needs to be transaction_id not Change's id 
+	@primaryKeyTransactionTable = result.id #@transaction[0].id #needs to be transaction_id not Change's id
 	puts "DEBUG1"
 	puts @primaryKeyTransactionTable
 	puts "DEBUG 2"
@@ -34,8 +34,6 @@ class TransactionController < ApplicationController
 	    puts change_id.id
 	    result = TransactionEntry.create!(change_id: change_id.id, transaction_id: @primaryKeyTransactionTable)
         end
-
-        @changes = Change.all
-        render "index"
+          redirect_to url_for(controller: "transaction", action: :index)
     end
 end
