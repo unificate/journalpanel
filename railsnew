@@ -12,8 +12,8 @@ mkdir $NAME
 cd $NAME
 echo -e "source 'https://rubygems.org'\ngem 'rails'\n" > Gemfile
 bundix -l
-cp ../hello_rails/.envrc .
-cp ../hello_rails/shell.nix .
+cp ../panel/.envrc .
+cp ../panel/shell.nix .
 nix-shell --run "rails plugin new . --force --skip-bundle $ARGS"
 bundix -l
 rm -rf .git
