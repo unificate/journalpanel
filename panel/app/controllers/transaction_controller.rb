@@ -25,15 +25,22 @@ class TransactionController < ApplicationController
         	rowList = params[:changes].split("/")
         	@transaction = Change.find(rowList)
         	result = Transaction.create!(user_id: current_user.id, description: "description goes here")
-        	@primaryKeyTransactionTable = result.id #@transaction[0].id #needs to be transaction_id not Change's id
-        	puts "DEBUG1"
+        	@primaryKeyTransactionTable = result.id
         	puts @primaryKeyTransactionTable
-        	puts "DEBUG 2"
         	@transaction.each do |change_id|
         	    puts change_id.id
         	    result = TransactionEntry.create!(change_id: change_id.id, transaction_id: @primaryKeyTransactionTable)
             end
             redirect_to url_for(controller: "transaction", action: :index)
         end
+    end
+
+    def show
+	    @bundledChanges = Array.new()
+	    query = TransactionEntry.where(transaction_id: params[:id])
+	    @tid = query[0].transaction_id
+	    query.each do |t|
+		    @bundledChanges.push(Change.find(t.change_id))
+	    end
     end
 end

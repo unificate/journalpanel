@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # GET /transaction --- display all saved transactions
   # POST /transaction --- create a new transaction; this is called from the changes#index form
   resources :transaction, only: [:index, :create]
+  get '/transaction/show', to: 'transaction#show'
 
   # this will create:
   # GET /microservice --- display all microservices

@@ -5,7 +5,8 @@
       <thead class="thead-light">
         <tr>
 	  <th scope="col">Transaction Number</th>
-	  <th scope="foo">Change Ids</th>
+	  <th scope="col">Change Ids</th>
+	  <th scope="col"></th>
 	</tr>
       </thead>
       <tbody>
@@ -15,6 +16,13 @@
 	        <tr>
 		  <td><%=displayTransactionId.id%></td>
 		  <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
+		  <td>
+			  <%= button_to "View Changes",
+                                  "/transaction/show",
+                                  method: :get,
+                                  class: "btn btn-primary",
+                                  params: {id: displayTransactionId} %>
+		  </td>
                 </tr>
 	      <%end%>
             <%end%>
