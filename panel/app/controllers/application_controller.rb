@@ -147,6 +147,7 @@ class ApplicationController < ActionController::Base
 	   transaction = Transaction.find(transaction_id);
 	   unless transaction == nil
               transaction.destroy!
+	   end
     end
     protected
     def checkRole
