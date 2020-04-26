@@ -1,0 +1,35 @@
+<h1 class="service-title">Changes For Transaction <%=@tid%></h1>
+<div class="title-container">
+  <div class="container">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Change Id</th>
+	  <th scope="col">old value</th>
+	  <th scope="col">new value</th>
+        </tr>
+      </thead>
+      <tbody>
+	<%counter = 0%>
+	<%@bundledChanges.each do |print|%>
+        <tr>
+	  <td><%=@bundledChanges[counter].id%></td>
+	    <td>
+	      <%JSON.parse(@bundledChanges[counter].old_value).each do |t|%>
+	        <%=t[0].to_s + ":" +t[1].to_s%>
+	      <%end%>
+	    </td>
+	    <td>
+	      <%JSON.parse(@bundledChanges[counter].new_value).each do |t|%>
+                <%=t[0].to_s + ":" + t[1].to_s%>
+              <%end%> 
+
+	    </td>
+	</tr>
+	<%counter+=1%>
+        <%end%>
+      </tbody>
+    </table> 
+  </div>
+</div>
+
