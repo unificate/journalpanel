@@ -1,3 +1,3 @@
 class TransactionEntry < ApplicationRecord
-  belongs_to :change, dependent: :destroy
+  belongs_to :change
 end
