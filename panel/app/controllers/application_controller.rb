@@ -117,7 +117,27 @@ class ApplicationController < ActionController::Base
         ExecutedAt.transaction do
             Change.transaction do
                 row.executed_ats.create!(user_id: current_user.id, old_value: change.old_value, new_value: change.new_value)
-                change.destroy
+                change.destroy!
+            end
+        end
+    end
+    protected
+    def send_transaction(transaction_id)
+        transaction = Transaction.find(transaction_id);
+        unless transaction == nil
+            changes = transaction.modifications
+            Transaction.transaction do
+                ExecutedAt.transaction do
+                    Change.transaction do
+                        changes.each do |change|
+                            unless micro_put_change(change.row_entry.microservice_id,change.id) == nil
+                                row = change.row_entry
+                                row.executed_ats.create!(user_id: current_user.id, old_value: change.old_value, new_value: change.new_value)
+                            end
+                        end
+                        transaction.destroy!
+                    end
+                end
             end
         end
     end

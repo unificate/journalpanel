@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_04_22_032646) do
   add_foreign_key "changes", "users"
   add_foreign_key "executed_ats", "row_entries"
   add_foreign_key "executed_ats", "users"
-  add_foreign_key "transaction_entries", "changes"
-  add_foreign_key "transaction_entries", "transactions"
+  add_foreign_key "transaction_entries", "changes", on_delete: :cascade
+  add_foreign_key "transaction_entries", "transactions", on_delete: :cascade
   add_foreign_key "transactions", "users"
 end
