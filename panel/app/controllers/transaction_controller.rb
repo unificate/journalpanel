@@ -47,4 +47,14 @@ class TransactionController < ApplicationController
                 render403()
 	    end
     end
+
+    def destroy
+	    if checkRole() >= 3
+	       puts "DEBUG"
+	       puts params[:id]
+	       send_transaction(params[:id])
+	       redirect_to('/transaction')
+	    else render403()
+	    end
+    end
 end
