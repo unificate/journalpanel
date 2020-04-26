@@ -32,4 +32,8 @@ Add the dependency to the Gemfile file and then run `bundix -l`. You will then n
 
 # Running project
 $ cd panel
+
 $ rails s
+
+# Setting Up Your Own nixpkgs
+The nixpkgs repository contains instructions on how to build numerous packages including packages this project uses like Ruby and Node.JS. The nixpkgs-version.json file contains a link to the repository along with the revision. The nixpkg repository used needs to have the 8210ea3d606310a7f4595e7f5218ca71185f9ef4 commit cherry picked in. This commit makes Nix less pure, but allows for using the engine gem as a library in the microservices. If you want to update to the latest version of packages you can pull from [upstream](https://github.com/nixos/nixpkgs).
