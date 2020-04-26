@@ -136,6 +136,9 @@ class ApplicationController < ActionController::Base
                             end
                         end
                         transaction.destroy!
+                        changes.each do |change|
+                            change.destroy!
+                        end
                     end
                 end
             end
