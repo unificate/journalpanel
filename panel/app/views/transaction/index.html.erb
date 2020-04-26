@@ -8,6 +8,7 @@
 	  <th scope="col">Change Ids</th>
 	  <th scope="col"></th>
 	  <th scope="col"></th>
+	  <th scope="col"></th>
 	</tr>
       </thead>
       <tbody>
@@ -26,11 +27,19 @@
 		  </td>
 		  <td>
 		     <%= button_to "Submit  Transaction",
-                                  "/transaction/destroy",
+                                  "/transaction/submit",
                                   method: :get,
                                   class: "btn btn-primary",
                                   params: {id: displayTransactionId} %>
-	          </td>
+	         </td>
+	         <td>
+                     <%= button_to "Delete",
+                                  "/transaction/delete",
+                                  method: :get,
+                                  class: "btn btn-primary",
+                                  params: {id: displayTransactionId} %>
+                  </td>
+
                 </tr>
 	      <%end%>
             <%end%>
