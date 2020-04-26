@@ -22,7 +22,7 @@ class TransactionController < ApplicationController
     def create
         if checkRole() >= 2
             puts params[:changes]
-        	rowList = params[:changes].split("/")
+                rowList = params[:changes].split("/")
         	@transaction = Change.find(rowList)
         	result = Transaction.create!(user_id: current_user.id, description: "description goes here")
         	@primaryKeyTransactionTable = result.id
@@ -36,11 +36,15 @@ class TransactionController < ApplicationController
     end
 
     def show
-	    @bundledChanges = Array.new()
-	    query = TransactionEntry.where(transaction_id: params[:id])
-	    @tid = query[0].transaction_id
-	    query.each do |t|
-		    @bundledChanges.push(Change.find(t.change_id))
+	    if checkRole() >=2
+	        @bundledChanges = Array.new()
+	        query = TransactionEntry.where(transaction_id: params[:id])
+	        @tid = query[0].transaction_id
+	        query.each do |t|
+                    @bundledChanges.push(Change.find(t.change_id))
+	        end
+	    else
+                render403()
 	    end
     end
 end
