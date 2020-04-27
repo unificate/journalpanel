@@ -20,23 +20,29 @@
                 <td><%=displayTransactionId.id%></td>
                 <td><%=user%></td>
 		          <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
-		          <td>
-			          <%= button_to "View Changes",
-                              transaction_path(displayTransactionId),
-                              method: :get,
-                              class: "btn btn-primary btn-sm hp-blue" %>
-		          </td>
-		          <td>
-		            <%= button_to "Submit  Transaction",
-                              transaction_push_path,
-                              class: "btn btn-primary btn-sm hp-blue",
-                              params: {id: displayTransactionId} %>
-	            </td>
-	            <td>
-                <%= button_to "Delete",
-                              transaction_path(displayTransactionId),
-                              method: :delete,
-                              class: "btn btn-danger btn-sm" %>
+  		        <td>
+                  <% if checkRole >= 1 %>
+  			          <%= button_to "View",
+                                transaction_path(displayTransactionId),
+                                method: :get,
+                                class: "btn btn-primary btn-sm hp-blue" %>
+  		            <% end %>
+              </td>
+  		        <td>
+                <% if checkRole >= 3 %>
+  		            <%= button_to "Submit",
+                                transaction_push_path,
+                                class: "btn btn-primary btn-sm hp-blue",
+                                params: {id: displayTransactionId} %>
+                <% end %>
+              </td>
+              <td>
+                <% if checkRole >= 3 %>
+                  <%= button_to "Delete",
+                                transaction_path(displayTransactionId),
+                                method: :delete,
+                                class: "btn btn-danger btn-sm" %>
+                <% end %>
               </td>
             </tr>
 	        <%end%>
