@@ -57,7 +57,7 @@ role.
 
 The roles exist as a tiered permission system, where higher roles include all permissions of roles below them.
 * Developer: Create change requests, view change requests and transactions.
-* Product Owner: Create Transactions plus Developer permissions.
+* Product Owner: Create transactions plus Developer permissions.
 * Release Manager: Submit change requests and transactions plus Product Owner permissions.
 * Admin: Manage users plus Release Manager permissions.
 
