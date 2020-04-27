@@ -65,4 +65,4 @@ The roles exist as a tiered permission system, where higher roles include all pe
 ## Testing
 
 Testing is handled with RSpec. Simply run `rspec` in the project base directory to run the tests. Testing is currently
-present for user management.
+present for logging in and user management.
