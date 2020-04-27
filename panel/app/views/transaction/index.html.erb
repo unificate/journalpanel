@@ -77,7 +77,7 @@
   <tbody>
 	    <%counter = 0%>
             <%if @executedlist!=nil && @executedlist.any?%>
-              <%@executedlist.zip(@users).each do |displayTransactionId, user|%>
+              <%@executedlist.zip(@executedUsers).each do |displayTransactionId, user|%>
 	    <tr>
 		  <td><%=displayTransactionId.id%></td>
       <td><%=user%></td>
