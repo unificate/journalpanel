@@ -1,11 +1,13 @@
 <%= javascript_pack_tag 'accounts.js', 'data-turbolinks-track': 'reload' %>
 
 <div class="user-table">
+  <h1 class="service-title">Changes</h1>
   <table class="table table-hover text-center">
     <thead>
       <tr>
         <th scope="col">User</th>
         <th scope="col">Role</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -35,7 +37,7 @@
             <a class="btn btn-secondary dropdown-toggle dropdownMenuLinkC" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item change-password dropdownPassword" onclick="openPasswordModal('<%= user.username %>')" href="javascript:void(0)">Change Password</a>
-              
+
               <a class="dropdown-item delete-user dropdownDelete<%= current_user == user ? " hidden" : "" %>" onclick="openDeleteModal('<%= user.username %>')" href="javascript:void(0)">Delete User</a>
             </div>
           </div>
@@ -74,7 +76,7 @@
           <%= label_tag(:developer_new, "Developer", class: "form-check-label ml-2") %>
         </div>
         <br>
-          <%= submit_tag("Create", class: "btn btn-primary mt-2") %>
+          <%= submit_tag("Create", class: "btn btn-primary mt-2 hp-blue") %>
       </form>
     <% end %>
   </div>
