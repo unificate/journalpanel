@@ -124,9 +124,9 @@ class ChangesController < ApplicationController
         unless micro_put_change(row.microservice_id, change_id) == nil
           # move the change request to the executed table
           execute_change(change_id)
-          redirect_to url_for(:controller => "changes", :action => "index")
         end
       end
+      redirect_to url_for(:controller => "changes", :action => "index")
     else
       render403()
     end
