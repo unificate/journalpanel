@@ -21,6 +21,10 @@ example entries with sample Microservice addresses.
 The seed file also contains a default admin user, with username 'admin' and password 'password'. When using Panel
 for the first time, this password should of course be changed to a more secure value.
 
+Finally, you'll have to set up and run a MySQL instance on port 3306. A user will have to be created with the
+information contained in `/config/database.yml`. After this is done, use `db:reset` to set up a new database loaded
+with the appropriate schema. Stub code for microservices is included in their respective `/config/database.yml` files.
+
 
 ## Using the application
 
