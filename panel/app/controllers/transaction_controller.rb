@@ -9,6 +9,7 @@ class TransactionController < ApplicationController
     	  @result = Array.new()
     	  @executedresult = Array.new()
           @users = Array.new()
+          @executedUsers = Array.new()
     	  counter = 0
 		  tr.each do |trans|
 				@changeRequests = trans.transaction_entries
@@ -23,10 +24,10 @@ class TransactionController < ApplicationController
 					@executedlist.push(trans)
 					@executedChanges.each do |e|
 						@executedresult.push(e)
-                        @users.push((User.find(Transaction.find(e.transaction_id).user_id)).username)
+                        @executedUsers.push((User.find(Transaction.find(e.transaction_id).user_id)).username)
 					end
 				end
-			   
+
             end
         else
             render403()
