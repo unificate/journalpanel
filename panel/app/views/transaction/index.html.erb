@@ -15,9 +15,10 @@
       <tbody>
 	    <%counter = 0%>
         <%if @list!=nil %>
-          <%@list.each do |displayTransactionId|%>
-	          <tr>
-		          <td><%=displayTransactionId.id%></td>
+          <%@list.zip(@users).each do |displayTransactionId, user|%>
+              <tr>
+                <td><%=displayTransactionId.id%></td>
+                <td><%=user%></td>
 		          <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
 		          <td>
 			          <%= button_to "View Changes",
