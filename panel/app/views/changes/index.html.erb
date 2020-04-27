@@ -111,10 +111,10 @@
                     </tbody>
                 </table>
                 <% if checkRole() >= 3 %>
-                    <%= submit_tag("Execute Now", class: "btn btn-primary mt-2 mb-5") %>
+                    <%= submit_tag("Execute Now", class: "btn btn-primary mt-2 mb-5 hp-blue") %>
                 <% end %>
                 <% if checkRole() >= 2 %>
-                    <%= submit_tag("Create Transaction", class: "btn btn-primary mt-2 mb-5",
+                    <%= submit_tag("Create Transaction", class: "btn btn-primary mt-2 mb-5 hp-blue",
                                    formaction: "transaction#create") %>
                 <% end %>
             <% end %>
