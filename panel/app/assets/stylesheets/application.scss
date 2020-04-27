@@ -14,7 +14,6 @@ $hp-blue: #01A0D7;
 .user-table {
   width: 60%;
   margin: auto;
-  margin-top: 100px;
   margin-bottom: 10px;
 }
 
@@ -28,9 +27,9 @@ $hp-blue: #01A0D7;
     margin: auto;
     margin-top: 100px;
 }
-#login-button {
-  background-color: $hp-blue;
-  border-color: $hp-blue;
+.hp-blue {
+  background-color: $hp-blue !important;
+  border-color: $hp-blue !important;
 }
 
 #login-error {

@@ -3,9 +3,6 @@
 | -------------------- | ---------------------------------------- |
 | contacts             | Test microservice                        |
 | customer_info_server | Test microservice                        |
-| hello                | Ruby project template                    |
-| hello_rails          | Rails project template                   |
-| login_test           | Test microservice                        |
 | micromanage          | Engine for exposing microservice API     |
 | panel                | Control panel for apps with Micromanage  |
 

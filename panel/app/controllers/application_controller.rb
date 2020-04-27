@@ -147,14 +147,7 @@ class ApplicationController < ActionController::Base
             end
         end
     end
-    
-    protected
-    def delete_transaction(transaction_id) 
-	   transaction = Transaction.find(transaction_id);
-	   unless transaction == nil
-              transaction.destroy!
-	   end
-    end
+
     protected
     def checkRole
         if current_user

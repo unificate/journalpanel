@@ -1,51 +1,54 @@
-<h1 class="service-title">Recent Transactions</h1>
-<div class="title-container"> 
+<h1 class="service-title">Transactions</h1>
+<div class="title-container text-center">
   <div class="container">
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
-	  <th scope="col">Transaction Number</th>
-	  <th scope="col">Change Ids</th>
-	  <th scope="col"></th>
-	  <th scope="col"></th>
-	  <th scope="col"></th>
-	</tr>
+      	  <th scope="col">Transaction Number</th>
+          <th scope="col">User</th>
+      	  <th scope="col">Change Ids</th>
+      	  <th scope="col"></th>
+      	  <th scope="col"></th>
+      	  <th scope="col"></th>
+      	</tr>
       </thead>
       <tbody>
-	    <%counter = 0%>  
-            <%if @list!=nil %>
-              <%@list.each do |displayTransactionId|%>  
-	        <tr>
-		  <td><%=displayTransactionId.id%></td>
-		  <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
-		  <td>
-			  <%= button_to "View Changes",
-                                  "/transaction/show",
-                                  method: :get,
-                                  class: "btn btn-primary",
-                                  params: {id: displayTransactionId} %>
-		  </td>
-		  <td>
-		     <%= button_to "Submit  Transaction",
-                                  "/transaction/submit",
-                                  method: :get,
-                                  class: "btn btn-primary",
-                                  params: {id: displayTransactionId} %>
-	         </td>
-	         <td>
-                     <%= button_to "Delete",
-                                  "/transaction/delete",
-                                  method: :get,
-                                  class: "btn btn-primary",
-                                  params: {id: displayTransactionId} %>
-                  </td>
-
-                </tr>
-	      <%end%>
-            <%end%>
+	    <%counter = 0%>
+        <%if @list!=nil %>
+          <%@list.zip(@users).each do |displayTransactionId, user|%>
+              <tr>
+                <td><%=displayTransactionId.id%></td>
+                <td><%=user%></td>
+		          <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
+  		        <td>
+                  <% if checkRole >= 1 %>
+  			          <%= button_to "View",
+                                transaction_path(displayTransactionId),
+                                method: :get,
+                                class: "btn btn-primary btn-sm hp-blue" %>
+  		            <% end %>
+              </td>
+  		        <td>
+                <% if checkRole >= 3 %>
+  		            <%= button_to "Submit",
+                                transaction_push_path,
+                                class: "btn btn-primary btn-sm hp-blue",
+                                params: {id: displayTransactionId} %>
+                <% end %>
+              </td>
+              <td>
+                <% if checkRole >= 3 %>
+                  <%= button_to "Delete",
+                                transaction_path(displayTransactionId),
+                                method: :delete,
+                                class: "btn btn-danger btn-sm" %>
+                <% end %>
+              </td>
+            </tr>
+	        <%end%>
+        <%end%>
       </tbody>
-      
-    </table> 
+    </table>
   </div>
 </div>
 <div class="title-container"> 
@@ -67,11 +70,12 @@
 		  <td><%=displayTransactionId.id%></td>
 		  <td><%@executedresult.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.executed_at_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
 		  <td>
-			  <%= button_to "View Changes",
-                                  "/transaction/show",
-                                  method: :get,
-                                  class: "btn btn-primary",
-                                  params: {id: displayTransactionId} %>
+			  <% if checkRole >= 1 %>
+  			          <%= button_to "View",
+                                transaction_path(displayTransactionId),
+                                method: :get,
+                                class: "btn btn-primary btn-sm hp-blue" %>
+  		            <% end %>
 		  </td>
       </tr>
 	      <%end%>
