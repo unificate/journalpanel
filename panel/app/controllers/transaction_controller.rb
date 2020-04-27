@@ -1,18 +1,29 @@
 class TransactionController < ApplicationController
     def index
-       if checkRole() >= 1
-    	  @list = Transaction.all
+	   if checkRole() >= 1
+          tr = Transaction.all
+		  @list = Array.new()
+		  @executedlist = Array.new()
           @changes = Change.all
     	  @changeRequests
     	  @result = Array.new()
+    	  @executedresult = Array.new()
     	  counter = 0
-		  @list.each do |trans|
+		  tr.each do |trans|
 				@changeRequests = trans.transaction_entries
-                if (@changeRequests != nil)
+				@executedChanges = trans.executed_transaction_entries
+				if (@changeRequests != nil && @changeRequests.any?)
+					@list.push(trans)
         		    @changeRequests.each do |t|
         		    	@result.push(t)
     		        end
-    	       end
+				elsif @executedChanges != nil && @executedChanges.any?
+					@executedlist.push(trans)
+					@executedChanges.each do |e|
+						@executedresult.push(e)
+					end
+				end
+			   
             end
         else
             render403()
@@ -37,12 +48,18 @@ class TransactionController < ApplicationController
 
     def show
 	    if checkRole() >=2
-	        @bundledChanges = Array.new()
-	        query = TransactionEntry.where(transaction_id: params[:id])
-	        @tid = query[0].transaction_id
+			@bundledChanges = Array.new()
+			@executedChanges = Array.new()
+			transaction = Transaction.find(params[:id])
+			query = transaction.transaction_entries
+			executed = transaction.executed_transaction_entries
+	        @tid = transaction.id
 	        query.each do |t|
-                    @bundledChanges.push(t.change)
-	        end
+                @bundledChanges.push(t.change)
+			end
+			executed.each do |e|
+				@executedChanges.push(e.executed_at)
+			end
 	    else
                 render403()
 	    end

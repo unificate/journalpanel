@@ -44,6 +44,39 @@
 	      <%end%>
             <%end%>
       </tbody>
+      
+    </table> 
+  </div>
+</div>
+<div class="title-container"> 
+  <div class="container">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+	  <th scope="col">Transaction Number</th>
+	  <th scope="col">Executed Change Ids</th>
+	  <th scope="col"></th>
+	  <th scope="col"></th>
+	  <th scope="col"></th>
+	</tr>
+  <tbody>
+	    <%counter = 0%>  
+            <%if @executedlist!=nil && @executedlist.any?%>
+              <%@executedlist.each do |displayTransactionId|%>  
+	    <tr>
+		  <td><%=displayTransactionId.id%></td>
+		  <td><%@executedresult.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.executed_at_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
+		  <td>
+			  <%= button_to "View Changes",
+                                  "/transaction/show",
+                                  method: :get,
+                                  class: "btn btn-primary",
+                                  params: {id: displayTransactionId} %>
+		  </td>
+      </tr>
+	      <%end%>
+        <%end%>
+       </tbody>
     </table> 
   </div>
 </div>

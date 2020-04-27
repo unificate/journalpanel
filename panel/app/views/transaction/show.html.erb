@@ -10,6 +10,7 @@
         </tr>
       </thead>
       <tbody>
+  <%if @bundledChanges != nil && @bundledChanges.any?%>
 	<%counter = 0%>
 	<%@bundledChanges.each do |print|%>
         <tr>
@@ -23,11 +24,29 @@
 	      <%JSON.parse(@bundledChanges[counter].new_value).each do |t|%>
                 <%=t[0].to_s + ":" + t[1].to_s%>
               <%end%> 
-
 	    </td>
 	</tr>
-	<%counter+=1%>
-        <%end%>
+  <%counter+=1%>
+  <%end%>
+  <%elsif @executedChanges != nil && @executedChanges.any?%>
+  <%counter = 0%>
+	<%@executedChanges.each do |print|%>
+        <tr>
+	  <td><%=@executedChanges[counter].id%></td>
+	    <td>
+	      <%JSON.parse(@executedChanges[counter].old_value).each do |t|%>
+	        <%=t[0].to_s + ":" +t[1].to_s%>
+	      <%end%>
+	    </td>
+	    <td>
+	      <%JSON.parse(@executedChanges[counter].new_value).each do |t|%>
+                <%=t[0].to_s + ":" + t[1].to_s%>
+              <%end%> 
+	    </td>
+	</tr>
+  <%counter+=1%>
+  <%end%>
+  <%end%>
       </tbody>
     </table> 
   </div>
