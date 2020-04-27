@@ -14,36 +14,32 @@
       </thead>
       <tbody>
 	    <%counter = 0%>
-          <%if @list!=nil %>
-            <%@list.zip(@users).each do |displayTransactionId, user|%>
-	            <tr>
-          		  <td><%=displayTransactionId.id%></td>
-                <td><%=user%></td>
-          		  <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
-          		  <td>
-			            <%= button_to "View",
-                                "/transaction/show",
-                                method: :get,
-                                class: "btn btn-primary btn-sm hp-blue",
-                                params: {id: displayTransactionId} %>
-		            </td>
-		            <td>
-		              <%= button_to "Submit",
-                                "/transaction/submit",
-                                method: :get,
-                                class: "btn btn-primary btn-sm hp-blue",
-                                params: {id: displayTransactionId} %>
-	              </td>
-	              <td>
-                  <%= button_to "Delete",
-                                "/transaction/delete",
-                                method: :get,
-                                class: "btn btn-primary btn-sm",
-                                params: {id: displayTransactionId} %>
-                </td>
-              </tr>
-	          <%end%>
-          <%end%>
+        <%if @list!=nil %>
+          <%@list.each do |displayTransactionId|%>
+	          <tr>
+		          <td><%=displayTransactionId.id%></td>
+		          <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
+		          <td>
+			          <%= button_to "View Changes",
+                              transaction_path(displayTransactionId),
+                              method: :get,
+                              class: "btn btn-primary btn-sm hp-blue" %>
+		          </td>
+		          <td>
+		            <%= button_to "Submit  Transaction",
+                              transaction_push_path,
+                              class: "btn btn-primary btn-sm hp-blue",
+                              params: {id: displayTransactionId} %>
+	            </td>
+	            <td>
+                <%= button_to "Delete",
+                              transaction_path(displayTransactionId),
+                              method: :delete,
+                              class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+	        <%end%>
+        <%end%>
       </tbody>
     </table>
   </div>
