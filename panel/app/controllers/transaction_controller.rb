@@ -48,7 +48,7 @@ class TransactionController < ApplicationController
 	    end
     end
 
-    def submitTransaction
+    def push
 	    if checkRole() >= 3
 	       puts "DEBUG"
 	       puts params[:id]
@@ -57,11 +57,11 @@ class TransactionController < ApplicationController
 	    else render403()
 	    end
     end
-    def delete
+
+    def destroy
 	    if checkRole() >= 3
-		    puts "DEBUG"
-		    puts "deleting the transaction!"
-		    delete_transaction(params[:id])
+        @transaction = Transaction.find(params[:id])
+        @transaction.destroy
 		    redirect_to('/transaction')
 	    else render403()
 	    end

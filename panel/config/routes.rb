@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   # this will create:
   # GET /transaction --- display all saved transactions
   # POST /transaction --- create a new transaction; this is called from the changes#index form
-  resources :transaction, only: [:index, :create]
-  get '/transaction/show', to: 'transaction#show'
-  get '/transaction/submit', to: 'transaction#submitTransaction'
-  get '/transaction/delete', to: 'transaction#delete'
+  # GET /transaction/:id --- display all changes in a single transaction
+  # DELETE /transaction/:id --- destroy a transaction, return changes to unbundled state
+  resources :transaction, only: [:index, :create, :show, :destroy]
+  # this is a custom route to push all changes in a transaction to the MicroManage engine
+  post '/transaction/push', to: 'transaction#push'
 
   # this will create:
   # GET /microservice --- display all microservices

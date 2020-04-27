@@ -1,5 +1,5 @@
 <h1 class="service-title">Recent Transactions</h1>
-<div class="title-container"> 
+<div class="title-container">
   <div class="container">
     <table class="table table-hover">
       <thead class="thead-light">
@@ -12,38 +12,35 @@
 	</tr>
       </thead>
       <tbody>
-	    <%counter = 0%>  
+	    <%counter = 0%>
             <%if @list!=nil %>
-              <%@list.each do |displayTransactionId|%>  
+              <%@list.each do |displayTransactionId|%>
 	        <tr>
 		  <td><%=displayTransactionId.id%></td>
 		  <td><%@result.each do |display|%> <%if display.transaction_id == displayTransactionId.id%> <%=display.change_id%> <%end%> <%counter = counter + 1%> <%end%> </td>
 		  <td>
 			  <%= button_to "View Changes",
-                                  "/transaction/show",
+                                  transaction_path(displayTransactionId),
                                   method: :get,
-                                  class: "btn btn-primary",
-                                  params: {id: displayTransactionId} %>
+                                  class: "btn btn-primary" %>
 		  </td>
 		  <td>
 		     <%= button_to "Submit  Transaction",
-                                  "/transaction/submit",
-                                  method: :get,
+                                  transaction_push_path,
                                   class: "btn btn-primary",
                                   params: {id: displayTransactionId} %>
 	         </td>
 	         <td>
                      <%= button_to "Delete",
-                                  "/transaction/delete",
-                                  method: :get,
-                                  class: "btn btn-primary",
-                                  params: {id: displayTransactionId} %>
+                                   transaction_path(displayTransactionId),
+                                   method: :delete,
+                                   class: "btn btn-danger" %>
                   </td>
 
                 </tr>
 	      <%end%>
             <%end%>
       </tbody>
-    </table> 
+    </table>
   </div>
 </div>
