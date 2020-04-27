@@ -132,10 +132,13 @@ class ApplicationController < ActionController::Base
                         changes.each do |change|
                             unless micro_put_change(change.row_entry.microservice_id,change.id) == nil
                                 row = change.row_entry
-                                row.executed_ats.create!(user_id: current_user.id, old_value: change.old_value, new_value: change.new_value)
+                                exec = row.executed_ats.create!(user_id: current_user.id, old_value: change.old_value, new_value: change.new_value)
+                                transaction.executed_transaction_entries.create!(executed_at_id: exec.id)
                             end
                         end
-                        transaction.destroy!
+                        transaction.transaction_entries.each do |entry|
+                            entry.destroy!
+                        end
                         changes.each do |change|
                             change.destroy!
                         end
