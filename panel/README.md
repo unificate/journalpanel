@@ -57,7 +57,7 @@ role.
 
 The roles exist as a tiered permission system, where higher roles include all permissions of roles below them.
 * Developer: Create change requests, view change requests and transactions.
-* Product Owner: Create Transactions plus Developer permissions.
+* Product Owner: Create transactions plus Developer permissions.
 * Release Manager: Submit change requests and transactions plus Product Owner permissions.
 * Admin: Manage users plus Release Manager permissions.
 
@@ -65,4 +65,4 @@ The roles exist as a tiered permission system, where higher roles include all pe
 ## Testing
 
 Testing is handled with RSpec. Simply run `rspec` in the project base directory to run the tests. Testing is currently
-present for user management.
+present for logging in and user management.
