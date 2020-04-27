@@ -10,10 +10,11 @@
 	        <th scope="col">old value</th>
 	        <th scope="col">new value</th>
         </tr>
-        </thead>
-        <tbody>
-	        <%@bundledChanges.zip(@metadata).each do |change, meta|%>
-            <tr>
+      </thead>
+      <tbody>
+  <%if @bundledChanges != nil && @bundledChanges.any?%>
+	<%@bundledChanges.zip(@metadata).each do |change, meta|%>
+        <tr>
 	            <td>
                     <%=change.id%>
                 </td>
@@ -23,28 +24,45 @@
                 <td>
                     <%=meta[1]%>
                 </td>
-	            <td>
-	                <%JSON.parse(change.old_value).each do |t|%>
-	                <%=t[0].to_s + ":"%>
-                    <br>
-                    <%=t[1].to_s%>
-                    <br>
-                    <br>
-	                <%end%>
-	            </td>
-	            <td>
-	                <%JSON.parse(change.new_value).each do |t|%>
-                    <%=t[0].to_s + ":"%>
-                    <br>
-                    <%=t[1].to_s%>
-                    <br>
-                    <br>
-                    <%end%>
-	            </td>
-	        </tr>
-            <%end%>
-        </tbody>
-    </table>
+	    <td>
+	      <%JSON.parse(change.old_value).each do |t|%>
+	        <%=t[0].to_s + ":" +t[1].to_s%>
+	      <%end%>
+	    </td>
+	    <td>
+	      <%JSON.parse(change.new_value).each do |t|%>
+                <%=t[0].to_s + ":" + t[1].to_s%>
+              <%end%> 
+	    </td>
+	</tr>
+  <%end%>
+  <%elsif @executedChanges != nil && @executedChanges.any?%>
+	<%@executedChanges.zip(@metadata).each do |change, meta|%>
+        <tr>
+	              <td>
+                    <%=change.id%>
+                </td>
+                <td>
+                    <%= meta[0]%>
+                </td>
+                <td>
+                    <%=meta[1]%>
+                </td>
+	    <td>
+	      <%JSON.parse(change.old_value).each do |t|%>
+	        <%=t[0].to_s + ":" +t[1].to_s%>
+	      <%end%>
+	    </td>
+	    <td>
+	      <%JSON.parse(change.new_value).each do |t|%>
+                <%=t[0].to_s + ":" + t[1].to_s%>
+              <%end%> 
+	    </td>
+	</tr>
+  <%end%>
+  <%end%>
+       </tbody>
+     </table>
   </div>
 </div>
 

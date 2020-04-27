@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_032646) do
+ActiveRecord::Schema.define(version: 2020_04_27_002911) do
 
   create_table "changes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "row_entry_id", null: false
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 2020_04_22_032646) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["row_entry_id"], name: "index_executed_ats_on_row_entry_id"
     t.index ["user_id"], name: "index_executed_ats_on_user_id"
+  end
+
+  create_table "executed_transaction_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "executed_at_id", null: false
+    t.bigint "transaction_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["executed_at_id"], name: "index_executed_transaction_entries_on_executed_at_id"
+    t.index ["transaction_id"], name: "index_executed_transaction_entries_on_transaction_id"
   end
 
   create_table "microservices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -83,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_04_22_032646) do
   add_foreign_key "changes", "users"
   add_foreign_key "executed_ats", "row_entries"
   add_foreign_key "executed_ats", "users"
+  add_foreign_key "executed_transaction_entries", "executed_ats"
+  add_foreign_key "executed_transaction_entries", "transactions"
   add_foreign_key "transaction_entries", "transactions", on_delete: :cascade
   add_foreign_key "transactions", "users"
 end

@@ -1,20 +1,32 @@
 class TransactionController < ApplicationController
     def index
-       if checkRole() >= 1
-    	  @list = Transaction.all
+	   if checkRole() >= 1
+          tr = Transaction.all
+		  @list = Array.new()
+		  @executedlist = Array.new()
           @changes = Change.all
     	  @changeRequests
     	  @result = Array.new()
+    	  @executedresult = Array.new()
           @users = Array.new()
     	  counter = 0
-    	  @list.each do |trans|
-                if (TransactionEntry.where(transaction_id: trans.id) != nil)
-        		    @changeRequests = (TransactionEntry.where(transaction_id: trans.id))
+		  tr.each do |trans|
+				@changeRequests = trans.transaction_entries
+				@executedChanges = trans.executed_transaction_entries
+				if (@changeRequests != nil && @changeRequests.any?)
+					@list.push(trans)
         		    @changeRequests.each do |t|
         		    	@result.push(t)
                         @users.push((User.find(Transaction.find(t.transaction_id).user_id)).username)
     		        end
-    	       end
+				elsif @executedChanges != nil && @executedChanges.any?
+					@executedlist.push(trans)
+					@executedChanges.each do |e|
+						@executedresult.push(e)
+                        @users.push((User.find(Transaction.find(e.transaction_id).user_id)).username)
+					end
+				end
+			   
             end
         else
             render403()
@@ -43,15 +55,23 @@ class TransactionController < ApplicationController
 
     def show
 	    if checkRole() >=1
-	        @bundledChanges = Array.new()
+			@bundledChanges = Array.new()
+			@executedChanges = Array.new()
             @metadata = Array.new()
-	        query = TransactionEntry.where(transaction_id: params[:id])
-	        @tid = query[0].transaction_id
+			transaction = Transaction.find(params[:id])
+			query = transaction.transaction_entries
+			executed = transaction.executed_transaction_entries
+	        @tid = transaction.id
 	        query.each do |t|
-                    @bundledChanges.push(Change.find(t.change_id))
-                    row_entry = t.change.row_entry
-                    @metadata.push([row_entry.microservice.name, row_entry.Table_Name])
-	        end
+                @bundledChanges.push(t.change)
+                row_entry = t.change.row_entry
+                @metadata.push([row_entry.microservice.name, row_entry.Table_Name])
+			end
+			executed.each do |e|
+				@executedChanges.push(e.executed_at)
+				row_entry = e.executed_at.row_entry
+                @metadata.push([row_entry.microservice.name, row_entry.Table_Name])
+			end
 	    else
                 render403()
 	    end
