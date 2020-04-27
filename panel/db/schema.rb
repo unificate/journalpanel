@@ -52,10 +52,11 @@ ActiveRecord::Schema.define(version: 2020_04_27_002911) do
 
   create_table "row_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "Table_Name"
-    t.integer "microservice_id"
+    t.bigint "microservice_id", null: false
     t.integer "record_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["microservice_id"], name: "index_row_entries_on_microservice_id"
   end
 
   create_table "transaction_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_002911) do
   add_foreign_key "executed_ats", "users"
   add_foreign_key "executed_transaction_entries", "executed_ats"
   add_foreign_key "executed_transaction_entries", "transactions"
+  add_foreign_key "row_entries", "microservices"
   add_foreign_key "transaction_entries", "transactions", on_delete: :cascade
   add_foreign_key "transactions", "users"
 end
