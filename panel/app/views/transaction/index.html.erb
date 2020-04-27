@@ -1,6 +1,19 @@
-<h1 class="service-title">Transactions</h1>
-<div class="title-container text-center">
-  <div class="container">
+<%= javascript_pack_tag 'transaction.js', 'data-turbolinks-track': 'reload', defer: true %>
+
+
+<div class="container">
+  <h1 class="service-title">Transactions</h1>
+  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+        <input type="radio" name="options" id="queued" autocomplete="off" checked> Queued
+    </label>
+    <% if checkRole() >= 2 %>
+    <label class="btn btn-secondary">
+        <input type="radio" name="options" id="committed" autocomplete="off"> Committed
+    </label>
+    <% end %>
+  </div>
+  <div class="container text-center" id="transactions">
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -50,9 +63,7 @@
       </tbody>
     </table>
   </div>
-</div>
-<div class="title-container"> 
-  <div class="container">
+  <div class="container text-center" id="executed" style="display: none;">
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -64,7 +75,7 @@
 	  <th scope="col"></th>
 	</tr>
   <tbody>
-	    <%counter = 0%>  
+	    <%counter = 0%>
             <%if @executedlist!=nil && @executedlist.any?%>
               <%@executedlist.zip(@users).each do |displayTransactionId, user|%>
 	    <tr>
@@ -79,10 +90,11 @@
                                 class: "btn btn-primary btn-sm hp-blue" %>
   		            <% end %>
 		  </td>
+      <td></td>
       </tr>
 	      <%end%>
         <%end%>
        </tbody>
-    </table> 
+    </table>
   </div>
 </div>
