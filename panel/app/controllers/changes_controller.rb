@@ -114,6 +114,10 @@ class ChangesController < ApplicationController
 
   # POST /changes/push --- Execute a change request by posting the change to the MicroManage API
   def push
+    unless params[:changes]  # ignore request if no changes were selected
+      redirect_to url_for(:controller => "changes", :action => "index")
+      return
+    end
     if checkRole() >= 1
       params[:changes].each do |change_id|
         row = Change.find(change_id).row_entry
