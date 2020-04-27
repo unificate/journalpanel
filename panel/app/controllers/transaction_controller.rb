@@ -6,9 +6,9 @@ class TransactionController < ApplicationController
     	  @changeRequests
     	  @result = Array.new()
     	  counter = 0
-    	  @list.each do |trans|
-                if (TransactionEntry.where(transaction_id: trans.id) != nil)
-        		    @changeRequests = (TransactionEntry.where(transaction_id: trans.id))
+		  @list.each do |trans|
+				@changeRequests = trans.transaction_entries
+                if (@changeRequests != nil)
         		    @changeRequests.each do |t|
         		    	@result.push(t)
     		        end
@@ -41,7 +41,7 @@ class TransactionController < ApplicationController
 	        query = TransactionEntry.where(transaction_id: params[:id])
 	        @tid = query[0].transaction_id
 	        query.each do |t|
-                    @bundledChanges.push(Change.find(t.change_id))
+                    @bundledChanges.push(t.change)
 	        end
 	    else
                 render403()
