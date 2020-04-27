@@ -20,6 +20,10 @@ class TransactionController < ApplicationController
     end
 
     def create
+      unless params[:changes]  # ignore request if no changes were selected
+        redirect_to url_for(controller: "changes", action: :index)
+        return
+      end
         if checkRole() >= 2
             puts params[:changes]
                 rowList = params[:changes].split("/")
