@@ -5,12 +5,14 @@ class TransactionController < ApplicationController
           @changes = Change.all
     	  @changeRequests
     	  @result = Array.new()
+          @users = Array.new()
     	  counter = 0
     	  @list.each do |trans|
                 if (TransactionEntry.where(transaction_id: trans.id) != nil)
         		    @changeRequests = (TransactionEntry.where(transaction_id: trans.id))
         		    @changeRequests.each do |t|
         		    	@result.push(t)
+                        @users.push((User.find(Transaction.find(t.transaction_id).user_id)).username)
     		        end
     	       end
             end
@@ -38,10 +40,13 @@ class TransactionController < ApplicationController
     def show
 	    if checkRole() >=2
 	        @bundledChanges = Array.new()
+            @metadata = Array.new()
 	        query = TransactionEntry.where(transaction_id: params[:id])
 	        @tid = query[0].transaction_id
 	        query.each do |t|
                     @bundledChanges.push(Change.find(t.change_id))
+                    row_entry = t.change.row_entry
+                    @metadata.push([row_entry.microservice.name, row_entry.Table_Name])
 	        end
 	    else
                 render403()
