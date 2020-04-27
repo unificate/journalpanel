@@ -23,6 +23,7 @@ class TransactionController < ApplicationController
 					@executedlist.push(trans)
 					@executedChanges.each do |e|
 						@executedresult.push(e)
+                        @users.push((User.find(Transaction.find(e.transaction_id).user_id)).username)
 					end
 				end
 			   
