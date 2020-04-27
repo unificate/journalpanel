@@ -27,10 +27,10 @@ for the first time, this password should of course be changed to a more secure v
 ### Dashboard
 
 After logging in, the dashboard tab will display the Microservices that can be managed. Selecting a Microservice will
-display all tables that have been exposed, and selecting a table will display the contents of that table.add
+display all tables that have been exposed, and selecting a table will display the contents of that table.
 
 When viewing a table, clicking edit will bring up a 'New Change Request' form where the user can edit the existing
-values in the row and submit their changes.add
+values in the row and submit their changes.
 
 ### Changes
 
@@ -55,7 +55,11 @@ The Users tab is only visible to admins. It displays all existing users of the a
 be updated with a new role, new password, or deleted from the system. New users can also be created with a selected
 role.
 
-Permissions...
+The roles exist as a tiered permission system, where higher roles include all permissions of roles below them.
+* Developer: Create change requests, view change requests and transactions.
+* Product Owner: Create Transactions plus Developer permissions.
+* Release Manager: Submit change requests and transactions plus Product Owner permissions.
+* Admin: Manage users plus Release Manager permissions.
 
 
 ## Testing
