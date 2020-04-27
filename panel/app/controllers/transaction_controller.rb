@@ -42,7 +42,7 @@ class TransactionController < ApplicationController
     end
 
     def show
-	    if checkRole() >=2
+	    if checkRole() >=1
 	        @bundledChanges = Array.new()
             @metadata = Array.new()
 	        query = TransactionEntry.where(transaction_id: params[:id])
